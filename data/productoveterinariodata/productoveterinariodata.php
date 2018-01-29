@@ -136,8 +136,9 @@ class ProductoVeterinarioData extends Data {
         while ($row = mysqli_fetch_array($result)) {
 
             if($row['productoveterinarioestado']!='B' && $row['productoveterinarioid']==$productoveterinarioId){
-              $productoveterinario = new productoveterinario($row['productoveterinarioid'],
-                $row['productoveterinarionombre'], $row['productoveterinarionombrecomun'],$row['productoveterinarioprincipioactivo'],$row['productoveterinariocontenido'],$row['productoveterinarioprecio'],$row['productoveterinarioestado']);
+              $productoveterinario = new productoveterinario($row['productoveterinarioid'],$row['productoveterinarionombre'], 
+                $row['productoveterinarionombrecomun'],$row['productoveterinarioprincipioactivo'],$row['productoveterinariocontenido'],
+                $row['productoveterinarioprecio'],$row['productoveterinarioestado']);
                 array_push($productosveterinarios, $productoveterinario);
 
           }//end if
