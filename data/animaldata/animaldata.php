@@ -32,8 +32,7 @@ class AnimalData extends Data {
                "'".$animal->getAnimalNombre() ."'". "," .
                "'".$animal->getAnimalEspecieRazaId() ."'" . "," .
                "'".$animal->getAnimalSennas() ."'". "," .
-               "'".$animal->getAnimalPeso() ."'". "," .
-               "'".$animal->getAnimalMedidaPeso() ."'". ",".
+                "'".$animal->getAnimalIdCliente() ."'". "," .
                "'A'". ");";
        $result = mysqli_query($conn, $queryInsert);
        mysqli_close($conn);
@@ -49,9 +48,8 @@ class AnimalData extends Data {
         $queryUpdate = "UPDATE tbanimal SET animalnombre = " . "'".$animal->getAnimalNombre() . "'". 
                 ", animalespecierazaid = " . $animal->getAnimalEspecieRazaId() .
                 ", animalsennas = " . "'".$animal->getAnimalSennas() ."'".
-                ", animalpeso = " . $animal->getAnimalPeso() .
-                ", animalmedidapeso = " ."'". $animal->getAnimalMedidaPeso() ."'".
                 ", animalestado = " ."'". $animal->getAnimalEstado() ."'".
+                ", animalidcliente = " ."'". $animal->getAnimalIdCliente() ."'".
                 " WHERE animalid = " . $animal->getAnimalId() . ";";
 
         $result = mysqli_query($conn, $queryUpdate);
@@ -91,15 +89,15 @@ class AnimalData extends Data {
             
             if($row['animalestado']!='B'){
                 $animal = new animal($row['animalnombre'], $row['animalid'], $row['animalespecierazaid'],
-                $row['animalsennas'], $row['animalpeso'], $row['animalmedidapeso'], $row['animalestado']);
+                $row['animalsennas'], $row['animalestado'], $row['animalidcliente']);
                 array_push($animales, $animal);
-
             }//end if
 
         }//end while
         
         return $animales;
     }//obteneranimales
+    //
 
     public function obtenerInformacionAnimales() {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);

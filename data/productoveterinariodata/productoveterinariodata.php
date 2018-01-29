@@ -33,7 +33,10 @@ class ProductoVeterinarioData extends Data {
 
         $queryInsert = "INSERT INTO tbproductoveterinario VALUES (" . $nextId . "," .
                 "'".$productoveterinario->getProductoVeterinarioNombre() ."'". "," .
+                "'".$productoveterinario->getProductoVeterinarioNombreComun() ."'". "," .
                 "'".$productoveterinario->getProductoVeterinarioPrincipioActivo(). "'".",".
+                "'".$productoveterinario->getProductoVeterinarioContenido(). "'".",".
+                "'".$productoveterinario->getProductoVeterinarioPrecio(). "'".",".
                 "'".$productoveterinario->getProductoVeterinarioEstado() ."'".  ");";
 
         $result = mysqli_query($conn, $queryInsert);
@@ -48,7 +51,10 @@ class ProductoVeterinarioData extends Data {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         $queryUpdate = "UPDATE tbproductoveterinario SET  productoveterinarionombre = " . "'".$productoveterinario->getProductoVeterinarioNombre() ."'".
+                ", productoveterinarioprincipioactivo = " . "'".$productoveterinario->getProductoVeterinarioNombreComun() ."'".
                 ", productoveterinarioprincipioactivo = " . "'".$productoveterinario->getProductoVeterinarioPrincipioActivo() ."'".
+                ", productoveterinarioprincipioactivo = " . "'".$productoveterinario->getProductoVeterinarioContenido() ."'".
+                ", productoveterinarioprincipioactivo = " . "'".$productoveterinario->getProductoVeterinarioPrecio() ."'".
                 ", productoveterinarioestado = " ."'". $productoveterinario->getProductoVeterinarioEstado() ."'".
                 " WHERE productoveterinarioid = " . $productoveterinario->getProductoVeterinarioId() . ";";
 
@@ -58,6 +64,7 @@ class ProductoVeterinarioData extends Data {
         return $result;
 
     }//actualizar productoveterinario
+
 
 
     public function eliminarProductoVeterinario($productoveterinarioid) {
@@ -71,7 +78,7 @@ class ProductoVeterinarioData extends Data {
 
         return $result;
 
-    }//eliminar productoveterinario
+    }//eliminar productoveterinario nombre,correo,pueblo,direc.estado
 
 
 
@@ -88,7 +95,7 @@ class ProductoVeterinarioData extends Data {
 
             if($row['productoveterinarioestado']!='B'){
                 $productoveterinario = new productoveterinario($row['productoveterinarioid'],
-                $row['productoveterinarionombre'], $row['productoveterinarioprincipioactivo'],$row['productoveterinarioestado']);
+                $row['productoveterinarionombre'], $row['productoveterinarionombrecomun'],$row['productoveterinarioprincipioactivo'],$row['productoveterinariocontenido'],$row['productoveterinarioprecio'],$row['productoveterinarioestado']);
                 array_push($productosveterinarios, $productoveterinario);
 
             }//end if
@@ -98,6 +105,22 @@ class ProductoVeterinarioData extends Data {
         return $productosveterinarios;
 
     }//obtenerMedicos
+
+
+    public function obtenerUnidades(){
+     	
+     	$conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+
+        $querySelect = "SELECT * FROM tbunidades;";
+        $result = mysqli_query($conn, $querySelect);
+        mysqli_close($conn);
+        $unidades = [];
+	    $row = mysqli_fetch_array($result);
+
+        return $row;
+
+    }//obtenerUnidades
 
 
     public function obtenerActualizar($productoveterinarioId) {
@@ -114,8 +137,8 @@ class ProductoVeterinarioData extends Data {
 
             if($row['productoveterinarioestado']!='B' && $row['productoveterinarioid']==$productoveterinarioId){
               $productoveterinario = new productoveterinario($row['productoveterinarioid'],
-               $row['productoveterinarioprincipioactivo'],$row['productoveterinarioestado']);
-              array_push($productosveterinarios, $productoveterinario);
+                $row['productoveterinarionombre'], $row['productoveterinarionombrecomun'],$row['productoveterinarioprincipioactivo'],$row['productoveterinariocontenido'],$row['productoveterinarioprecio'],$row['productoveterinarioestado']);
+                array_push($productosveterinarios, $productoveterinario);
 
           }//end if
 
@@ -123,8 +146,6 @@ class ProductoVeterinarioData extends Data {
 
         return $productoveterinarios;
     }//obtenerActualziar
-
-
 
 }//end class
 

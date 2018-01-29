@@ -27,7 +27,7 @@
             <li><a href="view/razaView.php">Raza</a></li>
         </ul>
         <ul>
-            <li><a href="view/encargadoView.php">Encargado</a></li>
+            <li><a href="view/encargadoView.php">Cliente</a></li>
         </ul>
         <ul>
             <li><a href="view/animalView.php">Animal</a></li>

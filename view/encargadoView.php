@@ -17,7 +17,7 @@
 <body>
 
     <header> 
-        <h1>Encargado</h1>
+        <h1>Cliente</h1>
     </header>
 
     <nav>
@@ -30,7 +30,9 @@
     <section id="form">
         <table>
             <tr>
-                <th>Nombre</th>
+                <th>Nombre Cliente</th>
+                <th>Correo Electr&oacute;nico</th>
+                <th>Pueblo</th>
                 <th>Direcci&oacute;n</th>
                 <th>Nuevo Tel&eacute;fono</th>
                 <th>Agregar</th>
@@ -41,6 +43,8 @@
             <tr>
                 <form method="post" action="">
                     <td><input type="text" name="encargadoNombreCompletoInsert" id="encargadoNombreCompletoInsert"/></td>
+                    <td><input type="text" name="encargadoCorreoInsert" id="encargadoCorreoInsert"/></td>
+                    <td><input type="text" name="encargadoPuebloInsert" id="encargadoPuebloInsert"/></td>
                     <td><input type="text" name="encargadoDireccionInsert" id="encargadoDireccionInsert"/></td>
                     <td><input type="number" name="encargadoTelefonoInsert" id="encargadoTelefonoInsert"/></td>
                     <td><input type="button" value="Agregar Teléfono" name="agregarTelefono" id="agregarTelefono" onclick="agregarTel();"/></td>
@@ -55,7 +59,9 @@
         <br><br>
         <table>
             <tr>
-                <th>Nombre</th>
+                <th>Nombre Cliente</th>
+                <th>Correo Electr&oacute;nico</th>
+                <th>Pueblo</th>
                 <th>Direcci&oacute;n</th>
                 <th>Actualizar</th>
                 <th>Nuevo Tel&eacute;fono</th>
@@ -75,6 +81,8 @@
                 <form method="post" action="../business/encargadobusiness/encargadoAction.php">
                     <input type="hidden" id="encargadoId" name="encargadoId" value="<?php echo $current->getEncargadoId();?>"></td>
                     <td><input type="text" name="encargadoNombreCompleto" id="encargadoNombreCompleto" value="<?php echo $current->getEncargadoNombreCompleto();?>"/></td>
+                    <td><input type="text" name="encargadoCorreo" id="encargadoCorreo" value="<?php ?>"/></td>
+                    <td><input type="text" name="encargadoPueblo" id="encargadoPueblo" value="<?php ?>"/></td>
                     <td><input type="text" name="encargadoDireccion" id="encargadoDireccion" value="<?php echo $current->getEncargadoDireccion();?>" /></td>
                     <td><input type="submit" value="Actualizar" name="actualizar" id="actualizar" /></td>
                     <td><input type="number" name="encargadoTelefono" id="encargadoTelefono"/></td>
