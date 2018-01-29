@@ -4,14 +4,21 @@
       private $ProductoVeterinarioId;
       private $ProductoVeterinarioNombre;
       private $ProductoVeterinarioPrincipioActivo;
+      private $ProductoVeterinarioContenido;
+      private $ProductoVeterinarioPrecio;
+      private $ProductoVeterinarioNombreComun;
       private $ProductoVeterinarioEstado;
 
       function productoveterinario($ProductoVeterinarioId, $ProductoVeterinarioNombre,
-      $ProductoVeterinarioPrincipioActivo, $ProductoVeterinarioEstado)
+      $ProductoVeterinarioPrincipioActivo, $ProductoVeterinarioContenido, $ProductoVeterinarioPrecio,
+      $ProductoVeterinarioNombreComun, $ProductoVeterinarioEstado)
       {
           $this->ProductoVeterinarioId = $ProductoVeterinarioId;
           $this->ProductoVeterinarioNombre = $ProductoVeterinarioNombre;
           $this->ProductoVeterinarioPrincipioActivo = $ProductoVeterinarioPrincipioActivo;
+          $this->ProductoVeterinarioContenido = $ProductoVeterinarioContenido;
+          $this->ProductoVeterinarioPrecio = $ProductoVeterinarioPrecio;
+          $this->ProductoVeterinarioNombreComun = $ProductoVeterinarioNombreComun;
           $this->ProductoVeterinarioEstado = $ProductoVeterinarioEstado;
       }
 
@@ -35,10 +42,24 @@
           return $this->ProductoVeterinarioPrincipioActivo;
       }
 
+      public function getProductoVeterinarioContenido()
+      {
+          return $this->ProductoVeterinarioContenido;
+      }
+      public function getProductoVeterinarioPrecio()
+      {
+          return $this->ProductoVeterinarioPrecio;
+      }
+      public function getProductoVeterinarioNombreComun()
+      {
+          return $this->ProductoVeterinarioNombreComun;
+      }
+
       public function getProductoVeterinarioEstado()
       {
           return $this->ProductoVeterinarioEstado;
       }
+
 
       /*SET*/
       public function setProductoVeterinarioId($ProductoVeterinarioId)
@@ -59,6 +80,19 @@
       public function setProductoVeterinarioEstado($ProductoVeterinarioEstado)
       {
           $this->ProductoVeterinarioEstado = $ProductoVeterinarioEstado;
+      }
+
+      public function setProductoVeterinarioContenido($ProductoVeterinarioContenido)
+      {
+          $this->ProductoVeterinarioContenido;
+      }
+      public function setProductoVeterinarioPrecio($ProductoVeterinarioPrecio)
+      {
+          $this->ProductoVeterinarioPrecio;
+      }
+      public function setProductoVeterinarioNombreComun($ProductoVeterinarioNombreComun)
+      {
+          $this->ProductoVeterinarioNombreComun;
       }
   }
 ?>
