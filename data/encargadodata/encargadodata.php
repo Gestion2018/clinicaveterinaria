@@ -33,7 +33,8 @@ class EncargadoData extends Data {
 
         $queryInsert = "INSERT INTO tbencargado VALUES (" . $nextId . "," .
                 "'".$encargado->getEncargadoNombreCompleto() ."'". "," .
-                "'algo'". "," .
+                "'".$encargado->getEncargadoNombreCorreo() ."'".. "," .
+                "'".$encargado->getEncargadoNombrePueblo() ."'".. "," .
                 "'".$encargado->getEncargadoDireccion() ."'". "," .
                 "'A'" . ");";
 
@@ -63,8 +64,10 @@ class EncargadoData extends Data {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
 
-        $queryUpdate = "UPDATE tbencargado SET  encargadonombrecompleto = " . "'".$encargado->getEncargadoNombreCompleto() ."'". ", encargadodireccion = " ."'". 
-            $encargado->getEncargadoDireccion() ."'".
+        $queryUpdate = "UPDATE tbencargado SET  encargadonombrecompleto = " . "'".$encargado->getEncargadoNombreCompleto() ."'". 
+        ", encargadodireccion = " ."'".$encargado->getEncargadoCorreo() ."'".
+        ", encargadodireccion = " ."'".$encargado->getEncargadoNombrePueblo() ."'".
+        ", encargadodireccion = " ."'".$encargado->getEncargadoDireccion() ."'".
                 " WHERE encargadoid = " . $encargado->getEncargadoId() . ";";
 
         $result = mysqli_query($conn, $queryUpdate);
@@ -87,7 +90,7 @@ class EncargadoData extends Data {
 
     }//eliminar medico
 
-
+//id,nom,te,dire,est,email,especie,pueblo
 
     public function obtenerEncargados() {
 
@@ -101,7 +104,8 @@ class EncargadoData extends Data {
         while ($row = mysqli_fetch_array($result)) {
 
             if($row['encargadoestado']!='B'){
-                $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'], $row['encargadotelefono'],
+                $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'], $row['encargadonombrecorreo'], 
+                $row['encargadotelefono'], $row['encargadonom'],
                 $row['encargadodireccion'], $row['encargadoestado']);
                 array_push($encargados, $encargado);
 
@@ -127,7 +131,7 @@ class EncargadoData extends Data {
         while ($row = mysqli_fetch_array($result)) {
 
             if($row['encargadoestado'] != 'B' && $row['encargadoid'] == $encargadoId){
-               $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'], $row['encargadotelefono'],
+               $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'],$row['encargadocorreo'], $row['encargadotelefono'],
                 $row['encargadodireccion'], $row['encargadoestado']);
                 array_push($encargados, $encargado);
 

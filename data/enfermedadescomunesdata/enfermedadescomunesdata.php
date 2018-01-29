@@ -35,6 +35,7 @@ class EnfermedadesComunesData extends Data {
                 "'".$enfermedadescomunes->getEnfermedadesComunesNombre() ."'". "," .
                 "'".$enfermedadescomunes->getEnfermedadescomunesDescripcion(). "'".",".
                 "'".$enfermedadescomunes->getEnfermedadescomunesSintomas(). "'".",".
+                "'".$enfermedadescomunes->getEnfermedadescomunesProductosUsados(). "'".",".
                 "'".$enfermedadescomunes->getEnfermedadescomunesEstado()."'".  ");";
 
         $result = mysqli_query($conn, $queryInsert);
@@ -51,6 +52,7 @@ class EnfermedadesComunesData extends Data {
         $queryUpdate = "UPDATE tbenfermedadescomunes SET  enfermedadescomunesnombre = " . "'".$enfermedadescomunes->getEnfermedadescomunesNombre() ."'".
                 ", enfermedadescomunesdescripcion = " . "'".$enfermedadescomunes->getEnfermedadescomunesDescripcion() ."'".
                 ", enfermedadescomunessintomas = " ."'". $enfermedadescomunes->getEnfermedadescomunesSintomas() ."'".
+                ", enfermedadescomunesproductosusados = " ."'". $enfermedadescomunes->getEnfermedadescomunesProductosUsados() ."'".
                 ", enfermedadescomunesestado = " ."'". $enfermedadescomunes->getEnfermedadescomunesEstado() ."'".
                 " WHERE enfermedadescomunesid = " . $enfermedadescomunes->getEnfermedadescomunesId() . ";";
 
@@ -91,7 +93,7 @@ class EnfermedadesComunesData extends Data {
             if($row['enfermedadescomunesestado']!='B'){
                 $enfermedadescomun = new enfermedadescomunes($row['enfermedadescomunesid'],
                  $row['enfermedadescomunesnombre'],$row['enfermedadescomunesdescripcion'],
-                 $row['enfermedadescomunessintomas'],$row['enfermedadescomunesestado']);
+                 $row['enfermedadescomunessintomas'],$row['enfermedadescomunesestado'],$row['enfermedadescomunesproductosusados']);
                 array_push($enfermedadescomunes, $enfermedadescomun);
 
             }//end if
@@ -116,9 +118,10 @@ class EnfermedadesComunesData extends Data {
 
           if($row['enfermedadescomunesestado']!='B' && $row['enfermedadescomunesid']==$enfermedadescomunesId){
               $enfermedadescomun = new enfermedadescomunes($row['enfermedadescomunesid'],
-               $row['enfermedadescomunesnombre'],$row['enfermedadescomunesdescripcion'],
-               $row['enfermedadescomunessintomas'],$row['enfermedadescomunesestado']);
-              array_push($enfermedadescomunes, $enfermedadescomun);
+                 $row['enfermedadescomunesnombre'],$row['enfermedadescomunesdescripcion'],
+                 $row['enfermedadescomunessintomas'],$row['enfermedadescomunesestado'],$row['enfermedadescomunesproductosusados']);
+                array_push($enfermedadescomunes, $enfermedadescomun);
+
 
           }//end if
 
