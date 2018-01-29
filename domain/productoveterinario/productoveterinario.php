@@ -84,15 +84,15 @@
 
       public function setProductoVeterinarioContenido($ProductoVeterinarioContenido)
       {
-          $this->ProductoVeterinarioContenido;
+          $this->ProductoVeterinarioContenido = $ProductoVeterinarioContenido;
       }
       public function setProductoVeterinarioPrecio($ProductoVeterinarioPrecio)
       {
-          $this->ProductoVeterinarioPrecio;
+          $this->ProductoVeterinarioPrecio = $ProductoVeterinarioPrecio;
       }
       public function setProductoVeterinarioNombreComun($ProductoVeterinarioNombreComun)
       {
-          $this->ProductoVeterinarioNombreComun;
+          $this->ProductoVeterinarioNombreComun = $ProductoVeterinarioNombreComun;
       }
   }
 ?>
