@@ -35,13 +35,12 @@
 
         <table>
             <tr>
-                <th>Nombre</th>
                 <th>Especie</th>
+                <th>Nombre Raza</th>
                 <th></th>
             </tr>
             <tr>
             <form method="post" action="../business/razabusiness/razaAction.php">
-                <td><input required type="text" id="razaNombre" name="razaNombre"></td>
                 <td><select id="especieId" name="especieId">
                 <?php
                     foreach ($especies as $current) {
@@ -49,6 +48,7 @@
                     }//foreach
                 ?>
                 </select></td>
+                <td><input required type="text" id="razaNombre" name="razaNombre"></td>
                 <input type="hidden" id="razaEstado" name="razaEstado" value="1"></td>
                 <td><input type="submit" value="Insertar" name="insertar" id="insertar"/></td>
             </form>
@@ -61,7 +61,6 @@
             ?>
                 <form method="post" action="../business/razabusiness/razaAction.php">
                 <input type="hidden" id="razaId" name="razaId" value="<?php echo $current->getRazaId() ?>"></td>
-                <td><input type="text" name="razaNombre" id="razaNombre" value="<?php echo $current->getRazaNombre() ?>"/></td>
                 <td><select id="especieId" name="especieId">
                 <?php
                     foreach ($especies as $especieActual) {
@@ -74,6 +73,7 @@
                     }//foreach
                     ?>
                 </select></td>
+                <td><input type="text" name="razaNombre" id="razaNombre" value="<?php echo $current->getRazaNombre() ?>"/></td>
                 <input type="hidden" id="razaEstado" name="razaEstado" value="1"></td>
                 <td><input type="submit" value="Actualizar" name="actualizar" id="actualizar"/></td>
                 <td><input type="submit" value="Eliminar" name="eliminar" id="eliminar"/></td>

@@ -30,7 +30,7 @@
     <section id="form">
         <table>
             <tr>
-                <th>Nombre</th>
+                <th>Nombre Especie</th>
                 <th></th>
             </tr>
             <tr>
