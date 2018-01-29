@@ -4,20 +4,16 @@
         private $AnimalId;
         private $EspecieRazaId;
         private $AnimalSennas; /*Señas de animales*/
-        private $AnimalPeso;
-        private $AnimalMedidaPeso;
         private $AnimalEstado;
         private $AnimalIdCliente
 
         function animal($AnimalNombre, $AnimalId, $EspecieRazaId, $AnimalSennas,
-        $AnimalPeso, $AnimalMedidaPeso, $AnimalEstado, $AnimalIdCliente)
+        $AnimalEstado, $AnimalIdCliente)
         {
             $this->AnimalNombre = $AnimalNombre;
             $this->AnimalId = $AnimalId;
             $this->EspecieRazaId = $EspecieRazaId;
             $this->AnimalSennas = $AnimalSennas;
-            $this->AnimalPeso = $AnimalPeso;
-            $this->AnimalMedidaPeso = $AnimalMedidaPeso;
             $this->AnimalEstado = $AnimalEstado;
             $this->AnimalIdCliente = $AnimalIdCliente;
         }
@@ -45,16 +41,6 @@
         public function getAnimalSennas()
         {
             return $this->AnimalSennas;
-        }
-
-        public function getAnimalPeso()
-        {
-            return $this->AnimalPeso;
-        }
-
-        public function getAnimalMedidaPeso()
-        {
-            return $this->AnimalMedidaPeso;
         }
 
         public function getAnimalEstado()
@@ -86,16 +72,6 @@
         public function setAnimalSennas($AnimalSennas)
         {
             $this->AnimalSennas = $AnimalSennas;
-        }
-
-        public function setAnimalPeso($AnimalPeso)
-        {
-            $this->AnimalPeso = $AnimalPeso;
-        }
-
-        public function setAnimalMedidaPeso($AnimalMedidaPeso)
-        {
-            $this->AnimalMedidaPeso = $AnimalMedidaPeso;
         }
 
         public function setAnimalEstado($AnimalEstado)
