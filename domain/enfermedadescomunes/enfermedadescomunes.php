@@ -6,15 +6,18 @@ class enfermedadescomunes
     private $EnfermedadescomunesDescripcion;
     private $EnfermedadescomunesSintomas;
     private $EnfermedadescomunesEstado;
+    private $EnfermedadescomunesProductosUsados;
 
     function enfermedadescomunes($EnfermedadescomunesId, $EnfermedadescomunesNombre,
-    $EnfermedadescomunesDescripcion, $EnfermedadescomunesSintomas, $EnfermedadescomunesEstado)
+    $EnfermedadescomunesDescripcion, $EnfermedadescomunesSintomas, $EnfermedadescomunesEstado,
+    $EnfermedadescomunesProductosUsados)
     {
         $this->EnfermedadescomunesId = $EnfermedadescomunesId;
         $this->EnfermedadescomunesNombre = $EnfermedadescomunesNombre;
         $this->EnfermedadescomunesDescripcion = $EnfermedadescomunesDescripcion;
         $this->EnfermedadescomunesSintomas = $EnfermedadescomunesSintomas;
         $this->EnfermedadescomunesEstado = $EnfermedadescomunesEstado;
+        $this->EnfermedadescomunesProductosUsados = $EnfermedadescomunesProductosUsados;
     }
 
     /***********************************************************************
@@ -47,6 +50,11 @@ class enfermedadescomunes
         return $this->EnfermedadescomunesEstado;
     }
 
+    public function getEnfermedadescomunesProductosUsados()
+    {
+        return $this->EnfermedadescomunesProductosUsados;
+    }
+
     /*SET*/
     public function setEnfermedadescomunesId($EnfermedadescomunesId)
     {
@@ -71,6 +79,11 @@ class enfermedadescomunes
     public function setEnfermedadescomunesEstado($EnfermedadescomunesEstado)
     {
         $this->EnfermedadescomunesEstado = $EnfermedadescomunesEstado;
+    }
+
+    public function getEnfermedadescomunesProductosUsados($EnfermedadescomunesProductosUsados)
+    {
+        $this->EnfermedadescomunesProductosUsados = $EnfermedadescomunesProductosUsados;
     }
 }
 ?>
