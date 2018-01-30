@@ -4,20 +4,18 @@
         private $AnimalId;
         private $EspecieRazaId;
         private $AnimalSennas; /*Señas de animales*/
-        private $AnimalPeso;
-        private $AnimalMedidaPeso;
         private $AnimalEstado;
+        private $AnimalIdCliente
 
         function animal($AnimalNombre, $AnimalId, $EspecieRazaId, $AnimalSennas,
-        $AnimalPeso, $AnimalMedidaPeso, $AnimalEstado)
+        $AnimalEstado, $AnimalIdCliente)
         {
             $this->AnimalNombre = $AnimalNombre;
             $this->AnimalId = $AnimalId;
             $this->EspecieRazaId = $EspecieRazaId;
             $this->AnimalSennas = $AnimalSennas;
-            $this->AnimalPeso = $AnimalPeso;
-            $this->AnimalMedidaPeso = $AnimalMedidaPeso;
             $this->AnimalEstado = $AnimalEstado;
+            $this->AnimalIdCliente = $AnimalIdCliente;
         }
 
         /***********************************************************************
@@ -45,19 +43,14 @@
             return $this->AnimalSennas;
         }
 
-        public function getAnimalPeso()
-        {
-            return $this->AnimalPeso;
-        }
-
-        public function getAnimalMedidaPeso()
-        {
-            return $this->AnimalMedidaPeso;
-        }
-
         public function getAnimalEstado()
         {
             return $this->AnimalEstado;
+        }
+
+        public function getAnimalIdCliente()
+        {
+            return $this->AnimalIdCliente;
         }
 
         /*SET*/
@@ -81,19 +74,14 @@
             $this->AnimalSennas = $AnimalSennas;
         }
 
-        public function setAnimalPeso($AnimalPeso)
-        {
-            $this->AnimalPeso = $AnimalPeso;
-        }
-
-        public function setAnimalMedidaPeso($AnimalMedidaPeso)
-        {
-            $this->AnimalMedidaPeso = $AnimalMedidaPeso;
-        }
-
         public function setAnimalEstado($AnimalEstado)
         {
             $this->AnimalEstado = $AnimalEstado;
+        }
+
+        public function setAnimalIdCliente($AnimalIdCliente)
+        {
+            $this->AnimalIdCliente = $AnimalIdCliente;
         }
     }
 ?>

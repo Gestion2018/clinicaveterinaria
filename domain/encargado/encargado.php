@@ -5,14 +5,18 @@
         private $EncargadoDireccion;
         private $EncargadoEstado;
         private $EncargadoTelefono;
+        private $EncargadoEmail;
+        private $EncargadoPueblo;
 
         function encargado($EncargadoId, $EncargadoNombreCompleto,$EncargadoTelefono,
-        $EncargadoDireccion, $EncargadoEstado){
+        $EncargadoDireccion, $EncargadoEstado, $EncargadoEmail,$EncargadoPueblo){
             $this->EncargadoId = $EncargadoId;
             $this->EncargadoNombreCompleto = $EncargadoNombreCompleto;
             $this->EncargadoDireccion = $EncargadoDireccion;
             $this->EncargadoEstado = $EncargadoEstado;
             $this->EncargadoTelefono = $EncargadoTelefono;
+            $this->EncargadoEmail = $EncargadoEmail;
+            $this->EncargadoPueblo = $EncargadoPueblo;
         }
 
         /**************************************************************************
@@ -40,6 +44,14 @@
             return $this->EncargadoTelefono;
         }
 
+        public function getEncargadoEmail(){
+            return $this->EncargadoEmail;
+        }
+
+        public function getEncargadoPueblo(){
+            return $this->EncargadoPueblo;
+        }
+
         /*SET*/
         public function setEncargadoId($EncargadoId){
             $this->EncargadoId = $EncargadoId;
@@ -58,7 +70,15 @@
         }
 
         public function setEncargadoTelefono($EncargadoTelefono){
-            return $this->EncargadoTelefono;
+            $this->EncargadoTelefono = $EncargadoTelefono;
+        }
+
+        public function setEncargadoEmail($EncargadoEmail){
+            $this->EncargadoEmail = $EncargadoEmail;
+        }
+
+        public function setEncargadoPueblo($EncargadoPueblo){
+            $this->EncargadoPueblo = $EncargadoPueblo;
         }
     }
 

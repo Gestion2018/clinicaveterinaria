@@ -104,9 +104,8 @@ class EncargadoData extends Data {
         while ($row = mysqli_fetch_array($result)) {
 
             if($row['encargadoestado']!='B'){
-                $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'], $row['encargadonombrecorreo'], 
-                $row['encargadotelefono'], $row['encargadonom'],
-                $row['encargadodireccion'], $row['encargadoestado']);
+                 $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'],$row['encargadotelefono'] 
+                ,$row['encargadodireccion'],$row['encargadoestado'], $row['encargadocorreo'],$row['encargadopueblo']);
                 array_push($encargados, $encargado);
 
             }//end if
@@ -131,8 +130,8 @@ class EncargadoData extends Data {
         while ($row = mysqli_fetch_array($result)) {
 
             if($row['encargadoestado'] != 'B' && $row['encargadoid'] == $encargadoId){
-               $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'],$row['encargadocorreo'], $row['encargadotelefono'],
-                $row['encargadodireccion'], $row['encargadoestado']);
+               $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'],$row['encargadotelefono'] 
+                ,$row['encargadodireccion'],$row['encargadoestado'], $row['encargadocorreo'],$row['encargadopueblo']);
                 array_push($encargados, $encargado);
 
             }//end if
