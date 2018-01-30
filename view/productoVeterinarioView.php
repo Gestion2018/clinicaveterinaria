@@ -48,14 +48,14 @@
                     <td><input required type="text" name="productoVeterinarioNombre" id="productoVeterinarioNombre"/></td>
                     <td><input required type="text" name="productoVeterinarioNombreComun" id="productoVeterinarioNombreComun"/></td>
                     <td><input type="text" name="productoVeterinarioPrincipioActivo" id="productoVeterinarioPrincipioActivo"/></td>
-                    <td><select>
+                    <td><select id="productoVeterinarioContenido" name="productoVeterinarioContenido">
                         <?php 
                             foreach ($unidades as $unidad) {
-                                echo '<option value='.$unidad['unidadid'].'>'.$unidad["unidadnombre"].'</option>';
+                                echo '<option value='.$unidad['unidadnombre'].'>'.$unidad["unidadnombre"].'</option>';
                             }//foreach
                         ?>
                     </select></td>
-                    <td><input type="number" name="productoVeterinarioPrecio" id="productoVeterinarioPrecio"/></td>
+                    <td><input type="number" name="productoVeterinarioCantidad" id="productoVeterinarioCantidad"/></td>
                     <td><input type="number" name="productoVeterinarioPrecio" id="productoVeterinarioPrecio"/></td>
                     <td><input type="date" name="productoVeterinarioFechaVencimiento" id="productoVeterinarioFechaVencimiento"/></td>
                     <td><input required type="hidden" name="productoVeterinarioEstado" id="productoVeterinarioEstado" value="A" /></td>
