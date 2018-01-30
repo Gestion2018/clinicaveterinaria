@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-01-2018 a las 16:05:05
+-- Tiempo de generación: 31-01-2018 a las 00:24:33
 -- Versión del servidor: 5.7.11
 -- Versión de PHP: 5.6.19
 
@@ -159,7 +159,10 @@ INSERT INTO `tbmedico` (`medicoid`, `mediconumeroidentificacion`, `mediconombrec
 CREATE TABLE `tbproductoveterinario` (
   `productoveterinarioid` int(3) NOT NULL,
   `productoveterinarionombre` varchar(100) NOT NULL,
+  `productoveterinarionombrecomun` varchar(100) NOT NULL,
   `productoveterinarioprincipioactivo` varchar(50) NOT NULL,
+  `productoveterinariocontenido` varchar(50) NOT NULL,
+  `productoveterinarioprecio` int(11) NOT NULL,
   `productoveterinarioestado` varchar(2) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -167,9 +170,9 @@ CREATE TABLE `tbproductoveterinario` (
 -- Volcado de datos para la tabla `tbproductoveterinario`
 --
 
-INSERT INTO `tbproductoveterinario` (`productoveterinarioid`, `productoveterinarionombre`, `productoveterinarioprincipioactivo`, `productoveterinarioestado`) VALUES
-(1, 'Producto 1', 'principio activo 1', 'A'),
-(2, 'Producto 2', 'principio 2', 'B');
+INSERT INTO `tbproductoveterinario` (`productoveterinarioid`, `productoveterinarionombre`, `productoveterinarionombrecomun`, `productoveterinarioprincipioactivo`, `productoveterinariocontenido`, `productoveterinarioprecio`, `productoveterinarioestado`) VALUES
+(1, 'Producto 1', '', 'principio activo 1', '', 0, 'A'),
+(2, 'Producto 2', '', 'principio 2', '', 0, 'B');
 
 -- --------------------------------------------------------
 
