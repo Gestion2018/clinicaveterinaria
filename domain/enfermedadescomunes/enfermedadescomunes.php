@@ -81,7 +81,7 @@ class enfermedadescomunes
         $this->EnfermedadescomunesEstado = $EnfermedadescomunesEstado;
     }
 
-    public function getEnfermedadescomunesProductosUsados($EnfermedadescomunesProductosUsados)
+    public function setEnfermedadescomunesProductosUsados($EnfermedadescomunesProductosUsados)
     {
         $this->EnfermedadescomunesProductosUsados = $EnfermedadescomunesProductosUsados;
     }
