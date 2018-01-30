@@ -9,10 +9,12 @@
       private $ProductoVeterinarioNombreComun;
       private $ProductoVeterinarioEstado;
       private $ProductoVeterinarioUnidad;/*Gramos, mililitros, pastillas*/
+      private $ProductoVeterinarioFechaVencimiento;
 
       function productoveterinario($ProductoVeterinarioId, $ProductoVeterinarioNombre,
       $ProductoVeterinarioPrincipioActivo, $ProductoVeterinarioContenido, $ProductoVeterinarioPrecio,
-      $ProductoVeterinarioNombreComun, $ProductoVeterinarioEstado, $ProductoVeterinarioUnidad)
+      $ProductoVeterinarioNombreComun, $ProductoVeterinarioEstado, $ProductoVeterinarioUnidad,
+      $ProductoVeterinarioFechaVencimiento)
       {
           $this->ProductoVeterinarioId = $ProductoVeterinarioId;
           $this->ProductoVeterinarioNombre = $ProductoVeterinarioNombre;
@@ -22,6 +24,7 @@
           $this->ProductoVeterinarioNombreComun = $ProductoVeterinarioNombreComun;
           $this->ProductoVeterinarioEstado = $ProductoVeterinarioEstado;
           $this->ProductoVeterinarioUnidad = $ProductoVeterinarioUnidad;
+          $this->ProductoVeterinarioFechaVencimiento = $ProductoVeterinarioFechaVencimiento;
       }
 
       /***********************************************************************
@@ -67,6 +70,11 @@
           return $this->ProductoVeterinarioUnidad;
       }
 
+      public function getProductoVeterinarioFechaVencimiento()
+      {
+          return $this->ProductoVeterinarioFechaVencimiento;
+      }
+
       /*SET*/
       public function setProductoVeterinarioId($ProductoVeterinarioId)
       {
@@ -104,6 +112,11 @@
       public function setProductoVeterinarioUnidad($ProductoVeterinarioUnidad)
       {
           $this->ProductoVeterinarioUnidad = $ProductoVeterinarioUnidad;
+      }
+
+      public function setProductoVeterinarioFechaVencimiento($ProductoVeterinarioFechaVencimiento)
+      {
+          $this->ProductoVeterinarioFechaVencimiento = $ProductoVeterinarioFechaVencimiento;
       }
   }
 ?>
