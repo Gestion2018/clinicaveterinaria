@@ -37,8 +37,8 @@
                 <th>Nombre</th>
                 <th>Nombre Com&uacute;n</th>
                 <th>Principio Activo</th>
-                <th>Cantidad</th>
                 <th>Tamaño</th>
+                <th>Cantidad</th>
                 <th>Precio</th>
                 <th>Fecha Vencimiento</th>
                 <th></th>
@@ -62,11 +62,21 @@
                     <td><input type="submit" value="insertar" name="insertar" id="insertar"/></td>
                 </form>
             </tr>
+            </table>
+            <br><br>
+            <table>
+            <tr>
+                <th>Nombre</th>
+                <th>Nombre Com&uacute;n</th>
+                <th>Principio Activo</th>
+                <th>Cotenido</th>
+                <th>Precio</th>
+                <th>Fecha Vencimiento</th>
+                <th></th>
+            </tr>
             <?php
-            //$productoVeterinarioBusiness = new ProductoVeterinarioBusiness();
             $productos = $productoVeterinarioBusiness->obtenerTBProductoVeterinario();
-
-            //obtener todas las unidades disponibles
+            
             foreach ($productos as $current) {
                 ?>
                 <form method="post" action="../business/productoVeterinariobusiness/productoVeterinarioAction.php">
@@ -83,6 +93,8 @@
                     </tr>
                 </form>
 
+                
+                
                 <?php 
                 /*echo '<form method="post" action="../business/productoVeterinariobusiness/productoVeterinarioAction.php">';
                 echo '<input type="hidden" id="productoVeterinarioId" name="productoVeterinarioId" value="' . $current->getProductoVeterinarioId() . '"></td>';

@@ -102,10 +102,9 @@ class ProductoVeterinarioData extends Data {
             if($row['productoveterinarioestado']!='B'){
                 $productoveterinario = new productoveterinario($row['productoveterinarioid'],
                 $row['productoveterinarionombre'], $row['productoveterinarionombrecomun'],$row['productoveterinarioprincipioactivo'],
-								$row['productoveterinariocontenido'],$row['productoveterinarioprecio'],$row['productoveterinarioestado']
+								$row['productoveterinariocontenido'],$row['productoveterinarioprecio'],$row['productoveterinarioestado'], "0"
 								,$row['productoveterinariofechavencimiento']);
                 array_push($productosveterinarios, $productoveterinario);
-
             }//end if
 
         }//end while
