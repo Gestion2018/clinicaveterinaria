@@ -14,7 +14,7 @@ class Data {
     public function Data() {
 
         $hostName = gethostname();
-
+        
         switch ($hostName) {
             case "SILVIA": //Office's PC
                 $this->isActive = false;
@@ -31,6 +31,13 @@ class Data {
                 $this->db = "bdclinicaveterinaria";
                 break;
             case "johan-VirtualBox": //Office's PC
+                $this->isActive = false;
+                $this->server = "localhost";
+                $this->user = "root";
+                $this->password = "";
+                $this->db = "bdclinicaveterinaria";
+                break;
+            case "DESKTOP-PF38PII": //Office's PC
                 $this->isActive = false;
                 $this->server = "localhost";
                 $this->user = "root";

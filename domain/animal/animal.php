@@ -5,7 +5,7 @@
         private $EspecieRazaId;
         private $AnimalSennas; /*Señas de animales*/
         private $AnimalEstado;
-        private $AnimalIdCliente
+        private $AnimalIdCliente;
 
         function animal($AnimalNombre, $AnimalId, $EspecieRazaId, $AnimalSennas,
         $AnimalEstado, $AnimalIdCliente)
