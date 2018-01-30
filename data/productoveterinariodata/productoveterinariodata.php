@@ -115,11 +115,12 @@ class ProductoVeterinarioData extends Data {
         $querySelect = "SELECT * FROM tbunidades;";
         $result = mysqli_query($conn, $querySelect);
         mysqli_close($conn);
-        $unidades = [];
-	    $row = mysqli_fetch_array($result);
-
-        return $row;
-
+        $unidades = array();
+         
+        while ($row = mysqli_fetch_array($result)) {
+                $unidades[] = $row;
+        }//end while
+        return $unidades;
     }//obtenerUnidades
 
 

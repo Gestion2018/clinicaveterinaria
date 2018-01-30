@@ -4,7 +4,6 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Productos Veterinarios</title>
-    <link rel="icon" href="../resources/icons/bull.png">
     <link rel="stylesheet" href="../resources/css/css.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -25,36 +24,77 @@
              <li><a href="../index.php">Inicio</a></li>
         </ul>
     </nav>
+
+    <?php 
+        $productoVeterinarioBusiness = new ProductoVeterinarioBusiness();
+        $unidades = $productoVeterinarioBusiness->obtenerUnidades();
+    ?>
     
 
     <section id="form">
         <table>
             <tr>
                 <th>Nombre</th>
+                <th>Nombre Com&uacute;n</th>
                 <th>Principio Activo</th>
+                <th>Cantidad</th>
+                <th>Tamaño</th>
+                <th>Precio</th>
+                <th>Fecha Vencimiento</th>
                 <th></th>
             </tr>
             <tr>
                 <form method="post" enctype="multipart/form-data" action="../business/productoVeterinariobusiness/productoVeterinarioAction.php">
                     <td><input required type="text" name="productoVeterinarioNombre" id="productoVeterinarioNombre"/></td>
+                    <td><input required type="text" name="productoVeterinarioNombreComun" id="productoVeterinarioNombreComun"/></td>
                     <td><input type="text" name="productoVeterinarioPrincipioActivo" id="productoVeterinarioPrincipioActivo"/></td>
+                    <td><select>
+                        <?php 
+                            foreach ($unidades as $unidad) {
+                                echo '<option value='.$unidad['unidadid'].'>'.$unidad["unidadnombre"].'</option>';
+                            }//foreach
+                        ?>
+                    </select></td>
+                    <td><input type="number" name="productoVeterinarioPrecio" id="productoVeterinarioPrecio"/></td>
+                    <td><input type="number" name="productoVeterinarioPrecio" id="productoVeterinarioPrecio"/></td>
+                    <td><input type="date" name="productoVeterinarioFechaVencimiento" id="productoVeterinarioFechaVencimiento"/></td>
                     <td><input required type="hidden" name="productoVeterinarioEstado" id="productoVeterinarioEstado" value="A" /></td>
                     <td><input type="submit" value="insertar" name="insertar" id="insertar"/></td>
                 </form>
             </tr>
             <?php
-            $productoVeterinarioBusiness = new ProductoVeterinarioBusiness();
+            //$productoVeterinarioBusiness = new ProductoVeterinarioBusiness();
             $productos = $productoVeterinarioBusiness->obtenerTBProductoVeterinario();
+
+            //obtener todas las unidades disponibles
             foreach ($productos as $current) {
-                echo '<form method="post" action="../business/productoVeterinariobusiness/productoVeterinarioAction.php">';
+                ?>
+                <form method="post" action="../business/productoVeterinariobusiness/productoVeterinarioAction.php">
+                    <input type="hidden" id="productoVeterinarioId" name="productoVeterinarioId" value=" <?php echo $current->getProductoVeterinarioId() ?>"></td>
+                    <td><input required type="text" name="productoVeterinarioNombre" id="productoVeterinarioNombre" value="<?php echo $current->getProductoVeterinarioNombre() ?>"/></td>
+                    <td><input required type="text" name="productoVeterinarioNombreComun" id="productoVeterinarioNombreComun" value="<?php echo $current->getProductoVeterinarioNombreComun() ?>"/></td>
+                    <td><input type="text" name="productoVeterinarioPrincipioActivo" id="productoVeterinarioPrincipioActivo" value=" <?php echo $current->getproductoVeterinarioPrincipioActivo() ?>"/></td>
+                    <td><input type="text" name="productoVeterinarioContenido" id="productoVeterinarioContenido" value=" <?php echo $current->getproductoVeterinarioContenido() ?>"></td>
+                    <td><input required type="number" name="productoVeterinarioPrecio" id="productoVeterinarioPrecio" value="<?php echo $current->getProductoVeterinarioPrecio() ?>"/></td>  
+                    <td><input required type="date" name="productoVeterinarioFechaVencimiento" id="productoVeterinarioFechaVencimiento" value="<?php echo $current->getProductoVeterinarioFechaVencimiento() ?>"/></td> 
+                    <input type="hidden" id="productoVeterinarioEstado" name="productoVeterinarioEstado" value="A"></td>
+                    <td><input type="submit" value="Actualizar" name="actualizar" id="actualizar"/></td>
+                    <td><input type="submit" value="Eliminar" name="eliminar" id="eliminar"/></td>
+                    </tr>
+                </form>
+
+                <?php 
+                /*echo '<form method="post" action="../business/productoVeterinariobusiness/productoVeterinarioAction.php">';
                 echo '<input type="hidden" id="productoVeterinarioId" name="productoVeterinarioId" value="' . $current->getProductoVeterinarioId() . '"></td>';
                 echo '<td><input required type="text" name="productoVeterinarioNombre" id="productoVeterinarioNombre" value="' . $current->getProductoVeterinarioNombre() . '"/></td>';
-                 echo '<td><input type="text" name="productoVeterinarioPrincipioActivo" id="productoVeterinarioPrincipioActivo" value="' . $current->getproductoVeterinarioPrincipioActivo() . '"/></td>';              
+                echo '<td><input required type="text" name="productoVeterinarioNombreComun" id="productoVeterinarioNombreComun" value="' . $current->getProductoVeterinarioNombreComun() . '"/></td>';
+                echo '<td><input type="text" name="productoVeterinarioPrincipioActivo" id="productoVeterinarioPrincipioActivo" value="' . $current->getproductoVeterinarioPrincipioActivo() . '"/></td>'; 
+                echo '<td><input required type="number" name="productoVeterinarioPrecio" id="productoVeterinarioPrecio" value="' . $current->getProductoVeterinarioPrecio() . '"/></td>'             
                 echo '<input type="hidden" id="productoVeterinarioEstado" name="productoVeterinarioEstado" value="A"></td>';
                 echo '<td><input type="submit" value="Actualizar" name="actualizar" id="actualizar"/></td>';
                 echo '<td><input type="submit" value="Eliminar" name="eliminar" id="eliminar"/></td>';
                 echo '</tr>';
-                echo '</form>';
+                echo '</form>';*/
             }
             ?>
             <tr>

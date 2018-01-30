@@ -37,6 +37,10 @@ class ProductoVeterinarioBusiness {
     public function obtenerActualizar($encargadoId) {
         return $this->productoVeterinarioData->obtenerActualizar($productoVeterinarioId);
     }//ObtenerActualizar
+
+    public function obtenerUnidades() {
+        return $this->productoVeterinarioData->obtenerUnidades();
+    }//ObtenerUnidades
 }//class
 
 ?>
