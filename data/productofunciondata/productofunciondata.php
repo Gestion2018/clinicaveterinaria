@@ -35,8 +35,7 @@ class ProductoFuncionData extends Data {
         }//end if
 
         $queryInsert = "INSERT INTO tbproductofuncion VALUES (" . $nextId . "," .
-        "'".$productofuncion->getProductoFuncionProductoId() ."'". ",". "'" . $productofuncion->getProductoFuncion() . "'" .
-        ",". "'" . $productofuncion->getProductoFuncionFechaVencimiento() . "'"");";
+        "'".$productofuncion->getProductoFuncionProductoId() ."'". ",". "'" . $productofuncion->getProductoFuncion() . "'" .");";
         $result = mysqli_query($conn, $queryInsert);
         mysqli_close($conn);
 		return $result;
@@ -49,8 +48,8 @@ class ProductoFuncionData extends Data {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         $queryUpdate = "UPDATE tbproductofuncion SET productofuncionidproducto = " . "'" . $especie->getProductoFuncionProductoId() . "'".
-        ",productofuncion = " . "'" . $especie->getProductoFuncion() . "'". ",'" . $especie->getProductoFuncionFechaVencimiento() . "'".
-        " WHERE productofuncionid =". $especie->getEspecieId() .";";
+        ",productofuncion = " . "'" . $especie->getProductoFuncion() . "'".
+          "WHERE productofuncionid =". $especie->getEspecieId() .";";
 
         $result = mysqli_query($conn, $queryUpdate);
         mysqli_close($conn);
@@ -88,7 +87,7 @@ class ProductoFuncionData extends Data {
 
             if($row['productofuncionestado']!='B'){
                 $productofuncion = new productofuncion($row['productofuncionid'], $row['productofuncionidproducto']
-                ,$row['productofuncionestado'],$row['productofuncionfechavencimiento']);
+                ,$row['productofuncionestado'],$row['productofuncionestado']);
                 array_push($funciones, $productofuncion);
 
             }//end if
@@ -112,7 +111,7 @@ class ProductoFuncionData extends Data {
 
             if($row['productofuncionestado']!='B' && $row['productofuncionid']==$productofuncionId){
                 $productofuncion = new productofuncion($row['productofuncionid'], $row['productofuncionidproducto']
-                ,$row['productofuncionestado'],$row['productofuncionfechavencimiento']);
+                ,$row['productofuncionestado']);
                 array_push($funciones, $productofuncion);
 
 

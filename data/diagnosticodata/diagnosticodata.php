@@ -8,10 +8,10 @@ que se toma la ruta desde el view
 */
 if (isset($_POST['eliminar']) || isset($_POST['actualizar']) || isset($_POST['insertar'])) {
 	include '../../data/data.php';
-	include '../../domain/medico/medico.php';
+	include '../../domain/diagnostico/diagnostico.php';
 }else {
 	include '../data/data.php';
-	include '../domain/medico/medico.php';
+	include '../domain/diagnostico/diagnostico.php';
 }
 
 
@@ -32,14 +32,15 @@ class DiagnosticoData extends Data {
         }//end if
 
         $queryInsert = "INSERT INTO tbdiagnostico VALUES (" . $nextId . "," .
-                "'".$medico->getMedicoNumeroIdentificacion() ."'". "," .
-                "'".$medico->getMedicoNombreCompleto() ."'". "," .
-                "'".$medico->getMedicoCorreo() ."'". "," .
-                "'".$medico->getMedicoEspecialidad() ."'". "," .
-                "'".$medico->getMedicoLicencia() ."'". "," .
-                "'".$medico->getMedicoFechaVigenciaLicencia() ."'". "," .
-                "'".$medico->getMedicoEstado() ."'". "," .
-                "'".$medico->getMedicoInclusionLaboral() ."'". ");";
+                "'".$medico->getDiagnisticoIdCliente() ."'". "," .
+                "'".$medico->getDiagnosticoAnimalNombre() ."'". "," .
+                "'".$medico->getDiagnosticoEspecie() ."'". "," .
+                "'".$medico->getDiganosticoRaza() ."'". "," .
+                "'".$medico->getDiagnosticoFechaNacimiento() ."'". "," .
+                "'".$medico->getDiagnosticoPeso() ."'". "," .
+                "'".$medico->getDiagnosticoFecha() ."'". "," .
+                "'".$medico->getDiagnosticoDescripcion() ."'".
+                "'".$medico->getDiagnosticoEstado() ."'". ");";
 
         $result = mysqli_query($conn, $queryInsert);
         mysqli_close($conn);
@@ -48,20 +49,20 @@ class DiagnosticoData extends Data {
     }//insertar medico
 
 
-    public function actualizarMedico($medico) {
+    public function actualizarDiagnostico($diagnostico) {
 
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $queryUpdate = "UPDATE tbmedico SET medicoid=" . $medico->getMedicoId() .
-                ", mediconumeroidentificacion = " . "'".$medico->getMedicoNumeroIdentificacion() . "'".
-                ", mediconombrecompleto = " . "'".$medico->getMedicoNombreCompleto() ."'".
-                ", medicocorreo = " . "'".$medico->getMedicoCorreo() ."'".
-                ", medicoespecialidad = " ."'". $medico->getMedicoEspecialidad() ."'".
-                ", medicolicencia = " ."'". $medico->getMedicoLicencia() ."'".
-                ", medicofechavigencialicencia = " ."'". $medico->getMedicoFechaVigenciaLicencia() ."'".
-                ", medicoestado = " ."'". $medico->getMedicoEstado() ."'".
-                ", medicoinclusionlaboral = " ."'". $medico->getMedicoInclusionLaboral() ."'".
-                " WHERE medicoid = " . $medico->getMedicoId() . ";";
+        $queryUpdate = "UPDATE tbdiagnostico SET diagnosticoid=" . $diagnostico->getDiagnosticoId() .
+                ", diagnosticoidcliente = " . "'".$diagnostico->getDiagnisticoIdCliente() . "'".
+                ", diagnosticoanimalnombre = " . "'".$diagnostico->getDiagnosticoAnimalNombre() ."'".
+                ", diagnosticoespecie = " . "'".$diagnostico->getDiagnosticoEspecie() ."'".
+                ", diagnosticoraza= " ."'". $diagnostico->getDiganosticoRaza() ."'".
+                ", diagnosticofechanacimiento = " ."'". $diagnostico->getDiagnosticoFechaNacimiento() ."'".
+                ", diagnosticopeso = " ."'". $diagnosticopeso->getDiagnosticoPeso() ."'".
+                ", diagnosticofecha = " ."'". $diagnostico->getDiagnosticoFecha() ."'".
+                ", diagnosticodescripcion = " ."'". $diagnostico->getDiagnosticoDescripcion() ."'".
+                " WHERE diagnosticoid = " . $diagnostico->getDiagnosticoId() . ";";
 
         $result = mysqli_query($conn, $queryUpdate);
         mysqli_close($conn);
@@ -71,12 +72,12 @@ class DiagnosticoData extends Data {
     }//actualizar medico
 
 
-    public function eliminarMedico($medicoid) {
+    public function eliminarDiagnostico($diagnosticoid) {
 
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
 
-        $queryUpdate = "UPDATE tbmedico SET medicoestado = 'B' WHERE medicoid = " . $medicoid . ";";
+        $queryUpdate = "UPDATE tbdiagnostico SET diagnosticoestado = 'B' WHERE diagnosticoid = " . $diagnosticoid . ";";
         $result = mysqli_query($conn, $queryUpdate);
         mysqli_close($conn);
 
@@ -86,55 +87,56 @@ class DiagnosticoData extends Data {
 
 
 
-    public function obtenerMedicos() {
+    public function obtenerDiagnosticos() {
 
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
 
-        $querySelect = "SELECT * FROM tbmedico;";
+        $querySelect = "SELECT * FROM tbdiagnostico;";
         $result = mysqli_query($conn, $querySelect);
         mysqli_close($conn);
-        $medicos = [];
+        $diagnosticos = [];
         while ($row = mysqli_fetch_array($result)) {
 
-            if($row['medicoestado']!='B'){
-                $medico = new medico($row['medicoid'], $row['mediconumeroidentificacion'], $row['mediconombrecompleto'],
-                $row['medicocorreo'], $row['medicoespecialidad'], $row['medicolicencia'], $row['medicofechavigencialicencia'],
-                $row['medicoestado'], $row['medicoinclusionlaboral']);
-                array_push($medicos, $medico);
+            if($row['diagnosticoestado']!='B'){
+                $diagnostico = new diagnostico($row['diagnosticoid'], $row['diagnosticoidcliente'], $row['diagnosticoanimalnombre'],
+                $row['diagnosticoespecie'], $row['diagnosticoraza'], $row['diagnosticofechanacimiento'], $row['diagnosticopeso'],
+                $row['diagnosticofecha'], $row['diagnosticodescripcion'], $row['diagnosticoestado']);
+                array_push($diagnosticos, $diagnostico);
 
             }//end if
 
         }//end while
 
-        return $medicos;
+        return $diagnosticos
 
     }//obtenerMedicos
 
 
-    public function obtenerActualizar($medicoId) {
+
+    public function obtenerActualizar($diagnosticoId) {
 
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
 
-        $querySelect = "SELECT * FROM tbmedico;";
+        $querySelect = "SELECT * FROM tbdiagnostico;";
         $result = mysqli_query($conn, $querySelect);
         mysqli_close($conn);
         $medicos = [];
 
         while ($row = mysqli_fetch_array($result)) {
 
-            if($row['medicoestado']!='B' && $row['medicoid']==$medicoId){
-                $medico = new medico($row['medicoid'], $row['mediconumeroidentificacion'], $row['mediconombrecompleto'],
-                $row['medicocorreo'], $row['medicoespecialidad'], $row['medicolicencia'], $row['medicofechavigencialicencia'],
-                $row['medicoestado']);
-                array_push($medicos, $medico);
+            if($row['diagnosticoestado']!='B' && $row['diagnosticoid']==$diagnosticoId){
+              $diagnostico = new diagnostico($row['diagnosticoid'], $row['diagnosticoidcliente'], $row['diagnosticoanimalnombre'],
+              $row['diagnosticoespecie'], $row['diagnosticoraza'], $row['diagnosticofechanacimiento'], $row['diagnosticopeso'],
+              $row['diagnosticofecha'], $row['diagnosticodescripcion'], $row['diagnosticoestado']);
+              array_push($diagnosticos, $diagnostico);
 
             }//end if
 
         }//end while
 
-        return $medicos;
+        return $diagnosticos;
     }//obtenerActualziar
 
 
