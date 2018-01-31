@@ -6,36 +6,36 @@ la ruta desde el business, y entra en el else si no se realiza el crud por
 que se toma la ruta desde el view
 */
 if (isset($_POST['eliminar']) || isset($_POST['insertar']) || isset($_POST['actualizar'])) {
-    include '../../data/enfermedadescomunesdata/enfermedadescomunesdata.php';
+    include '../../data/tratamientoveterinariodata/tratamientoveterinariodata.php';
 }else {
-    include '../data/enfermedadescomunesdata/enfermedadescomunesdata.php';
+    include '../data/tratamientoveterinariodata/tratamientoveterinariodata.php';
 }
-class EnfermedadesComunesBusiness {
+class TratamientoVeterinarioBusiness {
 
-    private $enfermedadesComunesData;
+    private $tratamientoVeterinarioData;
 
-    public function EnfermedadesComunesBusiness() {
-        $this->enfermedadesComunesData = new EnfermedadesComunesData();
+    public function TratamientoVeterinarioBusiness() {
+        $this->tratamientoVeterinarioData = new TratamientoVeterinarioData();
     }//constructor
 
-    public function insertarTBEnfermedadesComunes($enfermedadesComunes) {
-        return $this->enfermedadesComunesData->insertarEnfermedadesComunes($enfermedadesComunes);
-    }//InsertarEnfermedadesComunes
+    public function insertarTBTratamientoVeterinario($tratamientoVeterinario) {
+        return $this->tratamientoVeterinarioData->insertarTratamientoVeterinario($tratamientoVeterinario);
+    }//InsertarTratamientoVeterinario
 
-    public function actualizarTBEnfermedadesComunes($enfermedadesComunes) {
-        return $this->enfermedadesComunesData->actualizarEnfermedadesComunes($enfermedadesComunes);
-    }//ActualizarEnfermedadesComunes
+    public function actualizarTBTratamientoVeterinario($tratamientoVeterinario) {
+        return $this->tratamientoVeterinarioData->actualizarTratamientoVeterinario($tratamientoVeterinario);
+    }//ActualizarTratamientoVeterinario
 
-    public function eliminarTBEnfermedadesComunes($enfermedadesComunesId) {
-        return $this->enfermedadesComunesData->eliminarEnfermedadesComunes($enfermedadesComunesId);
-    }//EliminarEnfermedadesComunes
+    public function eliminarTBTratamientoVeterinario($tratamientoVeterinarioId) {
+        return $this->tratamientoVeterinarioData->eliminarTratamientoVeterinario($tratamientoVeterinarioId);
+    }//EliminarTratamientoVeterinario
 
-    public function obtenerTBEnfermedadesComunes() {
-        return $this->enfermedadesComunesData->obtenerEnfermedadesComunes();
-    }//ObtenerEnfermedadesComunes
+    public function obtenerTBTratamientoVeterinario() {
+        return $this->tratamientoVeterinarioData->obtenerTratamientoVeterinario();
+    }//ObtenerTratamientoVeterinario
 
-    public function obtenerActualizar($enfermedadesComunesId) {
-        return $this->enfermedadesComunesData->obtenerActualizar($enfermedadesComunesId);
+    public function obtenerActualizar($tratamientoVeterinarioId) {
+        return $this->tratamientoVeterinarioData->obtenerActualizar($tratamientoVeterinarioId);
     }//ObtenerActualizar
 }//class
 

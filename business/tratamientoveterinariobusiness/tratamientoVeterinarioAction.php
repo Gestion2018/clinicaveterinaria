@@ -1,88 +1,90 @@
 <?php
 
-include './enfermedadesComunesBusiness.php';
+include './tratamientoVeterinarioBusiness.php';
 
 if (isset($_POST['actualizar'])) {
 
-    if ( isset($_POST['enfermedadesComunesId']) && isset($_POST['enfermedadesComunesNombre']) && isset($_POST['enfermedadesComunesDescripcion']) && isset($_POST['enfermedadesComunesSintomas']) && isset($_POST['enfermedadesComunesEstado'])) {
+    if ( isset($_POST['tratamientoVeterinarioId']) && isset($_POST['productoVeterinarioId']) && isset($_POST['enfermedadescomunesId']) && isset($_POST['tratamientoVeterinarioDosis']) && isset($_POST['tratamientoVeterinarioPeriodicidad']) && isset($_POST['tratamientoVeterinarioFecha'])) {
             
-        $enfermedadesComunesId = $_POST['enfermedadesComunesId'];
-        $enfermedadesComunesNombre = $_POST['enfermedadesComunesNombre'];
-        $enfermedadesComunesDescripcion = $_POST['enfermedadesComunesDescripcion'];
-        $enfermedadesComunesSintomas = $_POST['enfermedadesComunesSintomas'];
-        $enfermedadesComunesEstado = $_POST['enfermedadesComunesEstado'];
+        $tratamientoVeterinarioId = $_POST['tratamientoVeterinarioId'];
+        $productoVeterinarioId = $_POST['productoVeterinarioId'];
+        $enfermedadescomunesId = $_POST['enfermedadescomunesId'];
+        $tratamientoVeterinarioDosis = $_POST['tratamientoVeterinarioDosis'];
+        $tratamientoVeterinarioPeriodicidad = $_POST['tratamientoVeterinarioPeriodicidad'];
+        $tratamientoVeterinarioFecha = $_POST['tratamientoVeterinarioFecha'];
         
 
-        if (strlen($enfermedadesComunesNombre) > 0 && strlen($enfermedadesComunesDescripcion) > 0 && strlen($enfermedadesComunesSintomas) > 0) {
-            if (!is_numeric($enfermedadesComunesNombre)) {
-                $enfermedadesComunes = new enfermedadescomunes($enfermedadesComunesId, $enfermedadesComunesNombre, $enfermedadesComunesDescripcion, $enfermedadesComunesSintomas, $enfermedadesComunesEstado);
+        if (strlen($tratamientoVeterinarioDosis) > 0 && strlen($tratamientoVeterinarioPeriodicidad) > 0 && strlen($tratamientoVeterinarioFecha) > 0) {
+            if (!is_numeric($tratamientoVeterinarioDosis) && !is_numeric($tratamientoVeterinarioPeriodicidad) && !is_numeric($tratamientoVeterinarioFecha)) {
+                $tratamientoVeterinario = new tratamientoveterinario($tratamientoVeterinarioId, $productoVeterinarioId, $enfermedadescomunesId, $tratamientoVeterinarioDosis, $tratamientoVeterinarioPeriodicidad, $tratamientoVeterinarioFecha);
 
-                $enfermedadesComunesBusiness = new EnfermedadesComunesBusiness();
+                $tratamientoVeterinarioBusiness = new TratamientoVeterinarioBusiness();
 
-                $resultado = $enfermedadesComunesBusiness->actualizarTBEnfermedadesComunes($enfermedadesComunes);
+                $resultado = $tratamientoVeterinarioBusiness->actualizarTBTratamientoVeterinario($tratamientoVeterinario);
                 if ($resultado == 1) {
-                    header("location: ../../view/enfermedadesComunesView.php?success=updated");
+                    header("location: ../../view/tratamientoVeterinarioView.php?success=updated");
                 } else {
                     //echo $idSickness." - ".$bullName;
-                    header("location: ../../view/enfermedadesComunesView.php?error=dbError");
+                    header("location: ../../view/tratamientoVeterinarioView.php?error=dbError");
                 }//if error a nivel de base
             } else {
-                header("location: ../../view/enfermedadesComunesView.php?error=numberFormat");
+                header("location: ../../view/tratamientoVeterinarioView.php?error=numberFormat");
             }//if si se igreso un numero
         } else {
-            header("location: ../../view/enfermedadesComunesView.php?error=emptyField");
+            header("location: ../../view/tratamientoVeterinarioView.php?error=emptyField");
         }//if si se dejo en blanco
     } else {
-        header("location:../../view/enfermedadesComunesView.php?error=error");
+        header("location:../../view/tratamientoVeterinarioView.php?error=error");
     }//if si esta seteado el campo
 } else if (isset($_POST['eliminar'])) {
 
-    if (isset($_POST['enfermedadesComunesId'])) {
+    if (isset($_POST['tratamientoVeterinarioId'])) {
 
-        $enfermedadesComunesId = $_POST['enfermedadesComunesId'];
+        $tratamientoVeterinarioId = $_POST['tratamientoVeterinarioId'];
 
-        $enfermedadesComunesBusiness = new EnfermedadesComunesBusiness();
-        $resultado = $enfermedadesComunesBusiness->eliminarTBEnfermedadesComunes($enfermedadesComunesId);
+        $tratamientoVeterinarioBusiness = new TratamientoVeterinarioBusiness();
+        $resultado = $tratamientoVeterinarioBusiness->eliminarTBTratamientoVetrinario($tratamientoVeterinarioId);
 
         if ($resultado == 1) {
-            header("location: ../../view/enfermedadesComunesView.php?success=deleted");
+            header("location: ../../view/tratamientoVeterinarioView.php?success=deleted");
         } else {
-            header("location: ../../view/enfermedadesComunesView.php?error=dbError");
+            header("location: ../../view/tratamientoVeterinarioView.php?error=dbError");
         }//if error a nivel de base
     } else {
-        header("location: ../../view/enfermedadesComunesView.php?error=error");
+        header("location: ../../view/tratamientoVeterinarioView.php?error=error");
     }//if si esta seteado el campo
 } else if (isset($_POST['insertar'])) {
 
-    if (isset($_POST['enfermedadesComunesNombre']) && isset($_POST['enfermedadesComunesDescripcion']) && isset($_POST['enfermedadesComunesSintomas']) && isset($_POST['enfermedadesComunesEstado'])) {
-            
-        $enfermedadesComunesNombre = $_POST['enfermedadesComunesNombre'];
-        $enfermedadesComunesDescripcion = $_POST['enfermedadesComunesDescripcion'];
-        $enfermedadesComunesSintomas = $_POST['enfermedadesComunesSintomas'];
-        $enfermedadesComunesEstado = $_POST['enfermedadesComunesEstado'];
+    if (isset($_POST['productoVeterinarioId']) && isset($_POST['enfermedadescomunesId']) && isset($_POST['tratamientoVeterinarioDosis']) && isset($_POST['tratamientoVeterinarioPeriodicidad']) && isset($_POST['tratamientoVeterinarioFecha'])) {
+
+        $productoVeterinarioId = $_POST['productoVeterinarioId'];
+        $enfermedadescomunesId = $_POST['enfermedadescomunesId'];
+        $tratamientoVeterinarioDosis = $_POST['tratamientoVeterinarioDosis'];
+        $tratamientoVeterinarioPeriodicidad = $_POST['tratamientoVeterinarioPeriodicidad'];
+        $tratamientoVeterinarioFecha = $_POST['tratamientoVeterinarioFecha'];
         
-        if (strlen($enfermedadesComunesNombre) > 0 && strlen($enfermedadesComunesDescripcion) > 0 && strlen($enfermedadesComunesSintomas) > 0) {
-            if (!is_numeric($enfermedadesComunesNombre)) {
-                
-                $enfermedadesComunes = new enfermedadescomunes(0, $enfermedadesComunesNombre, $enfermedadesComunesDescripcion, $enfermedadesComunesSintomas, $enfermedadesComunesEstado);
 
-                $enfermedadesComunesBusiness = new EnfermedadesComunesBusiness();
+        if (strlen($tratamientoVeterinarioDosis) > 0 && strlen($tratamientoVeterinarioPeriodicidad) > 0 && strlen($tratamientoVeterinarioFecha) > 0) {
+            if (!is_numeric($tratamientoVeterinarioDosis) && !is_numeric($tratamientoVeterinarioPeriodicidad) && !is_numeric($tratamientoVeterinarioFecha)) {
+                $tratamientoVeterinario = new tratamientoveterinario(0, $productoVeterinarioId, $enfermedadescomunesId, $tratamientoVeterinarioDosis, $tratamientoVeterinarioPeriodicidad, $tratamientoVeterinarioFecha);
 
-                $resultado = $enfermedadesComunesBusiness->insertarTBEnfermedadesComunes($enfermedadesComunes);
+                $tratamientoVeterinarioBusiness = new TratamientoVeterinarioBusiness();
+
+                $resultado = $tratamientoVeterinarioBusiness->insertarTBTratamientoVeterinario($tratamientoVeterinario);
 
                 if ($resultado == 1) {
-                    header("location: ../../view/enfermedadesComunesView.php?success=inserted");
+                    header("location: ../../view/tratamientoVeterinarioView.php?success=inserted");
                 } else {
-                    header("location: ../../view/enfermedadesComunesView.php?error=dbError");
+                    header("location: ../../view/tratamientoVeterinarioView.php?error=dbError");
                 }//if error a nivel de base
             } else {
-                header("location: ../../view/enfermedadesComunesView.php?error=numberFormat");
+                header("location: ../../view/tratamientoVeterinarioView.php?error=numberFormat");
             }//if si se igreso un numero
         } else {
-            header("location: ../../view/enfermedadesComunesView.php?error=emptyField");
+            header("location: ../../view/tratamientoVeterinarioView.php?error=emptyField");
         }//if si se dejo en blanco
     } else {
-        header("location: ../view/enfermedadesComunesView.php?error=error");
+        header("location: ../view/tratamientoVeterinarioView.php?error=error");
     }//if si esta seteado el campo
 }//if accion
 ?>
