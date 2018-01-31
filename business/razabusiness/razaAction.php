@@ -59,7 +59,7 @@ if (isset($_POST['actualizar'])) {
         $razaEstado = $_POST['razaEstado'];
         
         if (strlen($especieId) > 0 && strlen($razaNombre) > 0 && strlen($razaEstado) > 0 ) {
-            if (!is_numeric($nombre)) {
+            if (!is_numeric($razaNombre)) {
                 $raza = new raza(0, $razaNombre, $razaEstado, $especieId, 0);
 
                 $razaBusiness = new razaBusiness();

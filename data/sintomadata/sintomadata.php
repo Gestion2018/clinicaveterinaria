@@ -90,7 +90,7 @@ class SintomaData extends Data {
             if($row['sintomaestado']!='B'){
                 $sintoma= new sintoma($row['sintomaid'], $row['sintomanombre'],
                 $row['sintomadescripcion'],$row['sintomaestado']);
-                array_push($razas, $raza);
+                array_push($sintomas, $sintoma);
 
             }//end if
         }//end while
