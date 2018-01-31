@@ -49,6 +49,18 @@ class EncargadoBusiness {
     public function obtenerTelefonosEncargado(){
         return $this->encargadoData->obtenerTelefonosEncargado();
     }//ObtenerActualizar
+
+    public function busquedaEncargadoPorNombre($nombrecompleto){
+        return $this->encargadoData->busquedaEncargadoPorNombre($nombrecompleto);
+    }//busquedaEncargadoPorNombre
+
+    public function busquedaEncargadoPorPueblo($pueblo){
+        return $this->encargadoData->busquedaEncargadoPorPueblo($pueblo);
+    }//busquedaEncargadoPorPueblo
+
+    public function busquedaEncargadoPorEspecie($idEspecie){
+        return $this->encargadoData->busquedaEncargadoPorEspecie($idEspecie);
+    }//busquedaEncargadoPorEspecie
 }//class
 
 ?>
