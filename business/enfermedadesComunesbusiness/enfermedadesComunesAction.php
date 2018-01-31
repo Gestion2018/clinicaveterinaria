@@ -4,18 +4,20 @@ include './enfermedadesComunesBusiness.php';
 
 if (isset($_POST['actualizar'])) {
 
-    if ( isset($_POST['enfermedadesComunesId']) && isset($_POST['enfermedadesComunesNombre']) && isset($_POST['enfermedadesComunesDescripcion']) && isset($_POST['enfermedadesComunesSintomas']) && isset($_POST['enfermedadesComunesEstado'])) {
+    if ( isset($_POST['enfermedadesComunesId']) && isset($_POST['enfermedadesComunesNombre']) && isset($_POST['enfermedadesComunesDescripcion']) && isset($_POST['enfermedadesComunesSintomas']) && isset($_POST['enfermedadesComunesProductosUsados']) && isset($_POST['enfermedadesComunesEstado'])) {
             
         $enfermedadesComunesId = $_POST['enfermedadesComunesId'];
         $enfermedadesComunesNombre = $_POST['enfermedadesComunesNombre'];
         $enfermedadesComunesDescripcion = $_POST['enfermedadesComunesDescripcion'];
         $enfermedadesComunesSintomas = $_POST['enfermedadesComunesSintomas'];
+        $enfermedadesComunesProductosUsados = $_POST['enfermedadesComunesProductosUsados'];
         $enfermedadesComunesEstado = $_POST['enfermedadesComunesEstado'];
         
 
-        if (strlen($enfermedadesComunesNombre) > 0 && strlen($enfermedadesComunesDescripcion) > 0 && strlen($enfermedadesComunesSintomas) > 0) {
-            if (!is_numeric($enfermedadesComunesNombre)) {
-                $enfermedadesComunes = new enfermedadescomunes($enfermedadesComunesId, $enfermedadesComunesNombre, $enfermedadesComunesDescripcion, $enfermedadesComunesSintomas, $enfermedadesComunesEstado);
+        if (strlen($enfermedadesComunesNombre) > 0 && strlen($enfermedadesComunesDescripcion) > 0 && strlen($enfermedadesComunesSintomas) > 0 && strlen($enfermedadesComunesProductosUsados) > 0) {
+            if (!is_numeric($enfermedadesComunesNombre) && !is_numeric($enfermedadesComunesProductosUsados)) {
+
+                $enfermedadesComunes = new enfermedadescomunes($enfermedadesComunesId, $enfermedadesComunesNombre, $enfermedadesComunesDescripcion, $enfermedadesComunesSintomas, $enfermedadesComunesEstado, $enfermedadesComunesProductosUsados);
 
                 $enfermedadesComunesBusiness = new EnfermedadesComunesBusiness();
 
@@ -54,17 +56,18 @@ if (isset($_POST['actualizar'])) {
     }//if si esta seteado el campo
 } else if (isset($_POST['insertar'])) {
 
-    if (isset($_POST['enfermedadesComunesNombre']) && isset($_POST['enfermedadesComunesDescripcion']) && isset($_POST['enfermedadesComunesSintomas']) && isset($_POST['enfermedadesComunesEstado'])) {
+    if (isset($_POST['enfermedadesComunesNombre']) && isset($_POST['enfermedadesComunesDescripcion']) && isset($_POST['enfermedadesComunesSintomas']) && isset($_POST['enfermedadesComunesProductosUsados']) && isset($_POST['enfermedadesComunesEstado'])) {
             
         $enfermedadesComunesNombre = $_POST['enfermedadesComunesNombre'];
         $enfermedadesComunesDescripcion = $_POST['enfermedadesComunesDescripcion'];
         $enfermedadesComunesSintomas = $_POST['enfermedadesComunesSintomas'];
+        $enfermedadesComunesProductosUsados = $_POST['enfermedadesComunesProductosUsados'];
         $enfermedadesComunesEstado = $_POST['enfermedadesComunesEstado'];
         
-        if (strlen($enfermedadesComunesNombre) > 0 && strlen($enfermedadesComunesDescripcion) > 0 && strlen($enfermedadesComunesSintomas) > 0) {
-            if (!is_numeric($enfermedadesComunesNombre)) {
+        if (strlen($enfermedadesComunesNombre) > 0 && strlen($enfermedadesComunesDescripcion) > 0 && strlen($enfermedadesComunesSintomas) > 0 && strlen($enfermedadesComunesProductosUsados) > 0) {
+            if (!is_numeric($enfermedadesComunesNombre) && !is_numeric($enfermedadesComunesProductosUsados)) {
                 
-                $enfermedadesComunes = new enfermedadescomunes(0, $enfermedadesComunesNombre, $enfermedadesComunesDescripcion, $enfermedadesComunesSintomas, $enfermedadesComunesEstado);
+                $enfermedadesComunes = new enfermedadescomunes(0, $enfermedadesComunesNombre, $enfermedadesComunesDescripcion, $enfermedadesComunesSintomas, $enfermedadesComunesEstado, $enfermedadesComunesProductosUsados);
 
                 $enfermedadesComunesBusiness = new EnfermedadesComunesBusiness();
 
