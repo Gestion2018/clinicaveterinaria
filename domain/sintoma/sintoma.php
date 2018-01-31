@@ -32,7 +32,7 @@ class sintoma
 
     public function getSintomaDescripcion()
     {
-        return $this->EnfermedadescomunesDescripcion;
+        return $this->SintomaDescripcion;
     }
 
     public function getSintomaEstado()

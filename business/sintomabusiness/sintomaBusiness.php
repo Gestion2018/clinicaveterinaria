@@ -31,7 +31,7 @@ class SintomaBusiness {
     }//EliminarSintoma
 
     public function obtenerTBSintoma() {
-        return $this->aintomaData->obtenerSintomas();
+        return $this->sintomaData->obtenerSintomas();
     }//ObtenerSintoma
 
     public function obtenerActualizar($sintomaId) {

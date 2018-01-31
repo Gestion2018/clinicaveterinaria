@@ -38,6 +38,9 @@
         <ul>
             <li><a href="view/productoVeterinarioView.php">Producto Veterinario</a></li>
         </ul>
+        <ul>
+            <li><a href="view/sintomaView.php">S&iacute;ntomas</a></li>
+        </ul>
     </nav>
     <footer>
         
