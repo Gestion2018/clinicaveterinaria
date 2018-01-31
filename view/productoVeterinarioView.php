@@ -82,11 +82,11 @@
                 <form method="post" action="../business/productoVeterinariobusiness/productoVeterinarioAction.php">
                     <input type="hidden" id="productoVeterinarioId" name="productoVeterinarioId" value=" <?php echo $current->getProductoVeterinarioId() ?>"></td>
                     <td><input required type="text" name="productoVeterinarioNombre" id="productoVeterinarioNombre" value="<?php echo $current->getProductoVeterinarioNombre() ?>"/></td>
-                    <td><input required type="text" name="productoVeterinarioNombreComun" id="productoVeterinarioNombreComun" value="<?php echo $current->getProductoVeterinarioNombreComun() ?>"/></td>
+                    <td><input type="text" name="productoVeterinarioNombreComun" id="productoVeterinarioNombreComun" value="<?php echo $current->getProductoVeterinarioNombreComun() ?>"/></td>
                     <td><input type="text" name="productoVeterinarioPrincipioActivo" id="productoVeterinarioPrincipioActivo" value=" <?php echo $current->getproductoVeterinarioPrincipioActivo() ?>"/></td>
                     <td><input type="text" name="productoVeterinarioContenido" id="productoVeterinarioContenido" value=" <?php echo $current->getproductoVeterinarioContenido() ?>"></td>
                     <td><input required type="number" name="productoVeterinarioPrecio" id="productoVeterinarioPrecio" value="<?php echo $current->getProductoVeterinarioPrecio() ?>"/></td>  
-                    <td><input required type="date" name="productoVeterinarioFechaVencimiento" id="productoVeterinarioFechaVencimiento" value="<?php echo $current->getProductoVeterinarioFechaVencimiento() ?>"/></td> 
+                    <td><input type="date" name="productoVeterinarioFechaVencimiento" id="productoVeterinarioFechaVencimiento" value="<?php echo $current->getProductoVeterinarioFechaVencimiento() ?>"/></td> 
                     <input type="hidden" id="productoVeterinarioEstado" name="productoVeterinarioEstado" value="A"></td>
                     <td><input type="submit" value="Actualizar" name="actualizar" id="actualizar"/></td>
                     <td><input type="submit" value="Eliminar" name="eliminar" id="eliminar"/></td>

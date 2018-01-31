@@ -38,7 +38,7 @@ class ProductoVeterinarioData extends Data {
                 "'".$productoveterinario->getProductoVeterinarioContenido(). "'".",".
                 "'".$productoveterinario->getProductoVeterinarioPrecio(). "'".",".
                 "'".$productoveterinario->getProductoVeterinarioEstado() ."'".  ",".
-								"'".$productoveterinario->getProductoVeterinarioFechaVencimiento() ."'".  ");";
+				"'".$productoveterinario->getProductoVeterinarioFechaVencimiento() ."'".  ");";
 
         $result = mysqli_query($conn, $queryInsert);
         mysqli_close($conn);
@@ -54,10 +54,12 @@ class ProductoVeterinarioData extends Data {
         $queryUpdate = "UPDATE tbproductoveterinario SET  productoveterinarionombre = " . "'".$productoveterinario->getProductoVeterinarioNombre() ."'".
                 ", productoveterinarioprincipioactivo = " . "'".$productoveterinario->getProductoVeterinarioNombreComun() ."'".
                 ", productoveterinarioprincipioactivo = " . "'".$productoveterinario->getProductoVeterinarioPrincipioActivo() ."'".
-                ", productoveterinarioprincipioactivo = " . "'".$productoveterinario->getProductoVeterinarioContenido() ."'".
-                ", productoveterinarioprincipioactivo = " . "'".$productoveterinario->getProductoVeterinarioPrecio() ."'".
-                ", productoveterinarioestado = " ."'". $productoveterinario->getProductoVeterinarioEstado() ."'".
-								", productoveterinarioestado = " ."'". $productoveterinario->getProductoVeterinarioFechaVencimiento() ."'".
+                ", productoveterinariocontenido = " . "'".$productoveterinario->getProductoVeterinarioContenido() ."'".
+                ", productoveterinarioprecio = " . "'".$productoveterinario->
+                getProductoVeterinarioPrecio() ."'"
+                .", productoveterinarioestado = " ."'". $productoveterinario->
+                getProductoVeterinarioEstado() ."'".
+                ", productoveterinariofechavencimiento = " ."'". $productoveterinario->getProductoVeterinarioFechaVencimiento() ."'".
 								" WHERE productoveterinarioid = " . $productoveterinario->getProductoVeterinarioId() . ";";
 
 
@@ -102,8 +104,7 @@ class ProductoVeterinarioData extends Data {
             if($row['productoveterinarioestado']!='B'){
                 $productoveterinario = new productoveterinario($row['productoveterinarioid'],
                 $row['productoveterinarionombre'], $row['productoveterinarionombrecomun'],$row['productoveterinarioprincipioactivo'],
-								$row['productoveterinariocontenido'],$row['productoveterinarioprecio'],$row['productoveterinarioestado'], "0"
-								,$row['productoveterinariofechavencimiento']);
+								$row['productoveterinariocontenido'],$row['productoveterinarioprecio'],$row['productoveterinarioestado'],$row['productoveterinariofechavencimiento']);
                 array_push($productosveterinarios, $productoveterinario);
             }//end if
 

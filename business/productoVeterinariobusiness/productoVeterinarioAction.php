@@ -73,7 +73,7 @@ if (isset($_POST['actualizar'])) {
             && strlen($productoVeterinarioFechaVencimiento) > 0) {
             if (!is_numeric($productoVeterinarioNombre) && !is_numeric($productoVeterinarioNombreComun)) {
 
-                $contenido = $productoVeterinarioCantidad + " " + $productoVeterinarioContenido;
+                $contenido = $productoVeterinarioCantidad . " " . $productoVeterinarioContenido;
                 $productoVeterinario = new productoveterinario(0, $productoVeterinarioNombre, $productoVeterinarioNombreComun, $productoVeterinarioPrincipioActivo, $contenido, $productoVeterinarioPrecio, $productoVeterinarioEstado, $productoVeterinarioFechaVencimiento);
 
                 $productoVeterinarioBusiness = new ProductoVeterinarioBusiness();
@@ -95,5 +95,4 @@ if (isset($_POST['actualizar'])) {
         header("location: ../view/productoVeterinarioView.php?error=error");
     }//if si esta seteado el campo
 }//if accion
-}
 ?>
