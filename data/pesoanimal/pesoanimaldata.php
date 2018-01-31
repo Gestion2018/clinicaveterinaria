@@ -9,12 +9,12 @@ que se toma la ruta desde el view
 if (isset($_POST['eliminar']) || isset($_POST['actualizar']) || isset($_POST['insertar'])) {
 
 	include_once '../../data/data.php';
-	include '../../domain/especie/especie.php';
+	include '../../domain/pesoanimal/pesoanimal.php';
 
 }else {
 
 	include '../data/data.php';
-	include '../domain/especie/especie.php';
+	include '../domain/pesoanimal/pesoanimal.php';
 
 }
 
@@ -126,11 +126,9 @@ class PesoAnimalData extends Data {
 
         }//end while
 
-        return $razas;
+        return $pesosanimal;
 
     }//obtenerActualizar
-
-
 
 }//end class
 
