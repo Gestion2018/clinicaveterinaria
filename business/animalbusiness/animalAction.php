@@ -4,19 +4,19 @@ include './animalBusiness.php';
 
 if (isset($_POST['actualizar'])) {
 
-    if ( isset($_POST['animalNombre']) && isset($_POST['animalId']) && isset($_POST['especieRazaId']) && isset($_POST['animalSennas']) && isset($_POST['animalPeso']) && isset($_POST['animalMedidaPeso'])) {
+    if ( isset($_POST['animalNombre']) && isset($_POST['animalId']) && isset($_POST['especieRazaId']) && isset($_POST['clienteId']) && isset($_POST['animalFechaNacimiento']) && isset($_POST['animalEstado'])) {
             
         $animalNombre = $_POST['animalNombre'];
         $animalId = $_POST['animalId'];
         $especieRazaId = $_POST['especieRazaId'];
-        $animalSennas = $_POST['animalSennas'];
-        $animalPeso = $_POST['animalPeso'];
-        $animalMedidaPeso = $_POST['animalMedidaPeso'];
+        $clienteId = $_POST['clienteId'];
+        $animalFechaNacimiento = $_POST['animalFechaNacimiento'];
+        $animalEstado = $_POST['animalEstado'];
 
         if($especieRazaId != -1){
-            if (strlen($animalNombre) > 0 && strlen($animalId) > 0 && strlen($especieRazaId) > 0 && strlen($animalSennas) > 0 && strlen($animalPeso) > 0 && strlen($animalMedidaPeso) > 0) {
+            if (strlen($animalNombre) > 0 && strlen($animalId) > 0 && strlen($especieRazaId) > 0 && strlen($clienteId) > 0 && strlen($animalFechaNacimiento) > 0) {
                 if (!is_numeric($animalNombre)) {
-                    $animal = new animal($animalNombre, $animalId, $especieRazaId, $animalSennas, $animalPeso, $animalMedidaPeso, 0);
+                    $animal = new animal($animalNombre, $animalId, $especieRazaId, $clienteId, $animalFechaNacimiento, $animalEstado);
 
                     $animalBusiness = new AnimalBusiness();
 
@@ -59,18 +59,18 @@ if (isset($_POST['actualizar'])) {
     }//if si esta seteado el campo
 } else if (isset($_POST['insertar'])) {
 
-    if (isset($_POST['animalNombre']) && isset($_POST['especieRazaId']) && isset($_POST['animalSennas']) && isset($_POST['animalPeso']) && isset($_POST['animalMedidaPeso'])) {
+    if (isset($_POST['animalNombre']) && isset($_POST['especieRazaId']) && isset($_POST['clienteId']) && isset($_POST['animalFechaNacimiento']) && isset($_POST['animalEstado'])) {
             
         $animalNombre = $_POST['animalNombre'];
         $especieRazaId = $_POST['especieRazaId'];
-        $animalSennas = $_POST['animalSennas'];
-        $animalPeso = $_POST['animalPeso'];
-        $animalMedidaPeso = $_POST['animalMedidaPeso'];
+        $clienteId = $_POST['clienteId'];
+        $animalFechaNacimiento = $_POST['animalFechaNacimiento'];
+        $animalEstado = $_POST['animalEstado'];
         
         if($especieRazaId != -1){
-            if (strlen($animalNombre) > 0 && strlen($especieRazaId) > 0 && strlen($animalSennas) > 0 && strlen($animalPeso) > 0 && strlen($animalMedidaPeso) > 0) {
+            if (strlen($animalNombre) > 0 && strlen($especieRazaId) > 0 && strlen($clienteId) > 0 && strlen($animalFechaNacimiento) > 0) {
                 if (!is_numeric($animalNombre)) {
-                    $animal = new animal($animalNombre, 0, $especieRazaId, $animalSennas, $animalPeso, $animalMedidaPeso, 0);
+                    $animal = new animal($animalNombre, 0, $especieRazaId, $clienteId, $animalFechaNacimiento, $animalEstado);
 
                     $animalBusiness = new AnimalBusiness();
 
