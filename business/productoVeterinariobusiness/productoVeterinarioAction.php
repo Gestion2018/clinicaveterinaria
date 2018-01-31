@@ -18,7 +18,7 @@ if (isset($_POST['actualizar'])) {
         if (strlen($productoVeterinarioNombreComun) > 0 && strlen($productoVeterinarioPrincipioActivo) > 0 && strlen($productoVeterinarioContenido) > 0 && strlen($productoVeterinarioFechaVencimiento) > 0 && strlen($productoVeterinarioPrecio) > 0) {
             if (!is_numeric($productoVeterinarioNombre) && !is_numeric($productoVeterinarioNombreComun)) {
 
-                $productoVeterinario = new productoveterinario($productoVeterinarioId, $productoVeterinarioNombre, $productoVeterinarioNombreComun, $productoVeterinarioPrincipioActivo, $productoVeterinarioContenido, $productoVeterinarioPrecio, $productoVeterinarioEstado, $productoVeterinarioContenido, $productoVeterinarioFechaVencimiento);
+                $productoVeterinario = new productoveterinario($productoVeterinarioId, $productoVeterinarioNombre, $productoVeterinarioNombreComun, $productoVeterinarioPrincipioActivo, $productoVeterinarioContenido, $productoVeterinarioPrecio, $productoVeterinarioEstado, $productoVeterinarioFechaVencimiento);
 
                 $productoVeterinarioBusiness = new ProductoVeterinarioBusiness();
 
@@ -73,7 +73,8 @@ if (isset($_POST['actualizar'])) {
             && strlen($productoVeterinarioFechaVencimiento) > 0) {
             if (!is_numeric($productoVeterinarioNombre) && !is_numeric($productoVeterinarioNombreComun)) {
 
-                $productoVeterinario = new productoveterinario(0, $productoVeterinarioNombre, $productoVeterinarioNombreComun, $productoVeterinarioPrincipioActivo, $productoVeterinarioContenido, $productoVeterinarioPrecio, $productoVeterinarioEstado, $productoVeterinarioCantidad, $productoVeterinarioFechaVencimiento);
+                $contenido = $productoVeterinarioCantidad + " " + $productoVeterinarioContenido;
+                $productoVeterinario = new productoveterinario(0, $productoVeterinarioNombre, $productoVeterinarioNombreComun, $productoVeterinarioPrincipioActivo, $contenido, $productoVeterinarioPrecio, $productoVeterinarioEstado, $productoVeterinarioFechaVencimiento);
 
                 $productoVeterinarioBusiness = new ProductoVeterinarioBusiness();
 
