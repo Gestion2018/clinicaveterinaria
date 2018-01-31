@@ -45,27 +45,26 @@ class DiagnosticoData extends Data {
 ////PESO ANIMAL
 
 
-        $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
-        $conn->set_charset('utf8');
+        $conn2 = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+        $conn2->set_charset('utf8');
 
         //Get the last id
-        $queryGetLastId = "SELECT MAX(diagnosticoid) AS diagnosticoid  FROM tbdiagnostico";
-        $idCont = mysqli_query($conn, $queryGetLastId);
-        $nextId = 1;
+        $queryGetLastId2 = "SELECT MAX(pesoanimalid) AS pesoanimalid  FROM tbdiagnostico";
+        $idCont2 = mysqli_query($conn2, $queryGetLastId2);
+        $nextId2 = 1;
 
-        if ($row = mysqli_fetch_row($idCont)) {
-            $nextId = trim($row[0]) + 1;
+        if ($row = mysqli_fetch_row($idCont2)) {
+            $nextId2 = trim($row[0]) + 1;
         }//end if
 
-        $queryInsert = "INSERT INTO tbdiagnostico (" . $nextId . "," .
-        "'".$diagnostico->getDiagnosticoIdCliente() ."'".","
+        $queryInsert2 = "INSERT INTO tbpesoanimal (" . $nextId2 . "," .
+        "'".$nextId ."'".","
         "'".$diagnostico->getDiagnosticoAnimalID() ."'".",".
         "'".$diagnostico->getDiagnosticoPeso() ."'".",".
-				"'".$diagnostico->getDiagnosticoFecha() ."'". "," .
 				"'".$diagnostico->getDiagnosticoDescripcion() ."'".
         "'" . $pesoanimal->getPesoAnimalEstado() . "'" .");";
-        $result = mysqli_query($conn, $queryInsert);
-        mysqli_close($conn);
+        $result = mysqli_query($conn2, $queryInsert2);
+        mysqli_close($conn2);
 
         return $result;
 
