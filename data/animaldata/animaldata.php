@@ -1,7 +1,7 @@
 <?php
 
 if (isset($_POST['eliminar']) || isset($_POST['actualizar']) || isset($_POST['insertar'])) {
-    
+
     include_once '../../data/data.php';
     include '../../domain/animal/animal.php';
 
@@ -9,7 +9,7 @@ if (isset($_POST['eliminar']) || isset($_POST['actualizar']) || isset($_POST['in
 
     include_once '../data/data.php';
     include '../domain/animal/animal.php';
-    
+
 }
 
 class AnimalData extends Data {
@@ -31,8 +31,8 @@ class AnimalData extends Data {
        $queryInsert = "INSERT INTO tbanimal VALUES (" . $nextId . "," .
                "'".$animal->getAnimalNombre() ."'". "," .
                "'".$animal->getAnimalEspecieRazaId() ."'" . "," .
-               "'".$animal->getAnimalSennas() ."'". "," .
                 "'".$animal->getAnimalIdCliente() ."'". "," .
+                "'".$animal->getAnimalFechaNacimiento() ."'". "," .
                "'A'". ");";
        $result = mysqli_query($conn, $queryInsert);
        mysqli_close($conn);
@@ -45,18 +45,18 @@ class AnimalData extends Data {
 
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $queryUpdate = "UPDATE tbanimal SET animalnombre = " . "'".$animal->getAnimalNombre() . "'". 
+        $queryUpdate = "UPDATE tbanimal SET animalnombre = " . "'".$animal->getAnimalNombre() . "'".
                 ", animalespecierazaid = " . $animal->getAnimalEspecieRazaId() .
-                ", animalsennas = " . "'".$animal->getAnimalSennas() ."'".
                 ", animalestado = " ."'". $animal->getAnimalEstado() ."'".
                 ", animalidcliente = " ."'". $animal->getAnimalIdCliente() ."'".
+                ", animalfechanacimiento = " ."'". $animal->getAnimalFechaNacimiento() ."'".
                 " WHERE animalid = " . $animal->getAnimalId() . ";";
 
         $result = mysqli_query($conn, $queryUpdate);
         mysqli_close($conn);
 
         return $result;
-    
+
     }//actualizar animal
 
 
@@ -70,7 +70,7 @@ class AnimalData extends Data {
         mysqli_close($conn);
 
         return $result;
-    
+
     }//eliminar animal
 
 
@@ -86,15 +86,15 @@ class AnimalData extends Data {
         $animales = [];
 
         while ($row = mysqli_fetch_array($result)) {
-            
+
             if($row['animalestado']!='B'){
                 $animal = new animal($row['animalnombre'], $row['animalid'], $row['animalespecierazaid'],
-                $row['animalsennas'], $row['animalestado'], $row['animalidcliente']);
+                $row['animalestado'], $row['animalidcliente'],$row['animalfechanacimiento']);
                 array_push($animales, $animal);
             }//end if
 
         }//end while
-        
+
         return $animales;
     }//obteneranimales
     //
@@ -106,7 +106,7 @@ class AnimalData extends Data {
         $querySelect = "SELECT * from tbanimal, tbraza, tbespecie WHERE tbanimal.animalespecierazaid = tbraza.razaid and tbraza.razaespecieid = tbespecie.especieid;";
         $result = mysqli_query($conn, $querySelect);
         mysqli_close($conn);
-        
+
 
         $animales = array();
 
@@ -116,7 +116,7 @@ class AnimalData extends Data {
             }//end if
         }//end while
         return $animales;
-    }//obtenerInformacionAnimales   
+    }//obtenerInformacionAnimales
 
 }//end class
 

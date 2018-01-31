@@ -49,7 +49,7 @@ class SintomaData extends Data {
 
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $queryUpdate = "UPDATE tbespecie SET sintomanombre = " . "'" . $sintoma->getSintomaNombre() . "'".
+        $queryUpdate = "UPDATE tbsintoma SET sintomanombre = " . "'" . $sintoma->getSintomaNombre() . "'".
         ", sintomadescripcion = " . "'" . $sintoma->getSintomaDescripcion() . "'".
          "WHERE sintomaid =". $sintoma->getSintomaId() .";";
 

@@ -32,18 +32,41 @@ class DiagnosticoData extends Data {
         }//end if
 
         $queryInsert = "INSERT INTO tbdiagnostico VALUES (" . $nextId . "," .
-                "'".$medico->getDiagnisticoIdCliente() ."'". "," .
-                "'".$medico->getDiagnosticoAnimalNombre() ."'". "," .
-                "'".$medico->getDiagnosticoEspecie() ."'". "," .
-                "'".$medico->getDiganosticoRaza() ."'". "," .
-                "'".$medico->getDiagnosticoFechaNacimiento() ."'". "," .
-                "'".$medico->getDiagnosticoPeso() ."'". "," .
-                "'".$medico->getDiagnosticoFecha() ."'". "," .
-                "'".$medico->getDiagnosticoDescripcion() ."'".
-                "'".$medico->getDiagnosticoEstado() ."'". ");";
+                "'".$diagnostico->getDiagnosticoIdCliente() ."'". "," .
+                "'".$diagnostico->getDiagnosticoAnimalID() ."'". "," .
+                "'".$diagnostico->getDiagnosticoPeso() ."'". "," .
+                "'".$diagnostico->getDiagnosticoFecha() ."'". "," .
+                "'".$diagnostico->getDiagnosticoDescripcion() ."'".
+                "'".$diagnostico->getDiagnosticoEstado() ."'". ");";
 
         $result = mysqli_query($conn, $queryInsert);
         mysqli_close($conn);
+
+////PESO ANIMAL
+
+
+        $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+
+        //Get the last id
+        $queryGetLastId = "SELECT MAX(diagnosticoid) AS diagnosticoid  FROM tbdiagnostico";
+        $idCont = mysqli_query($conn, $queryGetLastId);
+        $nextId = 1;
+
+        if ($row = mysqli_fetch_row($idCont)) {
+            $nextId = trim($row[0]) + 1;
+        }//end if
+
+        $queryInsert = "INSERT INTO tbdiagnostico (" . $nextId . "," .
+        "'".$diagnostico->getDiagnosticoIdCliente() ."'".","
+        "'".$diagnostico->getDiagnosticoAnimalID() ."'".",".
+        "'".$diagnostico->getDiagnosticoPeso() ."'".",".
+				"'".$diagnostico->getDiagnosticoFecha() ."'". "," .
+				"'".$diagnostico->getDiagnosticoDescripcion() ."'".
+        "'" . $pesoanimal->getPesoAnimalEstado() . "'" .");";
+        $result = mysqli_query($conn, $queryInsert);
+        mysqli_close($conn);
+
         return $result;
 
     }//insertar medico
@@ -55,10 +78,7 @@ class DiagnosticoData extends Data {
         $conn->set_charset('utf8');
         $queryUpdate = "UPDATE tbdiagnostico SET diagnosticoid=" . $diagnostico->getDiagnosticoId() .
                 ", diagnosticoidcliente = " . "'".$diagnostico->getDiagnisticoIdCliente() . "'".
-                ", diagnosticoanimalnombre = " . "'".$diagnostico->getDiagnosticoAnimalNombre() ."'".
-                ", diagnosticoespecie = " . "'".$diagnostico->getDiagnosticoEspecie() ."'".
-                ", diagnosticoraza= " ."'". $diagnostico->getDiganosticoRaza() ."'".
-                ", diagnosticofechanacimiento = " ."'". $diagnostico->getDiagnosticoFechaNacimiento() ."'".
+                ", diagnosticoanimalid = " . "'".$diagnostico->getDiagnosticoAnimalID() ."'".
                 ", diagnosticopeso = " ."'". $diagnosticopeso->getDiagnosticoPeso() ."'".
                 ", diagnosticofecha = " ."'". $diagnostico->getDiagnosticoFecha() ."'".
                 ", diagnosticodescripcion = " ."'". $diagnostico->getDiagnosticoDescripcion() ."'".
@@ -99,9 +119,8 @@ class DiagnosticoData extends Data {
         while ($row = mysqli_fetch_array($result)) {
 
             if($row['diagnosticoestado']!='B'){
-                $diagnostico = new diagnostico($row['diagnosticoid'], $row['diagnosticoidcliente'], $row['diagnosticoanimalnombre'],
-                $row['diagnosticoespecie'], $row['diagnosticoraza'], $row['diagnosticofechanacimiento'], $row['diagnosticopeso'],
-                $row['diagnosticofecha'], $row['diagnosticodescripcion'], $row['diagnosticoestado']);
+                $diagnostico = new diagnostico($row['diagnosticoid'], $row['diagnosticoidcliente'], $row['diagnosticoanimalid'],
+                $row['diagnosticopeso'],$row['diagnosticofecha'], $row['diagnosticodescripcion'], $row['diagnosticoestado']);
                 array_push($diagnosticos, $diagnostico);
 
             }//end if
@@ -127,10 +146,9 @@ class DiagnosticoData extends Data {
         while ($row = mysqli_fetch_array($result)) {
 
             if($row['diagnosticoestado']!='B' && $row['diagnosticoid']==$diagnosticoId){
-              $diagnostico = new diagnostico($row['diagnosticoid'], $row['diagnosticoidcliente'], $row['diagnosticoanimalnombre'],
-              $row['diagnosticoespecie'], $row['diagnosticoraza'], $row['diagnosticofechanacimiento'], $row['diagnosticopeso'],
-              $row['diagnosticofecha'], $row['diagnosticodescripcion'], $row['diagnosticoestado']);
-              array_push($diagnosticos, $diagnostico);
+							$diagnostico = new diagnostico($row['diagnosticoid'], $row['diagnosticoidcliente'], $row['diagnosticoanimalid'],
+							$row['diagnosticopeso'],$row['diagnosticofecha'], $row['diagnosticodescripcion'], $row['diagnosticoestado']);
+							array_push($diagnosticos, $diagnostico);
 
             }//end if
 
