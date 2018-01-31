@@ -95,7 +95,7 @@ class PesoAnimalData extends Data {
 
             if($row['pesoanimalestado']!='B'){
                 $pesoanimal = new pesoanimal($row['pesoanimalid'], $row['pesonanimalanimalid'],
-                $row['pesoanimalpeso'],$row['pesoanimaldiagnosticoid']);
+                $row['pesoanimalpeso'],$row['pesoanimaldiagnosticoid'],$row['pesoanimaldiagnosticoestado']);
                 array_push($pesosanimal, $pesoanimal);
 
             }//end if
@@ -119,7 +119,7 @@ class PesoAnimalData extends Data {
 
             if($row['pesoanimalestado']!='B' && $row['pesoanimalid']==$pesoanimalId){
               $pesoanimal = new pesoanimal($row['pesoanimalid'], $row['pesonanimalanimalid'],
-              $row['pesoanimalpeso'],$row['pesoanimaldiagnosticoid']);
+              $row['pesoanimalpeso'],$row['pesoanimaldiagnosticoid'],$row['pesoanimaldiagnosticoestado']);
               array_push($pesosanimal, $pesoanimal);
 
             }//end if
