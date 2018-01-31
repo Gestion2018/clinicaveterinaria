@@ -8,7 +8,6 @@
       private $ProductoVeterinarioPrecio;
       private $ProductoVeterinarioNombreComun;
       private $ProductoVeterinarioEstado;
-      private $ProductoVeterinarioUnidad;/*Gramos, mililitros, pastillas*/
       private $ProductoVeterinarioFechaVencimiento;
 
       function productoveterinario($ProductoVeterinarioId, $ProductoVeterinarioNombre, $ProductoVeterinarioNombreComun, $ProductoVeterinarioPrincipioActivo, $ProductoVeterinarioContenido, $ProductoVeterinarioPrecio, $ProductoVeterinarioEstado, $ProductoVeterinarioFechaVencimiento)
@@ -20,7 +19,6 @@
           $this->ProductoVeterinarioPrecio = $ProductoVeterinarioPrecio;
           $this->ProductoVeterinarioNombreComun = $ProductoVeterinarioNombreComun;
           $this->ProductoVeterinarioEstado = $ProductoVeterinarioEstado;
-          $this->ProductoVeterinarioUnidad = $ProductoVeterinarioUnidad;
           $this->ProductoVeterinarioFechaVencimiento = $ProductoVeterinarioFechaVencimiento;
       }
 
@@ -62,11 +60,6 @@
           return $this->ProductoVeterinarioEstado;
       }
 
-      public function getProductoVeterinarioUnidad()
-      {
-          return $this->ProductoVeterinarioUnidad;
-      }
-
       public function getProductoVeterinarioFechaVencimiento()
       {
           return $this->ProductoVeterinarioFechaVencimiento;
@@ -104,11 +97,6 @@
       public function setProductoVeterinarioNombreComun($ProductoVeterinarioNombreComun)
       {
           $this->ProductoVeterinarioNombreComun = $ProductoVeterinarioNombreComun;
-      }
-
-      public function setProductoVeterinarioUnidad($ProductoVeterinarioUnidad)
-      {
-          $this->ProductoVeterinarioUnidad = $ProductoVeterinarioUnidad;
       }
 
       public function setProductoVeterinarioFechaVencimiento($ProductoVeterinarioFechaVencimiento)
