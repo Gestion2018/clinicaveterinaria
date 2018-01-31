@@ -4,10 +4,8 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Animal</title>
-    <link rel="icon" href="../resources/icons/bull.png">
-    <link rel="stylesheet" href="../resources/css/css.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <script src="jquery.min.js" type="text/javascript"></script>
+    <!--<script src="jquery.min.js" type="text/javascript"></script>-->
 
     <script src="./jquery-3.2.1.js"></script>
 
@@ -15,6 +13,7 @@
     include '../business/especiebusiness/especieBusiness.php';
     include '../business/razabusiness/razaBusiness.php';
     include '../business/animalbusiness/animalBusiness.php';
+    include '../business/encargadobusiness/encargadoBusiness.php';
     ?>
 
 </head>
@@ -33,6 +32,9 @@
 
     <section id="form">
         <?php
+            $encargadoBusiness = new EncargadoBusiness();
+            $clientes = $encargadoBusiness->obtenerTBEncargado();
+
             $especieBusiness = new EspecieBusiness();
             $especies = $especieBusiness->obtenerTBEspecie();
         ?>
@@ -42,9 +44,8 @@
                 <th>Nombre</th>
                 <th>Especie</th>
                 <th>Raza</th>
-                <th>Caracteristicas Especiales</th>
-                <th>Medida Peso</th>
-                <th>Peso</th>
+                <th>Fecha Nacimiento</th>
+                <th>Cliente</th>
                 <th></th>
             </tr>
             <tr>
@@ -60,13 +61,16 @@
                 </select></td>
                 <td><select id="especieRazaId" name="especieRazaId">
                 </select></td>
-                <td><input  type="text" id="animalSennas" name="animalSennas"></td>
-                <td><select id="animalMedidaPeso" name="animalMedidaPeso">
-                    <option>Gramos</option>
-                    <option>Kilogramos</option>
-                    <option>Libras</option>
+                <td><input  type="date" id="animalFechaNacimiento" name="animalFechaNacimiento"></td>
+                <td><select id="clienteId" name="clienteId">
+                <option value="-1">Seleccione un cliente</option>
+                <?php
+                    foreach ($clientes as $cliente) {
+                        echo '<option value='.$cliente->getEncargadoId().'>'.$cliente->getEncargadoNombreCompleto().'</option>';
+                    }//foreach
+                ?>
                 </select></td>
-                <td><input required type="text" id="animalPeso" name="animalPeso"></td>
+                <td><input type="hidden" value="A" name="animalEstado" id="animalEstado"/></td>
                 <td><input type="submit" value="Insertar" name="insertar" id="insertar"/></td>
             </form>
             </tr>
@@ -100,25 +104,19 @@
                     }//foreach
                 ?>
                 </select></td>
-                <td><input  type="text" id="animalSennas" name="animalSennas" value="<?php echo $animal["animalsennas"];?>"></td>
-                <td><select id="animalMedidaPeso" name="animalMedidaPeso">
+                <td><input  type="date" id="animalFechaNacimiento" name="animalFechaNacimiento" value="<?php echo $animal["animalfechanacimiento"];?>"></td>
+                <td><select id="clienteId" name="clienteId">
                     <?php 
-                        if($animal["animalmedidapeso"] == "Gramos"){
-                            echo '<option selected>Gramos</option>';
-                            echo '<option>Kilogramos</option>';
-                            echo '<option>Libras</option>';
-                        }else if($animal["animalmedidapeso"] == "Kilogramos"){
-                            echo '<option>Gramos</option>';
-                            echo '<option selected>Kilogramos</option>';
-                            echo '<option>Libras</option>';
-                        }else{
-                            echo '<option>Gramos</option>';
-                            echo '<option>Kilogramos</option>';
-                            echo '<option selected>Libras</option>';
-                        }//if-else
+                        foreach ($clientes as $cliente) {
+                            if($cliente->getEncargadoId() == $animal["animalidcliente"]){
+                                echo '<option selected value='.$cliente->getEncargadoId().'>'.$cliente->getEncargadoNombreCompleto().'</option>';
+                            }else{
+                                echo '<option value='.$cliente->getEncargadoId().'>'.$cliente->getEncargadoNombreCompleto().'</option>';
+                            }//if-else
+                        }//foreach
                     ?>
                 </select></td>
-                <td><input required type="text" id="animalPeso" name="animalPeso" value="<?php echo $animal["animalpeso"];?>"></td>
+                <td><input type="hidden" value="A" name="animalEstado" id="animalEstado"/></td>
                 <td><input type="submit" value="Actualizar" name="actualizar" id="actualizar"/></td>
                 <td><input type="submit" value="Eliminar" name="eliminar" id="eliminar"/></td>
                 </tr>
