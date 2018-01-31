@@ -33,8 +33,8 @@ class EncargadoData extends Data {
 
         $queryInsert = "INSERT INTO tbencargado VALUES (" . $nextId . "," .
                 "'".$encargado->getEncargadoNombreCompleto() ."'". "," .
-                "'".$encargado->getEncargadoNombreCorreo() ."'".. "," .
-                "'".$encargado->getEncargadoNombrePueblo() ."'".. "," .
+                "'".$encargado->getEncargadoNombreCorreo() ."'". "," .
+                "'".$encargado->getEncargadoNombrePueblo() ."'". "," .
                 "'".$encargado->getEncargadoDireccion() ."'". "," .
                 "'A'" . ");";
 
