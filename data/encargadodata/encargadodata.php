@@ -77,12 +77,12 @@ class EncargadoData extends Data {
     }//actualizar encargado
 
 
-		public function busquedaEncargado($nombrecompleto){
+		public function busquedaEncargadoPorNombre($nombrecompleto){
 
 				$conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
 				$conn->set_charset('utf8');
 
-				$queryUpdate = "SELECT * FROM tbencargado WHERE encaragdonombrecompleto LIKE" . "'%" . $nombrecompleto . "%'" ;
+				$queryUpdate = "SELECT * FROM tbencargado WHERE encargadonombrecompleto LIKE" . "'%" . $nombrecompleto . "%'" ;
 				$result = mysqli_query($conn, $querySelect);
 				mysqli_close($conn);
 				$encargados = [];
@@ -99,6 +99,58 @@ class EncargadoData extends Data {
 
 				return $encargados;
 		}
+
+
+				public function busquedaEncargadoPorPueblo($pueblo){
+
+						$conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+						$conn->set_charset('utf8');
+
+						$queryUpdate = "SELECT * FROM tbencargado WHERE encargadopueblo LIKE" . "'%" . $pueblo . "%'" ;
+						$result = mysqli_query($conn, $querySelect);
+						mysqli_close($conn);
+						$encargados = [];
+						while ($row = mysqli_fetch_array($result)) {
+
+								if($row['encargadoestado']!='B'){
+										 $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'],$row['encargadotelefono']
+										,$row['encargadodireccion'],$row['encargadoestado'], $row['encargadocorreo'],$row['encargadopueblo']);
+										array_push($encargados, $encargado);
+
+								}//end if
+
+						}//end while
+
+						return $encargados;
+				}
+
+
+								public function busquedaEncargadoPorEspecie($idEspecie){
+
+										$conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+										$conn->set_charset('utf8');
+
+										$queryUpdate = "SELECT * FROM tbencargado,tbanimal,tbespecie WHERE
+										tbencargado.encargadoid = tbanimal.animalidcliente
+										AND tbanimal.animalespecierazaid = tbespecie.especieid
+										AND tbespecie.especieid = ". $idEspecie . ";" ;
+										$result = mysqli_query($conn, $querySelect);
+										mysqli_close($conn);
+										$encargados = [];
+										while ($row = mysqli_fetch_array($result)) {
+
+												if($row['encargadoestado']!='B'){
+														 $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'],$row['encargadotelefono']
+														,$row['encargadodireccion'],$row['encargadoestado'], $row['encargadocorreo'],$row['encargadopueblo']);
+														array_push($encargados, $encargado);
+
+												}//end if
+
+										}//end while
+
+										return $encargados;
+								}
+
 
     public function eliminarEncargado($encargadoid) {
 
