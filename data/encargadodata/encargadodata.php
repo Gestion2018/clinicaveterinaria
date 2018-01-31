@@ -39,7 +39,7 @@ class EncargadoData extends Data {
                 "'A'" . ");";
 
         $result = mysqli_query($conn, $queryInsert);
-        
+
         $encargado->setEncargadoId($nextId);
 
         $telefonos = [];
@@ -54,7 +54,7 @@ class EncargadoData extends Data {
         }//end for*/
 
         mysqli_close($conn);
-        
+
         echo json_encode($result);
     }//insertar encargado
 
@@ -64,7 +64,7 @@ class EncargadoData extends Data {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
 
-        $queryUpdate = "UPDATE tbencargado SET  encargadonombrecompleto = " . "'".$encargado->getEncargadoNombreCompleto() ."'". 
+        $queryUpdate = "UPDATE tbencargado SET  encargadonombrecompleto = " . "'".$encargado->getEncargadoNombreCompleto() ."'".
         ", encargadodireccion = " ."'".$encargado->getEncargadoCorreo() ."'".
         ", encargadodireccion = " ."'".$encargado->getEncargadoNombrePueblo() ."'".
         ", encargadodireccion = " ."'".$encargado->getEncargadoDireccion() ."'".
@@ -76,6 +76,29 @@ class EncargadoData extends Data {
         return $result;
     }//actualizar encargado
 
+
+		public function busquedaEncargado($nombrecompleto){
+
+				$conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+				$conn->set_charset('utf8');
+
+				$queryUpdate = "SELECT * FROM tbencargado WHERE encaragdonombrecompleto LIKE" . "'%" . $nombrecompleto . "%'" ;
+				$result = mysqli_query($conn, $querySelect);
+				mysqli_close($conn);
+				$encargados = [];
+				while ($row = mysqli_fetch_array($result)) {
+
+						if($row['encargadoestado']!='B'){
+								 $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'],$row['encargadotelefono']
+								,$row['encargadodireccion'],$row['encargadoestado'], $row['encargadocorreo'],$row['encargadopueblo']);
+								array_push($encargados, $encargado);
+
+						}//end if
+
+				}//end while
+
+				return $encargados;
+		}
 
     public function eliminarEncargado($encargadoid) {
 
@@ -104,7 +127,7 @@ class EncargadoData extends Data {
         while ($row = mysqli_fetch_array($result)) {
 
             if($row['encargadoestado']!='B'){
-                 $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'],$row['encargadotelefono'] 
+                 $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'],$row['encargadotelefono']
                 ,$row['encargadodireccion'],$row['encargadoestado'], $row['encargadocorreo'],$row['encargadopueblo']);
                 array_push($encargados, $encargado);
 
@@ -130,7 +153,7 @@ class EncargadoData extends Data {
         while ($row = mysqli_fetch_array($result)) {
 
             if($row['encargadoestado'] != 'B' && $row['encargadoid'] == $encargadoId){
-               $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'],$row['encargadotelefono'] 
+               $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'],$row['encargadotelefono']
                 ,$row['encargadodireccion'],$row['encargadoestado'], $row['encargadocorreo'],$row['encargadopueblo']);
                 array_push($encargados, $encargado);
 
@@ -172,7 +195,7 @@ class EncargadoData extends Data {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
 
-        $querySelect = "SELECT * from tbtelefonoencargado, tbencargado 
+        $querySelect = "SELECT * from tbtelefonoencargado, tbencargado
                         where tbencargado.encargadoid = tbtelefonoencargado.encargadoid ;";
         $result = mysqli_query($conn, $querySelect);
         mysqli_close($conn);
