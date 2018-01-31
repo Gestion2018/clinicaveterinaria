@@ -14,7 +14,7 @@ if (isset($_POST['actualizar'])) {
 
         if (strlen($sintomaId) > 0 && strlen($sintomaNombre) > 0 && strlen($sintomaEstado) > 0 ) {
             if (!is_numeric($sintomaNombre)) {
-                $sintoma = new sintoma($sintoma, $sintomaNombre, $sintomaDescripcion, $sintomaEstado);
+                $sintoma = new sintoma($sintomaId, $sintomaNombre, $sintomaDescripcion, $sintomaEstado);
 
                 $sintomaBusiness = new sintomaBusiness();
 
