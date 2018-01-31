@@ -45,6 +45,20 @@ class EnfermedadesComunesData extends Data {
     }//insertar productoveterinario
 
 
+		public function insertarSintomaEnfermadad($enfermedadescomunesid,$sintomaid){
+			$conn = mysqli_connect($this->server,$this->user,$this->password,$this->db);
+			$conn->set_charset('utf8');
+			$queryGetLastId = "SELECT MAX(enfermedadescomunesid) AS enfermedadescomunesid  FROM tbenfermedadescomunes;";
+			$idCont = mysqli_query($conn, $queryGetLastId);
+			$nextId = 1;
+			if ($row = mysqli_fetch_row($idCont)) {
+			    $nextId = trim($row[0]) + 1;
+			}//end if
+			$queryInsertT="INSERT INTO tbsintomaenfermedad VALUES (". $nextId .",".$enfermedadescomunesId .",".
+			$sintomaid.");"
+		}//insertar
+
+
     public function actualizarEnfermedadesComunes($enfermedadescomunes) {
 
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
