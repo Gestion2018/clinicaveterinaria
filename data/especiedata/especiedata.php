@@ -7,7 +7,7 @@ que se toma la ruta desde el view
 */
 
 if (isset($_POST['eliminar']) || isset($_POST['actualizar']) || isset($_POST['insertar'])) {
-	
+
 	include_once '../../data/data.php';
 	include '../../domain/especie/especie.php';
 
@@ -15,7 +15,7 @@ if (isset($_POST['eliminar']) || isset($_POST['actualizar']) || isset($_POST['in
 
 	include '../data/data.php';
 	include '../domain/especie/especie.php';
-	
+
 }
 
 class EspecieData extends Data {
@@ -33,19 +33,19 @@ class EspecieData extends Data {
         if ($row = mysqli_fetch_row($idCont)) {
             $nextId = trim($row[0]) + 1;
         }//end if
-		
+
 		$query2 = "SELECT COUNT(*) FROM tbespecie WHERE especienombre='".$especie->getEspecieNombre()."';";
-		$result2 = mysqli_query($conn,$query2);	
+		$result2 = mysqli_query($conn,$query2);
 		$temp;
 
 		while($row=mysqli_fetch_row($result2)){
-			$temp = $row[0];	
+			$temp = $row[0];
 		}//end while
 
 	if($temp==1){
 
 		$queryUpdate = "UPDATE tbespecie SET especieestado = 'A' WHERE especienombre = '" .$especie->getEspecieNombre() . "';";
-		$result = mysqli_query($conn, $queryUpdate);	
+		$result = mysqli_query($conn, $queryUpdate);
 		mysqli_close($conn);
        	return $result;
 
@@ -55,7 +55,7 @@ class EspecieData extends Data {
         "'".$especie->getEspecieNombre() ."'". ",". "'" . $especie->getEspecieEstado	() . "'" .");";
         $result = mysqli_query($conn, $queryInsert);
         mysqli_close($conn);
-		return $result;	
+		return $result;
 
 	}//else-if
 
@@ -63,7 +63,7 @@ class EspecieData extends Data {
 
 
      public function actualizarEspecie($especie) {
-        
+
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         $queryUpdate = "UPDATE tbespecie SET especienombre = " . "'" . $especie->getEspecieNombre() . "'".  "WHERE especieid =". $especie->getEspecieId() .";";
@@ -77,7 +77,7 @@ class EspecieData extends Data {
 
 
     public function eliminarEspecie($especieid) {
-        
+
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
 
@@ -114,7 +114,7 @@ class EspecieData extends Data {
     }//obtenerEspecie
 
 
-    public function obtenerActualizar($razaId) {
+    public function obtenerActualizar($especieId) {
 
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
@@ -122,19 +122,19 @@ class EspecieData extends Data {
         $querySelect = "SELECT * FROM tbraza;";
         $result = mysqli_query($conn, $querySelect);
         mysqli_close($conn);
-        $razas = [];
+        $especies = [];
         while ($row = mysqli_fetch_array($result)) {
-            
-            if($row['especieestado']!='B' && $row['especieid']==$medicoId){
-                $razas = new especie($row['especieid'], $row['especienombre'], $row['especieestado'],
+
+            if($row['especieestado']!='B' && $row['especieid']==$especieId){
+                $especies = new especie($row['especieid'], $row['especienombre'], $row['especieestado'],
                 $row['especieid']);
-                array_push($razas, $raza);
+                array_push($especies, $especie);
 
             }//end if
 
         }//end while
 
-        return $razas;
+        return $especies;
 
     }//obtenerActualizar
 

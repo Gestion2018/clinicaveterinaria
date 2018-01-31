@@ -122,7 +122,7 @@ class EncargadoData extends Data {
 						}//end while
 
 						return $encargados;
-				}
+				}//busquedaEncargadoPorPueblo
 
 
 								public function busquedaEncargadoPorEspecie($idEspecie){
