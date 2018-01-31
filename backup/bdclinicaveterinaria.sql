@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-01-2018 a las 00:24:33
+-- Tiempo de generación: 31-01-2018 a las 15:33:06
 -- Versión del servidor: 5.7.11
 -- Versión de PHP: 5.6.19
 
@@ -56,7 +56,8 @@ INSERT INTO `tbanimal` (`animalid`, `animalnombre`, `animalespecierazaid`, `anim
 CREATE TABLE `tbencargado` (
   `encargadoid` int(3) NOT NULL,
   `encargadonombrecompleto` varchar(50) NOT NULL,
-  `encargadotelefono` varchar(50) NOT NULL,
+  `encargadocorreo` varchar(100) NOT NULL,
+  `encargadopueblo` varchar(100) NOT NULL,
   `encargadodireccion` varchar(100) NOT NULL,
   `encargadoestado` varchar(2) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -65,9 +66,10 @@ CREATE TABLE `tbencargado` (
 -- Volcado de datos para la tabla `tbencargado`
 --
 
-INSERT INTO `tbencargado` (`encargadoid`, `encargadonombrecompleto`, `encargadotelefono`, `encargadodireccion`, `encargadoestado`) VALUES
-(1, 'Allan', '123456789', 'San Jose, Costa Rica', 'A'),
-(2, 'prueba', '23', 'pruebaDireccion', 'B');
+INSERT INTO `tbencargado` (`encargadoid`, `encargadonombrecompleto`, `encargadocorreo`, `encargadopueblo`, `encargadodireccion`, `encargadoestado`) VALUES
+(3, 'persona1', '', '', 'persona1', 'A'),
+(2, 'Maureen Calderon Fernandez', '', '', 'Turrialba', 'A'),
+(1, 'Silvia Calderon Fernandez', '', '', 'Turrialba', 'A');
 
 -- --------------------------------------------------------
 
@@ -159,20 +161,21 @@ INSERT INTO `tbmedico` (`medicoid`, `mediconumeroidentificacion`, `mediconombrec
 CREATE TABLE `tbproductoveterinario` (
   `productoveterinarioid` int(3) NOT NULL,
   `productoveterinarionombre` varchar(100) NOT NULL,
-  `productoveterinarionombrecomun` varchar(100) NOT NULL,
+  `productoveterinarionombrecomun` varchar(50) NOT NULL,
   `productoveterinarioprincipioactivo` varchar(50) NOT NULL,
   `productoveterinariocontenido` varchar(50) NOT NULL,
-  `productoveterinarioprecio` int(11) NOT NULL,
-  `productoveterinarioestado` varchar(2) NOT NULL
+  `productoveterinarioprecio` int(10) NOT NULL,
+  `productoveterinarioestado` varchar(2) NOT NULL,
+  `productoveterinariofechavencimiento` date DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tbproductoveterinario`
 --
 
-INSERT INTO `tbproductoveterinario` (`productoveterinarioid`, `productoveterinarionombre`, `productoveterinarionombrecomun`, `productoveterinarioprincipioactivo`, `productoveterinariocontenido`, `productoveterinarioprecio`, `productoveterinarioestado`) VALUES
-(1, 'Producto 1', '', 'principio activo 1', '', 0, 'A'),
-(2, 'Producto 2', '', 'principio 2', '', 0, 'B');
+INSERT INTO `tbproductoveterinario` (`productoveterinarioid`, `productoveterinarionombre`, `productoveterinarionombrecomun`, `productoveterinarioprincipioactivo`, `productoveterinariocontenido`, `productoveterinarioprecio`, `productoveterinarioestado`, `productoveterinariofechavencimiento`) VALUES
+(1, 'Producto 1', '', 'principio activo 1', '', 0, 'A', NULL),
+(2, 'Producto 2', '', 'principio 2', '', 0, 'B', NULL);
 
 -- --------------------------------------------------------
 
@@ -236,6 +239,36 @@ CREATE TABLE `tbtelefonoencargado` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
+-- Volcado de datos para la tabla `tbtelefonoencargado`
+--
+
+INSERT INTO `tbtelefonoencargado` (`encargadoid`, `numerotelefono`) VALUES
+(1, '89661137'),
+(2, '88888888'),
+(2, '98765432'),
+(3, '78'),
+(3, '23');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbunidades`
+--
+
+CREATE TABLE `tbunidades` (
+  `unidadid` int(11) NOT NULL,
+  `unidadnombre` varchar(50) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tbunidades`
+--
+
+INSERT INTO `tbunidades` (`unidadid`, `unidadnombre`) VALUES
+(1, 'tableta'),
+(2, 'miligramos');
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -281,6 +314,12 @@ ALTER TABLE `tbpropietario`
 --
 ALTER TABLE `tbraza`
   ADD PRIMARY KEY (`razaid`);
+
+--
+-- Indices de la tabla `tbunidades`
+--
+ALTER TABLE `tbunidades`
+  ADD PRIMARY KEY (`unidadid`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
