@@ -11,7 +11,7 @@
       private $ProductoVeterinarioUnidad;/*Gramos, mililitros, pastillas*/
       private $ProductoVeterinarioFechaVencimiento;
 
-      function productoveterinario($ProductoVeterinarioId, $ProductoVeterinarioNombre, $ProductoVeterinarioNombreComun, $ProductoVeterinarioPrincipioActivo, $ProductoVeterinarioContenido, $ProductoVeterinarioPrecio, $ProductoVeterinarioEstado, $ProductoVeterinarioUnidad, $ProductoVeterinarioFechaVencimiento)
+      function productoveterinario($ProductoVeterinarioId, $ProductoVeterinarioNombre, $ProductoVeterinarioNombreComun, $ProductoVeterinarioPrincipioActivo, $ProductoVeterinarioContenido, $ProductoVeterinarioPrecio, $ProductoVeterinarioEstado, $ProductoVeterinarioFechaVencimiento)
       {
           $this->ProductoVeterinarioId = $ProductoVeterinarioId;
           $this->ProductoVeterinarioNombre = $ProductoVeterinarioNombre;
