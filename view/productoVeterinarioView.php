@@ -69,7 +69,7 @@
                 <th>Nombre</th>
                 <th>Nombre Com&uacute;n</th>
                 <th>Principio Activo</th>
-                <th>Cotenido</th>
+                <th>Contenido</th>
                 <th>Precio</th>
                 <th>Fecha Vencimiento</th>
                 <th></th>
