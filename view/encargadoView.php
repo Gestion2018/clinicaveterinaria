@@ -43,7 +43,7 @@
             <tr>
                 <form method="post" action="">
                     <td><input type="text" name="encargadoNombreCompletoInsert" id="encargadoNombreCompletoInsert"/></td>
-                    <td><input type="text" name="encargadoCorreoInsert" id="encargadoCorreoInsert"/></td>
+                    <td><input type="email" name="encargadoCorreoInsert" id="encargadoCorreoInsert"/></td>
                     <td><input type="text" name="encargadoPuebloInsert" id="encargadoPuebloInsert"/></td>
                     <td><input type="text" name="encargadoDireccionInsert" id="encargadoDireccionInsert"/></td>
                     <td><input type="number" name="encargadoTelefonoInsert" id="encargadoTelefonoInsert"/></td>
@@ -81,8 +81,8 @@
                 <form method="post" action="../business/encargadobusiness/encargadoAction.php">
                     <input type="hidden" id="encargadoId" name="encargadoId" value="<?php echo $current->getEncargadoId();?>"></td>
                     <td><input type="text" name="encargadoNombreCompleto" id="encargadoNombreCompleto" value="<?php echo $current->getEncargadoNombreCompleto();?>"/></td>
-                    <td><input type="text" name="encargadoCorreo" id="encargadoCorreo" value="<?php ?>"/></td>
-                    <td><input type="text" name="encargadoPueblo" id="encargadoPueblo" value="<?php ?>"/></td>
+                    <td><input type="email" name="encargadoCorreo" id="encargadoCorreo" value="<?php echo $current->getEncargadoEmail();?>"/></td>
+                    <td><input type="text" name="encargadoPueblo" id="encargadoPueblo" value="<?php echo $current->getEncargadoPueblo();?>"/></td>
                     <td><input type="text" name="encargadoDireccion" id="encargadoDireccion" value="<?php echo $current->getEncargadoDireccion();?>" /></td>
                     <td><input type="submit" value="Actualizar" name="actualizar" id="actualizar" /></td>
                     <td><input type="number" name="encargadoTelefono" id="encargadoTelefono"/></td>
@@ -161,7 +161,9 @@
                 "encargadoNombreCompleto" : $("#encargadoNombreCompletoInsert").val(),
                 "encargadoDireccion" : $("#encargadoDireccionInsert").val(),
                 "encargadoTelefonos" : arrayTelefonos,
-                "encargadoEstado" : 'A'
+                "encargadoEstado" : 'A',
+                "encargadoCorreo" : $("#encargadoCorreoInsert").val(),
+                "encargadoPueblo" : $("#encargadoPuebloInsert").val()
             };
 
 

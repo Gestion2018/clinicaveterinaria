@@ -33,8 +33,8 @@ class EncargadoData extends Data {
 
         $queryInsert = "INSERT INTO tbencargado VALUES (" . $nextId . "," .
                 "'".$encargado->getEncargadoNombreCompleto() ."'". "," .
-                "'".$encargado->getEncargadoNombreCorreo() ."'". "," .
-                "'".$encargado->getEncargadoNombrePueblo() ."'". "," .
+                "'".$encargado->getEncargadoEmail() ."'". "," .
+                "'".$encargado->getEncargadoPueblo() ."'". "," .
                 "'".$encargado->getEncargadoDireccion() ."'". "," .
                 "'A'" . ");";
 
@@ -65,8 +65,8 @@ class EncargadoData extends Data {
         $conn->set_charset('utf8');
 
         $queryUpdate = "UPDATE tbencargado SET  encargadonombrecompleto = " . "'".$encargado->getEncargadoNombreCompleto() ."'".
-        ", encargadodireccion = " ."'".$encargado->getEncargadoCorreo() ."'".
-        ", encargadodireccion = " ."'".$encargado->getEncargadoNombrePueblo() ."'".
+        ", encargadodireccion = " ."'".$encargado->getEncargadoEmail() ."'".
+        ", encargadodireccion = " ."'".$encargado->getEncargadoPueblo() ."'".
         ", encargadodireccion = " ."'".$encargado->getEncargadoDireccion() ."'".
                 " WHERE encargadoid = " . $encargado->getEncargadoId() . ";";
 
@@ -127,7 +127,7 @@ class EncargadoData extends Data {
         while ($row = mysqli_fetch_array($result)) {
 
             if($row['encargadoestado']!='B'){
-                 $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'],$row['encargadotelefono']
+                 $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'],"0"
                 ,$row['encargadodireccion'],$row['encargadoestado'], $row['encargadocorreo'],$row['encargadopueblo']);
                 array_push($encargados, $encargado);
 

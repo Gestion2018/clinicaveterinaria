@@ -55,7 +55,7 @@ if (isset($_POST['actualizar'])) {
     }//if si esta seteado el campo
 } else if (isset($_POST['insertar'])) {
 
-    if (isset($_POST['encargadoNombreCompleto']) && isset($_POST['encargadoTelefonos']) && isset($_POST['encargadoDireccion']) && isset($_POST['encargadoPueblo']) && isset($_POST['encargadoEstado'])) {
+    if (isset($_POST['encargadoNombreCompleto']) && isset($_POST['encargadoTelefonos']) && isset($_POST['encargadoDireccion']) && isset($_POST['encargadoPueblo']) && isset($_POST['encargadoEstado']) && isset($_POST['encargadoCorreo'])) {
             
         $encargadoNombreCompleto = $_POST['encargadoNombreCompleto'];
         $encargadoTelefono = $_POST['encargadoTelefonos'];
