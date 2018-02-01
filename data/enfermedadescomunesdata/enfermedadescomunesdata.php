@@ -38,9 +38,25 @@ class EnfermedadesComunesData extends Data {
                 "'".$enfermedadescomunes->getEnfermedadescomunesProductosUsados(). "'".",".
                 "'".$enfermedadescomunes->getEnfermedadescomunesEstado()."'".  ");";
 
-        $result = mysqli_query($conn, $queryInsert);
-        mysqli_close($conn);
-        return $result;
+
+				$result = mysqli_query($conn, $queryInsert);
+
+				$enfermedadescomunes->setEnfermedadescomunesId($nextId);
+
+				$sintomas = [];
+				$sintomas = explode(",", $enfermedadescomunes->getEnfermedadescomunesSintomas());
+
+				for ($i=0; $i < count($sintomas) ; $i++) {
+
+					$queryInsertS = "INSERT INTO tbsintomaenfermedad VALUES (".$enfermedadescomunes->getEnfermedadescomunesId()
+					.",".$sintomas[$i] . ");" ;
+					$result=mysqli_query($conn, $queryInsertS);
+
+				}//end for*/
+
+				mysqli_close($conn);
+
+				echo json_encode($result);
 
     }//insertar productoveterinario
 
@@ -57,6 +73,20 @@ class EnfermedadesComunesData extends Data {
 			$queryInsertT="INSERT INTO tbsintomaenfermedad VALUES (". $nextId .",".$enfermedadescomunesId .",".
 			$sintomaid.");"
 		}//insertar
+
+
+		public function eliminarSintomaEnfermadad($enfermedadescomunesid,$sintomaid){
+
+		    $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+		    $conn->set_charset('utf8');
+
+		    $queryUpdate = "DELETE FROM tbsintomaenfermedad WHERE enfermedadid = " . $encargadoid .
+				" AND sintomaid = ".$sintomaid.";";
+		    $result = mysqli_query($conn, $queryUpdate);
+   			mysqli_close($conn);
+
+				return $result;
+		}//eliminarTelefono
 
 
     public function actualizarEnfermedadesComunes($enfermedadescomunes) {

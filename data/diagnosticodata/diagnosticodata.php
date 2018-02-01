@@ -61,7 +61,7 @@ class DiagnosticoData extends Data {
         "'".$nextId ."'".","
         "'".$diagnostico->getDiagnosticoAnimalID() ."'".",".
         "'".$diagnostico->getDiagnosticoPeso() ."'".",".
-				"'".$diagnostico->getDiagnosticoDescripcion() ."'".
+				"'".$diagnostico->getDiagnosticoId() ."'".
         "'" . $pesoanimal->getPesoAnimalEstado() . "'" .");";
         $result = mysqli_query($conn2, $queryInsert2);
         mysqli_close($conn2);

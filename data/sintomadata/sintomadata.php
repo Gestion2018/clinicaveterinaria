@@ -60,6 +60,26 @@ class SintomaData extends Data {
 
     }//actualizar especie
 
+		public function insertarSintomaEnfermedad($idsintoma,$idenfermedad){
+			$conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+			$conn->set_charset('utf8');
+
+			//Get the last id
+			$queryGetLastId = "SELECT MAX(sintomaenfermadadid) AS sintomaenfermadadid  FROM tbsintomaenfermedad";
+			$idCont = mysqli_query($conn, $queryGetLastId);
+			$nextId = 1;
+
+			if ($row = mysqli_fetch_row($idCont)) {
+					$nextId = trim($row[0]) + 1;
+			}//end if
+
+			$queryInsert = "INSERT INTO tbsintomaenfermedad VALUES (".$nextId.",".$idsintoma.",".$idenfermedad.");";
+			$result = mysqli_query($conn, $queryInsert);
+			mysqli_close($conn);
+
+			return $result;
+		}//isertarSintomaEnfermedad
+
 
     public function eliminarSintoma($sintomaid) {
 
