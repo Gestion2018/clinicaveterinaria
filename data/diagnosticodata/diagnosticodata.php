@@ -68,7 +68,7 @@ class DiagnosticoData extends Data {
 
         return $result;
 
-    }//insertar medico
+    }//insertar diagnostico
 
 
     public function actualizarDiagnostico($diagnostico) {
@@ -88,7 +88,7 @@ class DiagnosticoData extends Data {
 
         return $result;
 
-    }//actualizar medico
+    }//actualizar diagnostico
 
 
     public function eliminarDiagnostico($diagnosticoid) {
@@ -102,7 +102,7 @@ class DiagnosticoData extends Data {
 
         return $result;
 
-    }//eliminar medico
+    }//eliminar diagnostico
 
 
 
@@ -128,7 +128,7 @@ class DiagnosticoData extends Data {
 
         return $diagnosticos
 
-    }//obtenerMedicos
+    }//obtenerdiagnosticos
 
 
 
