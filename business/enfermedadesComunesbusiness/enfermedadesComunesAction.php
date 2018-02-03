@@ -4,20 +4,19 @@ include './enfermedadesComunesBusiness.php';
 
 if (isset($_POST['actualizar'])) {
 
-    if ( isset($_POST['enfermedadesComunesId']) && isset($_POST['enfermedadesComunesNombre']) && isset($_POST['enfermedadesComunesDescripcion']) && isset($_POST['enfermedadesComunesSintomas']) && isset($_POST['enfermedadesComunesProductosUsados']) && isset($_POST['enfermedadesComunesEstado'])) {
+    if ( isset($_POST['enfermedadesComunesId']) && isset($_POST['enfermedadesComunesNombre']) && isset($_POST['enfermedadesComunesDescripcion']) && isset($_POST['enfermedadesComunesEstado'])) {
             
         $enfermedadesComunesId = $_POST['enfermedadesComunesId'];
         $enfermedadesComunesNombre = $_POST['enfermedadesComunesNombre'];
         $enfermedadesComunesDescripcion = $_POST['enfermedadesComunesDescripcion'];
-        $enfermedadesComunesSintomas = $_POST['enfermedadesComunesSintomas'];
-        $enfermedadesComunesProductosUsados = $_POST['enfermedadesComunesProductosUsados'];
         $enfermedadesComunesEstado = $_POST['enfermedadesComunesEstado'];
+        $enfermedadesComunesProductosUsados = $_POST['enfermedadesComunesProductosUsados'];
         
 
-        if (strlen($enfermedadesComunesNombre) > 0 && strlen($enfermedadesComunesDescripcion) > 0 && strlen($enfermedadesComunesSintomas) > 0 && strlen($enfermedadesComunesProductosUsados) > 0) {
-            if (!is_numeric($enfermedadesComunesNombre) && !is_numeric($enfermedadesComunesProductosUsados)) {
+        if (strlen($enfermedadesComunesNombre) > 0 && strlen($enfermedadesComunesDescripcion) > 0) {
+            if (!is_numeric($enfermedadesComunesNombre)) {
 
-                $enfermedadesComunes = new enfermedadescomunes($enfermedadesComunesId, $enfermedadesComunesNombre, $enfermedadesComunesDescripcion, $enfermedadesComunesSintomas, $enfermedadesComunesEstado, $enfermedadesComunesProductosUsados);
+                $enfermedadesComunes = new enfermedadescomunes($enfermedadesComunesId, $enfermedadesComunesNombre, $enfermedadesComunesDescripcion, 0, $enfermedadesComunesEstado, $enfermedadesComunesProductosUsados);
 
                 $enfermedadesComunesBusiness = new EnfermedadesComunesBusiness();
 
@@ -73,11 +72,11 @@ if (isset($_POST['actualizar'])) {
 
                 $resultado = $enfermedadesComunesBusiness->insertarTBEnfermedadesComunes($enfermedadesComunes);
 
-                if ($resultado == 1) {
+                /*if ($resultado == 1) {
                     header("location: ../../view/enfermedadesComunesView.php?success=inserted");
                 } else {
                     header("location: ../../view/enfermedadesComunesView.php?error=dbError");
-                }//if error a nivel de base
+                }//if error a nivel de base*/
             } else {
                 header("location: ../../view/enfermedadesComunesView.php?error=numberFormat");
             }//if si se igreso un numero
@@ -85,7 +84,44 @@ if (isset($_POST['actualizar'])) {
             header("location: ../../view/enfermedadesComunesView.php?error=emptyField");
         }//if si se dejo en blanco
     } else {
-        header("location: ../view/enfermedadesComunesView.php?error=error");
+        header("location: ../../view/enfermedadesComunesView.php?error=error");
     }//if si esta seteado el campo
-}//if accion
+}else if(isset($_POST['agregarSintoma'])){
+    $enfermedadesComunesId = $_POST['enfermedadesComunesId'];
+    $sintoma = $_POST['sintomas'];
+
+    $enfermedadesComunesBusiness = new EnfermedadesComunesBusiness();
+    $resultado = $enfermedadesComunesBusiness->insertarTBSintoma($enfermedadesComunesId, $sintoma);
+
+    if ($resultado == 1) {
+        header("location: ../../view/enfermedadesComunesView.php?success=success");
+    } else {
+        header("location: ../../view/enfermedadesComunesView.php?error=dbError");
+    }
+}else if(isset($_POST['eliminarSintoma'])){
+    $enfermedadesComunesId = $_POST['enfermedadesComunesId'];
+    $sintoma = $_POST['sintomasRegistrados'];
+
+    $enfermedadesComunesBusiness = new EnfermedadesComunesBusiness();
+    $resultado = $enfermedadesComunesBusiness->eliminarTBSintoma($enfermedadesComunesId, $sintoma);
+
+    if ($resultado == 1) {
+        header("location: ../../view/enfermedadesComunesView.php?success=success");
+    } else {
+        header("location: ../../view/enfermedadesComunesView.php?error=dbError");
+    }
+}else if(isset($_POST['agregarProducto'])){
+    $enfermedadId = $_POST['enfermedadesComunesId'];
+    $Seleccionado = $_POST['productosUsados'];
+    $Anteriores = $_POST['enfermedadesComunesProductosUsados'];
+
+    $enfermedadesComunesBusiness = new EnfermedadesComunesBusiness();
+    $resultado = $enfermedadesComunesBusiness->actualizarProductos($enfermedadId, $Seleccionado, $Anteriores);
+
+    if ($resultado == 1) {
+        header("location: ../../view/enfermedadesComunesView.php?success=success");
+    } else {
+        header("location: ../../view/enfermedadesComunesView.php?error=dbError");
+    }
+}//if
 ?>

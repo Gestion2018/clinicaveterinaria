@@ -13,7 +13,7 @@ if (isset($_POST['eliminar']) || isset($_POST['actualizar']) || isset($_POST['in
 
 }else {
 
-	include '../data/data.php';
+	include_once '../data/data.php';
 	include '../domain/sintoma/sintoma.php';
 
 }
