@@ -6,9 +6,9 @@ la ruta desde el business, y entra en el else si no se realiza el crud por
 que se toma la ruta desde el view
 */
 if (isset($_POST['eliminar']) || isset($_POST['insertar']) || isset($_POST['actualizar'])) {
-    include '../../data/especiedata/especiedata.php';
+    include_once '../../data/especiedata/especiedata.php';
 }else {
-    include '../data/especiedata/especiedata.php';
+    include_once '../data/especiedata/especiedata.php';
 }
 
 class EspecieBusiness {

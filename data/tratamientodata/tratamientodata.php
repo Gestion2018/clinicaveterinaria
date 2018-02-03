@@ -9,12 +9,12 @@ que se toma la ruta desde el view
 if (isset($_POST['eliminar']) || isset($_POST['actualizar']) || isset($_POST['insertar'])) {
 
 	include_once '../../data/data.php';
-	include '../../domain/tratamiento/tratamiento.php';
+	include '../../domain/tratamientoveterinario/tratamientoveterinario.php';
 
 }else {
 
-	include '../data/data.php';
-	include '../domain/tratamiento/tratamiento.php';
+	include_once '../data/data.php';
+	include '../domain/tratamientoveterinario/tratamientoveterinario.php';
 
 }
 
@@ -35,18 +35,23 @@ class TratamientoData extends Data {
         }//end if
 
         $queryInsert = "INSERT INTO tbtratamiento VALUES (" . $nextId . "," .
-        "'".$tratamiento->getTramientoProductoVeterinarioID() ."'".","
-        "'".$tratamiento->getTratamientoIdEnfermedadComun() ."'".",".
-        "'".$tratamiento->getTratamientoDosis() ."'".",".
-        "'".$tratamiento->getTratamientoPeriocidad() ."'".",".
-        "'" .$tratamiento->getTratamientoFechaTratamiento() . "'," .
-        "'" .$tratamiento->getTratamientoEstado() . "'" .");";
+        "'".$tratamiento->getProductoVeterinarioId() ."'".",".
+        "'".$tratamiento->getEnfermedadescomunesId() ."'".",".
+        "'".$tratamiento->getTratamientoveterinarioDosis() ."'".",".
+        "'".$tratamiento->getTratamientoveterinarioPeriodicidad() ."'".",".
+        "'" .$tratamiento->getTratamientoveterinarioFecha() . "'," .
+        "'" .$tratamiento->getTratamientoveterinarioEstado() . "'" .");";
 
         $result = mysqli_query($conn, $queryInsert);
+
+        $queryInsert2 = "INSERT INTO tbtratamientocliente VALUES (" . $nextId . "," .
+        $tratamiento->getTratamientoveterinarioAnimalId() .");";
+
+        $result = mysqli_query($conn, $queryInsert2);
+
+
         mysqli_close($conn);
 		return $result;
-
-	}//else-if
 
     }//insertar especie
 
@@ -55,15 +60,20 @@ class TratamientoData extends Data {
 
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $queryUpdate = "UPDATE tbtratamiento SET " .
-        "tratamientoid = " . "'" .$tratamiento->getTramientoProductoVeterinarioID() . "'". ", ".
-        "tratamientoenfermedadcomun = " .$tratamiento->getTratamientoIdEnfermedadComun() . "'". "," .
-        "tratamientodosis = " .$tratamiento->getTratamientoDosis() . "'". "," .
-        "tratamientoperiocidad = " .$tratamiento->getTratamientoPeriocidad() . "'". "," .
-        "tratamientofechatratamiento = " .$tratamiento->getTratamientoFechaTratamiento() . "'". "," .
-        "WHERE tratamientoid =". $tratamiento->getTratamientoID() .";";
+        $queryUpdate = "UPDATE tbtratamiento SET 
+            tratamientoenfermedadcomunid = " .$tratamiento->getEnfermedadescomunesId(). "," .
+            "tratamientoproductoveterinarioid = " .$tratamiento->getProductoVeterinarioId(). "," .
+            "tratamientodosis ='" .$tratamiento->getTratamientoveterinarioDosis() . "'". "," .
+        "tratamientoperiodicidad = '" .$tratamiento->getTratamientoveterinarioPeriodicidad() . "'". "," .
+        "tratamientofecha = '" .$tratamiento->getTratamientoveterinarioFecha() . "'".
+        " WHERE tratamientoid =". $tratamiento->getTratamientoveterinarioId() .";";
 
         $result = mysqli_query($conn, $queryUpdate);
+
+        $queryUpdate2 = "UPDATE tbtratamientocliente SET animalid = " .$tratamiento->getTratamientoveterinarioAnimalId(). " WHERE tratamientoid =". $tratamiento->getTratamientoveterinarioId() .";";
+
+        $result = mysqli_query($conn, $queryUpdate2);
+
         mysqli_close($conn);
 
         return $result;
@@ -92,22 +102,20 @@ class TratamientoData extends Data {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
 
-        $querySelect = "SELECT * FROM tbtratamiento;";
+        $querySelect = "SELECT * FROM tbtratamiento, tbtratamientocliente WHERE tbtratamiento.tratamientoid = tbtratamientocliente.tratamientoid;";
         $result = mysqli_query($conn, $querySelect);
         mysqli_close($conn);
         $tratamientos = [];
         while ($row = mysqli_fetch_array($result)) {
-
             if($row['tratamientoestado']!='B'){
-                $tratamiento = new tratamiento($row['tratamientoid'], $row['tratamientoenfermedadcomun'],
-                $row['tratamientodosis'],$row['tratamientoperiocidad'],$row['tratamientofechatratamiento'],
-                $row[]'tratamientoestado');
-                array_push($tratamiento, $tratamiento);
-
+                $tratamiento = new TratamientoVeterinario($row['tratamientoid'], $row['tratamientoproductoveterinarioid'] ,$row['tratamientoenfermedadcomunid'],
+                $row['tratamientodosis'],$row['tratamientoperiodicidad'],$row['tratamientofecha'],$row["animalid"],
+                $row['tratamientoestado']);
+                array_push($tratamientos, $tratamiento);
             }//end if
         }//end while
 
-        return $tratamiento;
+        return $tratamientos;
 
     }//obtenerEspecie
 
@@ -126,7 +134,7 @@ class TratamientoData extends Data {
           if($row['tratamientoestado']!='B' && $row['tratamientoid']==$tratamientoID){
             $tratamiento = new tratamiento($row['tratamientoid'], $row['tratamientoenfermedadcomun'],
             $row['tratamientodosis'],$row['tratamientoperiocidad'],$row['tratamientofechatratamiento'],
-            $row[]'tratamientoestado');
+            $row['tratamientoestado']);
             array_push($tratamiento, $tratamiento);
 
             }//end if

@@ -5,7 +5,7 @@ Entra en el if se realiza las siguientes operaciones, por que se toma
 la ruta desde el business, y entra en el else si no se realiza el crud por
 que se toma la ruta desde el view
 */
-if (isset($_POST['eliminar']) || isset($_POST['insertar']) || isset($_POST['actualizar']) || isset($_POST['eliminarTelefono']) || isset($_POST['agregarTelefono'])) {
+if (isset($_POST['eliminar']) || isset($_POST['insertar']) || isset($_POST['actualizar']) || isset($_POST['eliminarTelefono']) || isset($_POST['agregarTelefono']) || isset($_POST['obtener'])) {
     include_once '../../data/encargadodata/encargadodata.php';
 }else {
     include_once '../data/encargadodata/encargadodata.php';
@@ -60,6 +60,10 @@ class EncargadoBusiness {
 
     public function busquedaEncargadoPorEspecie($idEspecie){
         return $this->encargadoData->busquedaEncargadoPorEspecie($idEspecie);
+    }//busquedaEncargadoPorEspecie
+
+    public function obtenerAnimalesEncargado($tipo){
+        return $this->encargadoData->obtenerAnimalesEncargado($tipo);
     }//busquedaEncargadoPorEspecie
 }//class
 

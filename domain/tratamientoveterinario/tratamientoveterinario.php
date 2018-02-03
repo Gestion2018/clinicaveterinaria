@@ -7,10 +7,12 @@
         private $TratamientoveterinarioDosis;
         private $TratamientoveterinarioPeriodicidad;
         private $TratamientoveterinarioFecha;
+        private $TratamientoveterinarioAnimalId;
+        private $TratamientoveterinarioEstado;
 
         function tratamientoveterinario($TratamientoveterinarioId, $ProductoveterinarioId,
         $EnfermedadescomunesId, $TratamientoveterinarioDosis, $TratamientoveterinarioPeriodicidad,
-        $TratamientoveterinarioFecha)
+        $TratamientoveterinarioFecha, $TratamientoveterinarioAnimalId, $TratamientoveterinarioEstado)
         {
             $this->TratamientoveterinarioId = $TratamientoveterinarioId;
             $this->ProductoveterinarioId = $ProductoveterinarioId;
@@ -18,6 +20,8 @@
             $this->TratamientoveterinarioDosis = $TratamientoveterinarioDosis;
             $this->TratamientoveterinarioPeriodicidad = $TratamientoveterinarioPeriodicidad;
             $this->TratamientoveterinarioFecha = $TratamientoveterinarioFecha;
+            $this->TratamientoveterinarioAnimalId = $TratamientoveterinarioAnimalId;
+            $this->TratamientoveterinarioEstado = $TratamientoveterinarioEstado;
         }
 
         /*GET*/
@@ -51,6 +55,17 @@
             return $this->TratamientoveterinarioFecha;
         }
 
+        public function getTratamientoveterinarioAnimalId()
+        {
+            return $this->TratamientoveterinarioAnimalId;
+        }
+
+        public function getTratamientoveterinarioEstado()
+        {
+            return $this->TratamientoveterinarioEstado;
+        }
+
+
         /*SET*/
         public function setTratamientoveterinarioId($TratamientoveterinarioId)
         {
@@ -62,24 +77,34 @@
             $this->ProductoveterinarioId = $ProductoveterinarioId;
         }
 
-        public function getEnfermedadescomunesId($EnfermedadescomunesId)
+        public function setEnfermedadescomunesId($EnfermedadescomunesId)
         {
             $this->EnfermedadescomunesId = $EnfermedadescomunesId;
         }
 
-        public function getTratamientoveterinarioDosis($TratamientoveterinarioDosis)
+        public function setTratamientoveterinarioDosis($TratamientoveterinarioDosis)
         {
             $this->TratamientoveterinarioDosis = $TratamientoveterinarioDosis;
         }
 
-        public function getTratamientoveterinarioPeriodicidad($TratamientoveterinarioPeriodicidad)
+        public function setTratamientoveterinarioPeriodicidad($TratamientoveterinarioPeriodicidad)
         {
             $this->TratamientoveterinarioPeriodicidad = $TratamientoveterinarioPeriodicidad;
         }
 
-        public function getTratamientoveterinarioFecha($TratamientoveterinarioFecha)
+        public function setTratamientoveterinarioFecha($TratamientoveterinarioFecha)
         {
             $this->TratamientoveterinarioFecha = $TratamientoveterinarioFecha;
+        }
+
+        public function setTratamientoveterinarioAnimalId($TratamientoveterinarioAnimalId)
+        {
+            $this->TratamientoveterinarioAnimalId = $TratamientoveterinarioAnimalId;
+        }
+
+        public function setTratamientoveterinarioEstado($TratamientoveterinarioEstado)
+        {
+            $this->TratamientoveterinarioEstado = $TratamientoveterinarioEstado;
         }
     }
 

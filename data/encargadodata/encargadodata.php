@@ -6,7 +6,7 @@ Entra en el if se realiza las siguientes operaciones, por que se toma
 la ruta desde el business, y entra en el else si no se realiza el crud por
 que se toma la ruta desde el view
 */
-if (isset($_POST['eliminar']) || isset($_POST['actualizar']) || isset($_POST['insertar']) || isset($_POST['eliminarTelefono']) || isset($_POST['agregarTelefono'])) {
+if (isset($_POST['eliminar']) || isset($_POST['actualizar']) || isset($_POST['insertar']) || isset($_POST['eliminarTelefono']) || isset($_POST['agregarTelefono']) || isset($_POST['obtener'])) {
 	include_once '../../data/data.php';
 	include '../../domain/encargado/encargado.php';
 }else {
@@ -260,6 +260,32 @@ class EncargadoData extends Data {
 
     }//obtenerMedicos
 
+    public function obtenerAnimalesEncargado($tipo) {
+
+        $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+
+        $querySelect = "SELECT tbanimal.animalid, tbanimal.animalnombre, tbencargado.encargadoId, tbencargado.encargadonombrecompleto from tbanimal, tbencargado
+                        where tbencargado.encargadoid = tbanimal.animalidcliente AND tbencargado.encargadoestado = 'A' AND tbanimal.animalestado = 'A';";
+        $result = mysqli_query($conn, $querySelect);
+        mysqli_close($conn);
+        
+        if($tipo === 1){
+            $animales = [];
+            while ($row = mysqli_fetch_array($result)) {
+                $animales[] = $row;
+            }//end while
+            return $animales;
+        }else{
+            while ($row = mysqli_fetch_array($result)) {
+                $animales["Data"][] = $row;
+            }//end while
+             echo json_encode($animales);
+        }//if-else
+
+        //return $animales;
+       
+    }//obtenerMedicos
 }//end class
 
 ?>

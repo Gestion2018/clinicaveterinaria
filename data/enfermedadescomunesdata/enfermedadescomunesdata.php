@@ -71,7 +71,7 @@ class EnfermedadesComunesData extends Data {
 			    $nextId = trim($row[0]) + 1;
 			}//end if
 			$queryInsertT="INSERT INTO tbsintomaenfermedad VALUES (". $nextId .",".$enfermedadescomunesId .",".
-			$sintomaid.");"
+			$sintomaid.");";
 		}//insertar
 
 
@@ -137,7 +137,7 @@ class EnfermedadesComunesData extends Data {
             if($row['enfermedadescomunesestado']!='B'){
                 $enfermedadescomun = new enfermedadescomunes($row['enfermedadescomunesid'],
                  $row['enfermedadescomunesnombre'],$row['enfermedadescomunesdescripcion'],
-                 $row['enfermedadescomunessintomas'],$row['enfermedadescomunesestado'],$row['enfermedadescomunesproductosusados']);
+                 0,$row['enfermedadescomunesestado'],$row['enfermedadescomunesproductosusados']);
                 array_push($enfermedadescomunes, $enfermedadescomun);
 
             }//end if

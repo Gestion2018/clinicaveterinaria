@@ -4,7 +4,7 @@ include './encargadoBusiness.php';
 
 if (isset($_POST['actualizar'])) {
 
-    if (isset($_POST['encargadoId']) && isset($_POST['encargadoNombreCompleto']) && isset($_POST['encargadoDireccion']) && isset($_POST['encargadoCorreo']) && isset($_POST['encargadoPueblo']) && isset($_POST['encargadoEstado'])) {
+    if (isset($_POST['encargadoId']) && isset($_POST['encargadoNombreCompleto']) && isset($_POST['encargadoDireccion']) && isset($_POST['encargadoCorreo']) && isset($_POST['encargadoPueblo']) && isset($_POST['encargadoEstado']) && isset($_POST['obtener'])) {
             
         $encargadoId = $_POST['encargadoId'];
         $encargadoNombreCompleto = $_POST['encargadoNombreCompleto'];
@@ -113,5 +113,8 @@ if (isset($_POST['actualizar'])) {
     } else {
         header("location: ../../view/encargadoView.php?error=dbError");
     }//if error a nivel de base
-}//if action
+}else if(isset($_POST['obtener'])){
+    $encargado = new EncargadoBusiness();
+    $encargado->obtenerAnimalesEncargado(0);
+}//if
 ?>
