@@ -61,7 +61,7 @@ class EnfermedadesComunesData extends Data {
     }//insertar productoveterinario
 
 
-		public function insertarSintomaEnfermadad($enfermedadescomunesid,$sintomaid){
+		public function insertarSintomaEnfermedad($enfermedadescomunesid,$sintomaid){
 			$conn = mysqli_connect($this->server,$this->user,$this->password,$this->db);
 			$conn->set_charset('utf8');
 			$queryGetLastId = "SELECT MAX(enfermedadescomunesid) AS enfermedadescomunesid  FROM tbenfermedadescomunes;";
@@ -80,7 +80,7 @@ class EnfermedadesComunesData extends Data {
 		    $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
 		    $conn->set_charset('utf8');
 
-		    $queryUpdate = "DELETE FROM tbsintomaenfermedad WHERE enfermedadid = " . $encargadoid .
+		    $queryUpdate = "DELETE FROM tbsintomaenfermedad WHERE enfermedadid = " . $enfermedadescomunesid .
 				" AND sintomaid = ".$sintomaid.";";
 		    $result = mysqli_query($conn, $queryUpdate);
    			mysqli_close($conn);
