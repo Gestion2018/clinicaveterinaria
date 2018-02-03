@@ -54,22 +54,11 @@ class DiagnosticoData extends Data {
             $nextId2 = trim($row[0]) + 1;
         }//end if*/
 
-<<<<<<< HEAD
         $queryInsert2 = "INSERT INTO tbpesoanimal VALUES(" . $nextId . "," .
         $diagnostico->getAnimalId().",".
         "'".$diagnostico->getAnimalPeso() ."'".");";
         $result = mysqli_query($conn, $queryInsert2);
         mysqli_close($conn);
-=======
-        $queryInsert2 = "INSERT INTO tbpesoanimal (" . $nextId2 . "," .
-        "'".$nextId ."'".","
-        "'".$diagnostico->getDiagnosticoAnimalID() ."'".",".
-        "'".$diagnostico->getDiagnosticoPeso() ."'".",".
-				"'".$diagnostico->getDiagnosticoId() ."'".
-        "'" . $pesoanimal->getPesoAnimalEstado() . "'" .");";
-        $result = mysqli_query($conn2, $queryInsert2);
-        mysqli_close($conn2);
->>>>>>> a4ea8d8239b80d42388417afcd6f99bed59d79eb
 
         return $result;
 
