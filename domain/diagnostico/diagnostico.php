@@ -1,80 +1,56 @@
 <?php
     class diagnostico
     {
-        private $EncargadoId;
-        private $AnimalNombre;
-        private $AnimalEspecie;
-        private $AnimalRaza;
-        private $AnimalfechaNacimiento;
+        private $DiagnosticoId;
+        private $AnimalId;
         private $AnimalPeso;
         private $FechaDiagnostico;
         private $DescripcionDiagnostico;
+        private $DiagnosticoEstado;
 
-        function diagnostico($EncargadoId, $AnimalNombre, $AnimalEspecie, $AnimalRaza,
-        $AnimalfechaNacimiento, $AnimalPeso, $FechaDiagnostico, $DescripcionDiagnostico)
+        function diagnostico($DiagnosticoId, $AnimalId, $AnimalPeso,
+        $FechaDiagnostico, $DescripcionDiagnostico, $DiagnosticoEstado)
         {
-            $this->EncargadoId = $EncargadoId;
-            $this->AnimalNombre = $AnimalNombre;
-            $this->AnimalEspecie = $AnimalEspecie;
-            $this->AnimalRaza = $AnimalRaza;
-            $this->AnimalfechaNacimiento = $AnimalfechaNacimiento;
+            $this->DiagnosticoId = $DiagnosticoId;
+            $this->AnimalId = $AnimalId;
             $this->AnimalPeso = $AnimalPeso;
             $this->FechaDiagnostico = $FechaDiagnostico;
             $this->DescripcionDiagnostico = $DescripcionDiagnostico;
+            $this->DiagnosticoEstado = $DiagnosticoEstado;
         }
 
         /*GET*/
-        public function getEncargadoId() {
-            return $this->EncargadoId;
+        public function getDiagnosticoId() {
+            return $this->DiagnosticoId;
         }
 
-        public function getAnimalNombre() {
-            return $this->$AnimalNombre;
-        }
-
-        public function getAnimalEspecie() {
-            return $this->$AnimalEspecie;
-        }
-
-        public function getAnimalRaza() {
-            return $this->$AnimalRaza;
-        }
-
-        public function getAnimalfechaNacimiento() {
-            return $this->$AnimalfechaNacimiento;
+        public function getAnimalId() {
+            return $this->AnimalId;
         }
 
         public function getAnimalPeso() {
-            return $this->$AnimalPeso;
+            return $this->AnimalPeso;
         }
 
         public function getFechaDiagnostico() {
-            return $this->$FechaDiagnostico;
+            return $this->FechaDiagnostico;
         }
 
         public function getDescripcionDiagnostico() {
-            return $this->$DescripcionDiagnostico;
+            return $this->DescripcionDiagnostico;
+        }
+
+        public function getDiagnosticoEstado() {
+            return $this->DiagnosticoEstado;
         }
 
         /*SET*/
-        public function setEncargadoId($EncargadoId) {
-            $this->EncargadoId = $EncargadoId;
+        public function setDiagnosticoId($DiagnosticoId) {
+            $this->DiagnosticoId = $DiagnosticoId;
         }
 
-        public function setAnimalNombre($AnimalNombre) {
-            $this->AnimalNombre = $AnimalNombre;
-        }
-
-        public function setAnimalEspecie($AnimalEspecie) {
-            $this->$AnimalEspecie = $AnimalEspecie;
-        }
-
-        public function setAnimalRaza($AnimalRaza) {
-            $this->AnimalRaza = $AnimalRaza;
-        }
-
-        public function setAnimalfechaNacimiento($AnimalfechaNacimiento) {
-            $this->AnimalfechaNacimiento = $AnimalfechaNacimiento;
+        public function setAnimalId($AnimalId) {
+            $this->AnimalId = $AnimalId;
         }
 
         public function setAnimalPeso($AnimalPeso) {
@@ -87,6 +63,10 @@
 
         public function setDescripcionDiagnostico($DescripcionDiagnostico) {
             $this->DescripcionDiagnostico = $DescripcionDiagnostico;
+        }
+
+        public function setDiagnosticoEstado($DiagnosticoEstado) {
+            $this->DiagnosticoEstado = $DiagnosticoEstado;
         }
     }
 
