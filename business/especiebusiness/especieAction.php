@@ -15,7 +15,7 @@ if (isset($_POST['actualizar'])) {
             if (!is_numeric($especieNombre)) {
                 $especie = new especie($especieId, $especieNombre, $especieEstado);
 
-                $especieBusiness = new especieBusiness();
+                $especieBusiness = new EspecieBusiness();
 
                 $resultado = $especieBusiness->actualizarTBEspecie($especie);
                 if ($resultado == 1) {
@@ -39,7 +39,7 @@ if (isset($_POST['actualizar'])) {
 
         $especieId = $_POST['especieId'];
 
-        $especieBusiness = new especieBusiness();
+        $especieBusiness = new EspecieBusiness();
         $resultado = $especieBusiness->eliminarTBEspecie($especieId);
 
         if ($resultado == 1) {
@@ -61,7 +61,7 @@ if (isset($_POST['actualizar'])) {
             if (!is_numeric($especieNombre)) {
                 $especie = new especie(0, $especieNombre, $especieEstado);
 
-                $especieBusiness = new especieBusiness();
+                $especieBusiness = new EspecieBusiness();
 
                 $resultado = $especieBusiness->insertarTBEspecie($especie);
 
