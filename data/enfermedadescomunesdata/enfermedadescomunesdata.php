@@ -6,7 +6,7 @@ Entra en el if se realiza las siguientes operaciones, por que se toma
 la ruta desde el business, y entra en el else si no se realiza el crud por
 que se toma la ruta desde el view
 */
-if (isset($_POST['eliminar']) || isset($_POST['actualizar']) || isset($_POST['insertar'])) {
+if (isset($_POST['eliminar']) || isset($_POST['actualizar']) || isset($_POST['insertar']) || isset($_POST['agregarSintoma']) || isset($_POST['eliminarSintoma']) || isset($_POST['agregarProducto'])) {
 	include_once '../../data/data.php';
 	include '../../domain/enfermedadescomunes/enfermedadescomunes.php';
 }else {
@@ -32,11 +32,10 @@ class EnfermedadesComunesData extends Data {
         }//end if
 
         $queryInsert = "INSERT INTO tbenfermedadescomunes VALUES (" . $nextId . "," .
-                "'".$enfermedadescomunes->getEnfermedadesComunesNombre() ."'". "," .
+                "'".$enfermedadescomunes->getEnfermedadescomunesNombre() ."'". "," .
                 "'".$enfermedadescomunes->getEnfermedadescomunesDescripcion(). "'".",".
-                "'".$enfermedadescomunes->getEnfermedadescomunesSintomas(). "'".",".
-                "'".$enfermedadescomunes->getEnfermedadescomunesProductosUsados(). "'".",".
-                "'".$enfermedadescomunes->getEnfermedadescomunesEstado()."'".  ");";
+                "'".$enfermedadescomunes->getEnfermedadescomunesEstado(). "'".",".
+                "'".$enfermedadescomunes->getEnfermedadescomunesProductosUsados()."'".  ");";
 
 
 				$result = mysqli_query($conn, $queryInsert);
@@ -61,26 +60,26 @@ class EnfermedadesComunesData extends Data {
     }//insertar productoveterinario
 
 
-		public function insertarSintomaEnfermedad($enfermedadescomunesid,$sintomaid){
+		public function insertarSintomaEnfermedad($enfermedadescomunesId,$sintomaid){
 			$conn = mysqli_connect($this->server,$this->user,$this->password,$this->db);
 			$conn->set_charset('utf8');
-			$queryGetLastId = "SELECT MAX(enfermedadescomunesid) AS enfermedadescomunesid  FROM tbenfermedadescomunes;";
-			$idCont = mysqli_query($conn, $queryGetLastId);
-			$nextId = 1;
-			if ($row = mysqli_fetch_row($idCont)) {
-			    $nextId = trim($row[0]) + 1;
-			}//end if
-			$queryInsertT="INSERT INTO tbsintomaenfermedad VALUES (". $nextId .",".$enfermedadescomunesId .",".
+			
+			$queryInsert="INSERT INTO tbsintomaenfermedad VALUES (".$enfermedadescomunesId .",".
 			$sintomaid.");";
+
+      $result = mysqli_query($conn, $queryInsert);
+      mysqli_close($conn);
+
+      return $result;
 		}//insertar
 
 
-		public function eliminarSintomaEnfermadad($enfermedadescomunesid,$sintomaid){
+		public function eliminarSintomaEnfermedad($enfermedadescomunesid,$sintomaid){
 
 		    $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
 		    $conn->set_charset('utf8');
 
-		    $queryUpdate = "DELETE FROM tbsintomaenfermedad WHERE enfermedadid = " . $enfermedadescomunesid .
+		    $queryUpdate = "DELETE FROM tbsintomaenfermedad WHERE enfermedadcomunid = " . $enfermedadescomunesid .
 				" AND sintomaid = ".$sintomaid.";";
 		    $result = mysqli_query($conn, $queryUpdate);
    			mysqli_close($conn);
@@ -93,11 +92,9 @@ class EnfermedadesComunesData extends Data {
 
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $queryUpdate = "UPDATE tbenfermedadescomunes SET  enfermedadescomunesnombre = " . "'".$enfermedadescomunes->getEnfermedadescomunesNombre() ."'".
+        $queryUpdate = "UPDATE tbenfermedadescomunes SET enfermedadescomunesnombre = " . "'".$enfermedadescomunes->getEnfermedadescomunesNombre() ."'".
                 ", enfermedadescomunesdescripcion = " . "'".$enfermedadescomunes->getEnfermedadescomunesDescripcion() ."'".
-                ", enfermedadescomunessintomas = " ."'". $enfermedadescomunes->getEnfermedadescomunesSintomas() ."'".
                 ", enfermedadescomunesproductosusados = " ."'". $enfermedadescomunes->getEnfermedadescomunesProductosUsados() ."'".
-                ", enfermedadescomunesestado = " ."'". $enfermedadescomunes->getEnfermedadescomunesEstado() ."'".
                 " WHERE enfermedadescomunesid = " . $enfermedadescomunes->getEnfermedadescomunesId() . ";";
 
         $result = mysqli_query($conn, $queryUpdate);
@@ -174,7 +171,48 @@ class EnfermedadesComunesData extends Data {
       return $enfermedadescomunes;
     }//obtenerActualziar
 
+    public function obtenerEnfermedadesComunesSintomas() {
 
+        $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+
+        $querySelect = "SELECT tbsintoma.sintomaid, tbsintoma.sintomanombre, tbsintomaenfermedad.enfermedadcomunid FROM tbsintomaenfermedad, tbsintoma WHERE tbsintomaenfermedad.sintomaid = tbsintoma.sintomaid;";
+        $result = mysqli_query($conn, $querySelect);
+        mysqli_close($conn);
+        $enfermedadescomunes = [];
+
+        while ($row = mysqli_fetch_array($result)) {
+          $enfermedadescomunes[] = $row;
+        }//end while
+
+        return $enfermedadescomunes;
+    }//obtenerMedicos
+
+    public function actualizarProductos($enfermedadId, $Seleccionado, $Anteriores){
+
+      $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+      $conn->set_charset('utf8');
+
+      $name ="";
+      $queryGetName = "SELECT productoveterinarionombre from tbproductoveterinario WHERE productoveterinarioid = ". $Seleccionado .";";
+
+      $getName = mysqli_query($conn, $queryGetName);
+
+      if ($row = mysqli_fetch_row($getName)) {
+        $name = trim($row[0]);
+      }//end if
+
+      if($Anteriores !== " "){
+        $Anteriores = $Anteriores.",";
+      }//if
+        $Anteriores = $Anteriores.$name;
+
+      $queryInsert = "UPDATE tbenfermedadescomunes SET enfermedadescomunesproductosusados = ". "'".$Anteriores. "'" ." WHERE enfermedadescomunesid = ". $enfermedadId .";"; 
+
+      $result = mysqli_query($conn, $queryInsert);
+      mysqli_close($conn);
+      return $result;
+    }//actualizarProductos
 
 }//end class
 
