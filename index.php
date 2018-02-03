@@ -4,8 +4,6 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Cl&iacute;nica Veterinaria</title>
-    <link rel="icon" href="../resources/icons/bull.png">
-    <link rel="stylesheet" href="../resources/css/css.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 </head>
@@ -40,6 +38,9 @@
         </ul>
         <ul>
             <li><a href="view/sintomaView.php">S&iacute;ntomas</a></li>
+        </ul>
+        <ul>
+            <li><a href="view/atencionAnimalView.php">Tratamiento</a></li>
         </ul>
     </nav>
     <footer>
