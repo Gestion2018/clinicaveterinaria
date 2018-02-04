@@ -28,16 +28,13 @@
             <li><a href="view/encargadoView.php">Cliente</a></li>
         </ul>
         <ul>
-            <li><a href="view/animalView.php">Animal</a></li>
-        </ul>
-        <ul>
-            <li><a href="view/enfermedadesComunesView.php">Enfermedades Comunes</a></li>
-        </ul>
-        <ul>
             <li><a href="view/productoVeterinarioView.php">Producto Veterinario</a></li>
         </ul>
         <ul>
             <li><a href="view/sintomaView.php">S&iacute;ntomas</a></li>
+        </ul>
+        <ul>
+            <li><a href="view/enfermedadesComunesView.php">Enfermedades Comunes</a></li>
         </ul>
         <ul>
             <li><a href="view/atencionAnimalView.php">Tratamiento</a></li>
