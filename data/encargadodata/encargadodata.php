@@ -6,7 +6,9 @@ Entra en el if se realiza las siguientes operaciones, por que se toma
 la ruta desde el business, y entra en el else si no se realiza el crud por
 que se toma la ruta desde el view
 */
-if (isset($_POST['eliminar']) || isset($_POST['actualizar']) || isset($_POST['insertar']) || isset($_POST['eliminarTelefono']) || isset($_POST['agregarTelefono']) || isset($_POST['obtener'])) {
+if (isset($_POST['eliminar']) || isset($_POST['actualizar']) || isset($_POST['insertar']) ||
+isset($_POST['eliminarTelefono']) || isset($_POST['agregarTelefono']) || isset($_POST['obtener']) ||
+isset($_POST['buscar'])) {
 	include_once '../../data/data.php';
 	include '../../domain/encargado/encargado.php';
 }else {
@@ -77,79 +79,117 @@ class EncargadoData extends Data {
     }//actualizar encargado
 
 
-		public function busquedaEncargadoPorNombre($nombrecompleto){
+	public function busquedaEncargadoPorNombre($nombrecompleto){
 
-				$conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
-				$conn->set_charset('utf8');
+			$conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+			$conn->set_charset('utf8');
 
-				$queryUpdate = "SELECT * FROM tbencargado WHERE encargadonombrecompleto LIKE" . "'%" . $nombrecompleto . "%'" ;
-				$result = mysqli_query($conn, $querySelect);
-				mysqli_close($conn);
-				$encargados = [];
-				while ($row = mysqli_fetch_array($result)) {
+			$querySelect = "SELECT * FROM tbencargado WHERE encargadonombrecompleto LIKE" . "'%" . $nombrecompleto . "%'" ;
+			$result = mysqli_query($conn, $querySelect);
+			mysqli_close($conn);
+			//$encargados = [];
+			/*while ($row = mysqli_fetch_array($result)) {
 
-						if($row['encargadoestado']!='B'){
-								 $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'],$row['encargadotelefono']
-								,$row['encargadodireccion'],$row['encargadoestado'], $row['encargadocorreo'],$row['encargadopueblo']);
-								array_push($encargados, $encargado);
+					if($row['encargadoestado']!='B'){
+							 $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'],$row['encargadocorreo']
+							,$row['encargadopueblo'],$row['encargadodireccion'], $row['encargadoestado']);
 
-						}//end if
+							//$encargados["Data"][] = $encargado;
 
-				}//end while
+				            //$temp= json_encode($encargado);
+							echo json_encode($encargado);
+							//echo $temp->getEncargadoId();
 
-				return $encargados;
-		}
+					}//end if
 
+			}//end while*/
 
-				public function busquedaEncargadoPorPueblo($pueblo){
+			$ingreso = 'false';
 
-						$conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
-						$conn->set_charset('utf8');
+			while($temp = mysqli_fetch_array($result)){
+            	$encargados["Data"][] = $temp;
+				$ingreso = 'true';
+        	}
 
-						$queryUpdate = "SELECT * FROM tbencargado WHERE encargadopueblo LIKE" . "'%" . $pueblo . "%'" ;
-						$result = mysqli_query($conn, $querySelect);
-						mysqli_close($conn);
-						$encargados = [];
-						while ($row = mysqli_fetch_array($result)) {
-
-								if($row['encargadoestado']!='B'){
-										 $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'],$row['encargadotelefono']
-										,$row['encargadodireccion'],$row['encargadoestado'], $row['encargadocorreo'],$row['encargadopueblo']);
-										array_push($encargados, $encargado);
-
-								}//end if
-
-						}//end while
-
-						return $encargados;
-				}//busquedaEncargadoPorPueblo
+			if ($ingreso == 'true') {
+				echo json_encode($encargados);
+			}else {
+				echo 'Sin coincidencias';
+			}
+	}
 
 
-								public function busquedaEncargadoPorEspecie($idEspecie){
+	public function busquedaEncargadoPorPueblo($pueblo){
 
-										$conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
-										$conn->set_charset('utf8');
+			$conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+			$conn->set_charset('utf8');
 
-										$queryUpdate = "SELECT * FROM tbencargado,tbanimal,tbespecie WHERE
-										tbencargado.encargadoid = tbanimal.animalidcliente
-										AND tbanimal.animalespecierazaid = tbespecie.especieid
-										AND tbespecie.especieid = ". $idEspecie . ";" ;
-										$result = mysqli_query($conn, $querySelect);
-										mysqli_close($conn);
-										$encargados = [];
-										while ($row = mysqli_fetch_array($result)) {
+			$queryUpdate = "SELECT * FROM tbencargado WHERE encargadopueblo LIKE" . "'%" . $pueblo . "%'" ;
+			$result = mysqli_query($conn, $querySelect);
+			mysqli_close($conn);
+			/*$encargados = [];
+			while ($row = mysqli_fetch_array($result)) {
 
-												if($row['encargadoestado']!='B'){
-														 $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'],$row['encargadotelefono']
-														,$row['encargadodireccion'],$row['encargadoestado'], $row['encargadocorreo'],$row['encargadopueblo']);
-														array_push($encargados, $encargado);
+					if($row['encargadoestado']!='B'){
+							 $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'],$row['encargadotelefono']
+							,$row['encargadodireccion'],$row['encargadoestado'], $row['encargadocorreo'],$row['encargadopueblo']);
+							array_push($encargados, $encargado);
 
-												}//end if
+					}//end if
 
-										}//end while
+			}//end while*/
 
-										return $encargados;
-								}
+			$ingreso = 'false';
+
+			while($temp = mysqli_fetch_array($result)){
+            	$encargados["Data"][] = $temp;
+				$ingreso = 'true';
+        	}
+
+			if ($ingreso == 'true') {
+				echo json_encode($encargados);
+			}else {
+				echo 'Sin coincidencias';
+			}
+	}//busquedaEncargadoPorPueblo
+
+
+	public function busquedaEncargadoPorEspecie($idEspecie){
+
+			$conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+			$conn->set_charset('utf8');
+
+			$queryUpdate = "SELECT * FROM tbencargado,tbanimal,tbespecie WHERE
+			tbencargado.encargadoid = tbanimal.animalidcliente
+			AND tbanimal.animalespecierazaid = tbespecie.especieid
+			AND tbespecie.especieid = ". $idEspecie . ";" ;
+			$result = mysqli_query($conn, $querySelect);
+			mysqli_close($conn);
+			/*$encargados = [];
+			while ($row = mysqli_fetch_array($result)) {
+
+					if($row['encargadoestado']!='B'){
+							 $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'],$row['encargadotelefono']
+							,$row['encargadodireccion'],$row['encargadoestado'], $row['encargadocorreo'],$row['encargadopueblo']);
+							array_push($encargados, $encargado);
+
+					}//end if
+
+			}//end while*/
+
+			$ingreso = 'false';
+
+			while($temp = mysqli_fetch_array($result)){
+            	$encargados["Data"][] = $temp;
+				$ingreso = 'true';
+        	}
+
+			if ($ingreso == 'true') {
+				echo json_encode($encargados);
+			}else {
+				echo 'Sin coincidencias';
+			}
+	}
 
 
     public function eliminarEncargado($encargadoid) {
@@ -269,7 +309,7 @@ class EncargadoData extends Data {
                         where tbencargado.encargadoid = tbanimal.animalidcliente AND tbencargado.encargadoestado = 'A' AND tbanimal.animalestado = 'A';";
         $result = mysqli_query($conn, $querySelect);
         mysqli_close($conn);
-        
+
         if($tipo === 1){
             $animales = [];
             while ($row = mysqli_fetch_array($result)) {
@@ -284,7 +324,7 @@ class EncargadoData extends Data {
         }//if-else
 
         //return $animales;
-       
+
     }//obtenerMedicos
 }//end class
 
