@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <script src="./jquery-3.2.1.js"></script>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
     <?php
     include '../business/productoveterinariobusiness/productoVeterinarioBusiness.php';
     include '../business/tratamientoveterinariobusiness/tratamientoVeterinarioBusiness.php';
@@ -18,7 +21,7 @@
 
 <body>
 
-    <header> 
+    <header>
         <h1>Tratamiento</h1>
     </header>
 
@@ -48,7 +51,7 @@
                 <th>Producto Veterinario</th>
                 <th>Dosis</th>
                 <th>Periodicidad</th>
-                <th>Fecha Tratamiento</th>
+                <th>Fecha</th>
                 <th></th>
             </tr>
             <tr>
@@ -84,7 +87,7 @@
                 <td><input type="submit" value="Insertar" name="insertar" id="insertar"/></td>
             </form>
             </tr>
-            
+
             <?php
 
                 $tratamientoveterinarioBusiness = new TratamientoVeterinarioBusiness();
@@ -173,7 +176,7 @@
         </h3>
     </section>
     <footer>
-        
+
     </footer>
 
 </body>
@@ -190,7 +193,7 @@ $("#encargadoId").change(function () {
             };
 
             $.post("../business/encargadobusiness/encargadoAction.php",parameters, function(data){
-                
+
                 var prod = JSON.parse(data);
                 document.getElementById("animalId").options.length = 0;
                 var idEncargado = $("#encargadoId").val();

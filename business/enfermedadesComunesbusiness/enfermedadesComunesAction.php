@@ -90,17 +90,13 @@ if (isset($_POST['actualizar'])) {
     $enfermedadesComunesId = $_POST['enfermedadesComunesId'];
     $sintoma = $_POST['sintomas'];
 
-    if($sintoma != "-1"){
-        $enfermedadesComunesBusiness = new EnfermedadesComunesBusiness();
-        $resultado = $enfermedadesComunesBusiness->insertarTBSintoma($enfermedadesComunesId, $sintoma);
+    $enfermedadesComunesBusiness = new EnfermedadesComunesBusiness();
+    $resultado = $enfermedadesComunesBusiness->insertarTBSintoma($enfermedadesComunesId, $sintoma);
 
-        if ($resultado == 1) {
-            header("location: ../../view/enfermedadesComunesView.php?success=success");
-        } else {
-            header("location: ../../view/enfermedadesComunesView.php?error=dbError");
-        }//if
-    }else{
-        header("location: ../../view/enfermedadesComunesView.php");
+    if ($resultado == 1) {
+        header("location: ../../view/enfermedadesComunesView.php?success=success");
+    } else {
+        header("location: ../../view/enfermedadesComunesView.php?error=dbError");
     }
 }else if(isset($_POST['eliminarSintoma'])){
     $enfermedadesComunesId = $_POST['enfermedadesComunesId'];
@@ -119,18 +115,13 @@ if (isset($_POST['actualizar'])) {
     $Seleccionado = $_POST['productosUsados'];
     $Anteriores = $_POST['enfermedadesComunesProductosUsados'];
 
-    if($Seleccionado != "-1"){
-        $enfermedadesComunesBusiness = new EnfermedadesComunesBusiness();
-        $resultado = $enfermedadesComunesBusiness->actualizarProductos($enfermedadId, $Seleccionado, $Anteriores);
+    $enfermedadesComunesBusiness = new EnfermedadesComunesBusiness();
+    $resultado = $enfermedadesComunesBusiness->actualizarProductos($enfermedadId, $Seleccionado, $Anteriores);
 
-        if ($resultado == 1) {
-            header("location: ../../view/enfermedadesComunesView.php?success=success");
-        } else {
-            header("location: ../../view/enfermedadesComunesView.php?error=dbError");
-        }//if-else
-    }else{
-        header("location: ../../view/enfermedadesComunesView.php");
-    }//if
-
+    if ($resultado == 1) {
+        header("location: ../../view/enfermedadesComunesView.php?success=success");
+    } else {
+        header("location: ../../view/enfermedadesComunesView.php?error=dbError");
+    }
 }//if
 ?>

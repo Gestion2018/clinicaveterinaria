@@ -6,7 +6,9 @@
     <title>Productos Veterinarios</title>
     <link rel="stylesheet" href="../resources/css/css.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <script src="./jquery-3.2.1.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
     <?php
     include '../business/productoveterinariobusiness/productoVeterinarioBusiness.php';
@@ -16,7 +18,7 @@
 
 <body>
 
-    <header> 
+    <header>
         <h1>Productos Veterinarios</h1>
     </header>
 
@@ -26,12 +28,11 @@
         </ul>
     </nav>
 
-    <?php 
+    <?php
         $productoVeterinarioBusiness = new ProductoVeterinarioBusiness();
         $unidades = $productoVeterinarioBusiness->obtenerUnidades();
-        $funciones = $productoVeterinarioBusiness->obtenerFunciones();
     ?>
-    
+
 
     <section id="form">
         <table>
@@ -43,9 +44,6 @@
                 <th>Cantidad</th>
                 <th>Precio</th>
                 <th>Fecha Vencimiento</th>
-                <th>Funciones</th>
-                <th>Agregar Funcion</th>
-                <th>Funciones Producto</th>
                 <th></th>
             </tr>
             <tr>
@@ -54,7 +52,7 @@
                     <td><input required type="text" name="productoVeterinarioNombreComun" id="productoVeterinarioNombreComun"/></td>
                     <td><input type="text" name="productoVeterinarioPrincipioActivo" id="productoVeterinarioPrincipioActivo"/></td>
                     <td><select id="productoVeterinarioContenido" name="productoVeterinarioContenido">
-                        <?php 
+                        <?php
                             foreach ($unidades as $unidad) {
                                 echo '<option value='.$unidad['unidadnombre'].'>'.$unidad["unidadnombre"].'</option>';
                             }//foreach
@@ -63,15 +61,6 @@
                     <td><input type="number" name="productoVeterinarioCantidad" id="productoVeterinarioCantidad"/></td>
                     <td><input type="number" name="productoVeterinarioPrecio" id="productoVeterinarioPrecio"/></td>
                     <td><input type="date" name="productoVeterinarioFechaVencimiento" id="productoVeterinarioFechaVencimiento"/></td>
-                    <td><select id="funciones" name="funciones">
-                        <?php 
-                            foreach ($funciones as $funcion) {
-                                echo '<option value='.$funcion['funcionnombre'].'>'.$funcion["funcionnombre"].'</option>';
-                            }//foreach
-                        ?>
-                    </select></td>
-                    <td><input type="button" value="Agregar Funcion" name="agregarFuncion" id="agregarFuncion" onclick="agregarFuncionInsert();" /></td>
-                    <td><input type="text" name="productoVeterinarioFunciones" id="productoVeterinarioFunciones"/></td>
                     <td><input required type="hidden" name="productoVeterinarioEstado" id="productoVeterinarioEstado" value="A" /></td>
                     <td><input type="submit" value="insertar" name="insertar" id="insertar"/></td>
                 </form>
@@ -86,14 +75,11 @@
                 <th>Contenido</th>
                 <th>Precio</th>
                 <th>Fecha Vencimiento</th>
-                <th>Funciones</th>
-                <th>Agregar Funcion</th>
-                <th>Funciones Producto</th>
                 <th></th>
             </tr>
             <?php
             $productos = $productoVeterinarioBusiness->obtenerTBProductoVeterinario();
-            
+
             foreach ($productos as $current) {
                 ?>
                 <form method="post" action="../business/productoveterinariobusiness/productoVeterinarioAction.php">
@@ -102,32 +88,23 @@
                     <td><input type="text" name="productoVeterinarioNombreComun" id="productoVeterinarioNombreComun" value="<?php echo $current->getProductoVeterinarioNombreComun() ?>"/></td>
                     <td><input type="text" name="productoVeterinarioPrincipioActivo" id="productoVeterinarioPrincipioActivo" value=" <?php echo $current->getproductoVeterinarioPrincipioActivo() ?>"/></td>
                     <td><input type="text" name="productoVeterinarioContenido" id="productoVeterinarioContenido" value=" <?php echo $current->getproductoVeterinarioContenido() ?>"></td>
-                    <td><input required type="number" name="productoVeterinarioPrecio" id="productoVeterinarioPrecio" value="<?php echo $current->getProductoVeterinarioPrecio() ?>"/></td>  
-                    <td><input type="date" name="productoVeterinarioFechaVencimiento" id="productoVeterinarioFechaVencimiento" value="<?php echo $current->getProductoVeterinarioFechaVencimiento() ?>"/></td> 
-                    <td><select id="funciones" name="funciones">
-                        <?php 
-                            foreach ($funciones as $funcion) {
-                                echo '<option value='.$funcion['funcionnombre'].'>'.$funcion["funcionnombre"].'</option>';
-                            }//foreach
-                        ?>
-                    </select></td>
-                    <td><input type="submit" value="Agregar Funcion" name="agregarFuncion" id="agregarFuncion"/></td>
-                    <td><input type="text" name="productoVeterinarioFunciones" id="productoVeterinarioFunciones" value="<?php echo $current->getProductoVeterinarioFunciones() ?>" /></td>
+                    <td><input required type="number" name="productoVeterinarioPrecio" id="productoVeterinarioPrecio" value="<?php echo $current->getProductoVeterinarioPrecio() ?>"/></td>
+                    <td><input type="date" name="productoVeterinarioFechaVencimiento" id="productoVeterinarioFechaVencimiento" value="<?php echo $current->getProductoVeterinarioFechaVencimiento() ?>"/></td>
                     <input type="hidden" id="productoVeterinarioEstado" name="productoVeterinarioEstado" value="A"></td>
                     <td><input type="submit" value="Actualizar" name="actualizar" id="actualizar"/></td>
                     <td><input type="submit" value="Eliminar" name="eliminar" id="eliminar"/></td>
                     </tr>
                 </form>
 
-                
-                
-                <?php 
+
+
+                <?php
                 /*echo '<form method="post" action="../business/productoVeterinariobusiness/productoVeterinarioAction.php">';
                 echo '<input type="hidden" id="productoVeterinarioId" name="productoVeterinarioId" value="' . $current->getProductoVeterinarioId() . '"></td>';
                 echo '<td><input required type="text" name="productoVeterinarioNombre" id="productoVeterinarioNombre" value="' . $current->getProductoVeterinarioNombre() . '"/></td>';
                 echo '<td><input required type="text" name="productoVeterinarioNombreComun" id="productoVeterinarioNombreComun" value="' . $current->getProductoVeterinarioNombreComun() . '"/></td>';
-                echo '<td><input type="text" name="productoVeterinarioPrincipioActivo" id="productoVeterinarioPrincipioActivo" value="' . $current->getproductoVeterinarioPrincipioActivo() . '"/></td>'; 
-                echo '<td><input required type="number" name="productoVeterinarioPrecio" id="productoVeterinarioPrecio" value="' . $current->getProductoVeterinarioPrecio() . '"/></td>'             
+                echo '<td><input type="text" name="productoVeterinarioPrincipioActivo" id="productoVeterinarioPrincipioActivo" value="' . $current->getproductoVeterinarioPrincipioActivo() . '"/></td>';
+                echo '<td><input required type="number" name="productoVeterinarioPrecio" id="productoVeterinarioPrecio" value="' . $current->getProductoVeterinarioPrecio() . '"/></td>'
                 echo '<input type="hidden" id="productoVeterinarioEstado" name="productoVeterinarioEstado" value="A"></td>';
                 echo '<td><input type="submit" value="Actualizar" name="actualizar" id="actualizar"/></td>';
                 echo '<td><input type="submit" value="Eliminar" name="eliminar" id="eliminar"/></td>';
@@ -153,7 +130,7 @@
                     echo '<p style="color: green">Transacción realizada</p>';
                 }
             ?>
-                        
+
         </h3>
     </section>
 
@@ -162,15 +139,3 @@
 
 </body>
 </html>
-
-<script>
-    function agregarFuncionInsert(){
-        var texto = $('#funciones option:selected').text();
-        var anterior = $('#productoVeterinarioFunciones').val();
-        if(anterior != ""){
-            anterior += ",";
-        }//if
-        anterior += texto;
-        $('#productoVeterinarioFunciones').val(anterior);
-    }//agregarFuncionInsert
-</script>

@@ -8,7 +8,7 @@ que se toma la ruta desde el view
 */
 if (isset($_POST['eliminar']) || isset($_POST['actualizar']) || isset($_POST['insertar']) ||
 isset($_POST['eliminarTelefono']) || isset($_POST['agregarTelefono']) || isset($_POST['obtener']) ||
-isset($_POST['buscar'])) {
+isset($_POST['buscar']) || isset($_POST['telefonosJSON']) || isset($_POST['idAnimalJSON'])) {
 	include_once '../../data/data.php';
 	include '../../domain/encargado/encargado.php';
 }else {
@@ -46,13 +46,21 @@ class EncargadoData extends Data {
 
         $telefonos = [];
         $telefonos = explode(",", $encargado->getEncargadoTelefono());
-        
+
         for ($i=0; $i < count($telefonos) ; $i++) {
+<<<<<<< HEAD
             if($telefonos[$i] !== " "){
                 $queryInsertT = "INSERT INTO tbtelefonoencargado VALUES (".$encargado->getEncargadoId().",'".
                 $telefonos[$i] . "');" ;
                 mysqli_query($conn, $queryInsertT);
             }//if
+=======
+
+          $queryInsertT = "INSERT INTO tbtelefonoencargado VALUES (".$encargado->getEncargadoId().",'".
+          $telefonos[$i] . "');" ;
+          mysqli_query($conn, $queryInsertT);
+
+>>>>>>> 0177944420610ff3f47772686bfa2988ce1d4770
         }//end for*/
 
         mysqli_close($conn);
@@ -84,7 +92,10 @@ class EncargadoData extends Data {
 			$conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
 			$conn->set_charset('utf8');
 
-			$querySelect = "SELECT * FROM tbencargado WHERE encargadonombrecompleto LIKE" . "'%" . $nombrecompleto . "%'" ;
+			$querySelect = "SELECT enc.encargadoid, enc.encargadonombrecompleto, enc.encargadocorreo,
+			enc.encargadopueblo, enc.encargadodireccion, enc.encargadoestado
+			FROM tbencargado As enc
+			WHERE enc.encargadoestado = 'A' AND enc.encargadonombrecompleto LIKE" . "'%" . $nombrecompleto . "%'" ;
 			$result = mysqli_query($conn, $querySelect);
 			mysqli_close($conn);
 			//$encargados = [];
@@ -111,6 +122,8 @@ class EncargadoData extends Data {
 				$ingreso = 'true';
         	}
 
+			/*Se valida si se encontro alguna conincidencia con lo que ingreso el
+			usuario*/
 			if ($ingreso == 'true') {
 				echo json_encode($encargados);
 			}else {
@@ -124,7 +137,9 @@ class EncargadoData extends Data {
 			$conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
 			$conn->set_charset('utf8');
 
-			$queryUpdate = "SELECT * FROM tbencargado WHERE encargadopueblo LIKE" . "'%" . $pueblo . "%'" ;
+			$querySelect = "SELECT enc.encargadoid, enc.encargadonombrecompleto, enc.encargadocorreo,
+			enc.encargadopueblo, enc.encargadodireccion FROM tbencargado As enc
+			WHERE enc.encargadoestado = 'A' AND encargadopueblo LIKE" . "'%" . $pueblo . "%'" ;
 			$result = mysqli_query($conn, $querySelect);
 			mysqli_close($conn);
 			/*$encargados = [];
@@ -146,6 +161,8 @@ class EncargadoData extends Data {
 				$ingreso = 'true';
         	}
 
+			/*Se valida si se encontro alguna conincidencia con lo que ingreso el
+			usuario*/
 			if ($ingreso == 'true') {
 				echo json_encode($encargados);
 			}else {
@@ -154,43 +171,75 @@ class EncargadoData extends Data {
 	}//busquedaEncargadoPorPueblo
 
 
-	public function busquedaEncargadoPorEspecie($idEspecie){
+	public function busquedaEncargadoPorEspecie($nombreEspecie){
+		$conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+		$conn->set_charset('utf8');
 
-			$conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
-			$conn->set_charset('utf8');
+		$querySelect = "SELECT DISTINCT enc.encargadoid, enc.encargadonombrecompleto, enc.encargadocorreo,
+		enc.encargadopueblo, enc.encargadodireccion FROM tbencargado As enc
+		INNER JOIN tbanimal As an ON enc.encargadoid = an.animalidcliente
+		INNER JOIN tbespecie AS esp ON esp.especieid = an.animalespecierazaid
+		WHERE enc.encargadoestado = 'A' AND (esp.especienombre LIKE" . "'%" . $nombreEspecie . "%') GROUP BY (enc.encargadonombrecompleto)" ;
 
-			$queryUpdate = "SELECT * FROM tbencargado,tbanimal,tbespecie WHERE
-			tbencargado.encargadoid = tbanimal.animalidcliente
-			AND tbanimal.animalespecierazaid = tbespecie.especieid
-			AND tbespecie.especieid = ". $idEspecie . ";" ;
-			$result = mysqli_query($conn, $querySelect);
-			mysqli_close($conn);
-			/*$encargados = [];
-			while ($row = mysqli_fetch_array($result)) {
+		$result = mysqli_query($conn, $querySelect);
+		mysqli_close($conn);
+		/*$encargados = [];
+		while ($row = mysqli_fetch_array($result)) {
 
-					if($row['encargadoestado']!='B'){
-							 $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'],$row['encargadotelefono']
-							,$row['encargadodireccion'],$row['encargadoestado'], $row['encargadocorreo'],$row['encargadopueblo']);
-							array_push($encargados, $encargado);
+				if($row['encargadoestado']!='B'){
+						 $encargado = new encargado($row['encargadoid'], $row['encargadonombrecompleto'],$row['encargadotelefono']
+						,$row['encargadodireccion'],$row['encargadoestado'], $row['encargadocorreo'],$row['encargadopueblo']);
+						array_push($encargados, $encargado);
 
-					}//end if
+				}//end if
 
-			}//end while*/
+		}//end while*/
 
-			$ingreso = 'false';
+		$ingreso = 'false';
 
-			while($temp = mysqli_fetch_array($result)){
-            	$encargados["Data"][] = $temp;
-				$ingreso = 'true';
-        	}
+		while($temp = mysqli_fetch_array($result)){
+			$encargados["Data"][] = $temp;
+			$ingreso = 'true';
+		}
 
-			if ($ingreso == 'true') {
-				echo json_encode($encargados);
-			}else {
-				echo 'Sin coincidencias';
-			}
+		/*Se valida si se encontro alguna conincidencia con lo que ingreso el
+		usuario*/
+		if ($ingreso == 'true') {
+			echo json_encode($encargados);
+		}else {
+			echo 'Sin coincidencias';
+		}
 	}
 
+	/*Obtiene los animales de un determinado cliente*/
+	function busquedaDeAnimalesPorClienteConJSON($encargadoid){
+		$conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+		$conn->set_charset('utf8');
+
+		$querySelect = "SELECT DISTINCT enc.encargadonombrecompleto, an.animalnombre,
+		an.animalfechanacimiento, an.animalestado, esp.especienombre FROM tbencargado As enc
+		INNER JOIN tbanimal As an ON enc.encargadoid = an.animalidcliente
+		INNER JOIN tbespecie AS esp ON esp.especieid = an.animalespecierazaid
+		WHERE an.animalestado = 'A' AND enc.encargadoid = $encargadoid GROUP BY (enc.encargadonombrecompleto)" ;
+
+		$result = mysqli_query($conn, $querySelect);
+		mysqli_close($conn);
+
+		$ingreso = 'false';
+
+		while($temp = mysqli_fetch_array($result)){
+			$encargados["Data"][] = $temp;
+			$ingreso = 'true';
+		}
+
+		/*Se valida si se encontro alguna conincidencia con lo que ingreso el
+		usuario*/
+		if ($ingreso == 'true') {
+			echo json_encode($encargados);
+		}else {
+			echo 'Sin coincidencias';
+		}
+	}
 
     public function eliminarEncargado($encargadoid) {
 
@@ -238,7 +287,8 @@ class EncargadoData extends Data {
         $conn->set_charset('utf8');
 
         $querySelect = "SELECT * FROM tbencargado;";
-        $result = mysqli_query($conn, $querySelect);
+        $result = mysqli_query($conn, $querySelect);        $telefonos = [];
+
         mysqli_close($conn);
         $encargados = [];
 
@@ -299,6 +349,26 @@ class EncargadoData extends Data {
         return $telefonos;
 
     }//obtenerMedicos
+
+
+	/*Se obtiene los telefonos y se retornan en formato JSON*/
+	public function obtenerTelefonosEncargadoPorJSON() {
+
+        $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+
+        $querySelect = "SELECT * from tbtelefonoencargado, tbencargado
+                        where tbencargado.encargadoid = tbtelefonoencargado.encargadoid ;";
+        $result = mysqli_query($conn, $querySelect);
+        mysqli_close($conn);
+
+		while($row = mysqli_fetch_array($result)){
+			$telefonos["Data"][] = $row;
+		}
+
+		echo json_encode($telefonos);
+    }//obtenerMedicos
+
 
     public function obtenerAnimalesEncargado($tipo) {
 

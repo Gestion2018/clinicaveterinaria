@@ -6,7 +6,7 @@ Entra en el if se realiza las siguientes operaciones, por que se toma
 la ruta desde el business, y entra en el else si no se realiza el crud por
 que se toma la ruta desde el view
 */
-if (isset($_POST['eliminar']) || isset($_POST['actualizar']) || isset($_POST['insertar']) || isset($_POST['eliminarPeso']) || isset($_POST['actualizarPeso'])) {
+if (isset($_POST['eliminar']) || isset($_POST['actualizar']) || isset($_POST['insertar'])) {
 	include_once '../../data/data.php';
 	include '../../domain/diagnostico/diagnostico.php';
 }else {
@@ -99,15 +99,7 @@ class DiagnosticoData extends Data {
 
     }//eliminar diagnostico
 
-    function calculaedad($fechanacimiento){
-        list($ano,$mes,$dia) = explode("-",$fechanacimiento);
-        $ano_diferencia  = date("Y") - $ano;
-        $mes_diferencia = date("m") - $mes;
-        $dia_diferencia   = date("d") - $dia;
-            if ($dia_diferencia < 0 || $mes_diferencia < 0)
-                $ano_diferencia--;
-        return $ano_diferencia;
-    }//funcion
+
 
     public function obtenerDiagnosticos() {
 
@@ -157,37 +149,7 @@ class DiagnosticoData extends Data {
         return $diagnosticos;
     }//obtenerActualziar
 
-    public function obtenerPesoAnimal($animalId) {
 
-        $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
-        $conn->set_charset('utf8');
-
-        $querySelect = "SELECT tbdiagnostico.diagnosticofecha, tbpesoanimal.diagnosticoid,  tbpesoanimal.animalpeso, tbpesoanimal.animalid,tbanimal.animalnombre FROM tbpesoanimal, tbanimal, tbdiagnostico WHERE tbanimal.animalid = ".$animalId." AND (tbpesoanimal.animalid=".$animalId." AND tbpesoanimal.diagnosticoid = tbdiagnostico.diagnosticoid);";
-        $result = mysqli_query($conn, $querySelect);
-        $pesosanimal = [];
-        
-        while ($row = mysqli_fetch_array($result)) {
-            $pesosanimal [] = $row;
-        }//end while
-
-        mysqli_close($conn);
-
-        return $pesosanimal;
-
-    }//obtenerEspecie
-
-    public function actualizarPesoAnimal($diagnosticoId, $animalId, $peso) {
-
-        $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
-        $conn->set_charset('utf8');
-        $queryUpdate = "UPDATE tbpesoanimal SET animalpeso = ". "'" .$peso."'". " WHERE animalid =". $animalId ." AND diagnosticoid=". $diagnosticoId .";";
-
-        $result = mysqli_query($conn, $queryUpdate);
-        mysqli_close($conn);
-
-        return $result;
-
-    }//actualizar especie
 
 }//end class
 
