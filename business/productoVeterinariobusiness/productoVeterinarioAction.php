@@ -14,16 +14,15 @@ if (isset($_POST['actualizar'])) {
         $productoVeterinarioPrecio = $_POST['productoVeterinarioPrecio'];
         $productoVeterinarioFechaVencimiento = $_POST['productoVeterinarioFechaVencimiento'];
         $productoVeterinarioEstado = $_POST['productoVeterinarioEstado'];
-        $productoVeterinarioFunciones = $_POST['productoVeterinarioFunciones'];
 
         if (strlen($productoVeterinarioNombreComun) > 0 && strlen($productoVeterinarioPrincipioActivo) > 0 && strlen($productoVeterinarioContenido) > 0 && strlen($productoVeterinarioFechaVencimiento) > 0 && strlen($productoVeterinarioPrecio) > 0) {
             if (!is_numeric($productoVeterinarioNombre) && !is_numeric($productoVeterinarioNombreComun)) {
 
-                $productoVeterinario = new productoveterinario($productoVeterinarioId, $productoVeterinarioNombre, $productoVeterinarioNombreComun, $productoVeterinarioPrincipioActivo, $productoVeterinarioContenido, $productoVeterinarioPrecio, $productoVeterinarioEstado, $productoVeterinarioFechaVencimiento, $productoVeterinarioFunciones);
+                $productoVeterinario = new productoveterinario($productoVeterinarioId, $productoVeterinarioNombre, $productoVeterinarioNombreComun, $productoVeterinarioPrincipioActivo, $productoVeterinarioContenido, $productoVeterinarioPrecio, $productoVeterinarioEstado, $productoVeterinarioFechaVencimiento);
 
                 $productoVeterinarioBusiness = new ProductoVeterinarioBusiness();
 
-                $resultado = $productoVeterinarioBusiness->actualizarTBProductoVeterinario($productoVeterinario, "1");
+                $resultado = $productoVeterinarioBusiness->actualizarTBProductoVeterinario($productoVeterinario);
                 if ($resultado == 1) {
                     header("location: ../../view/productoVeterinarioView.php?success=updated");
                 } else {
@@ -58,7 +57,7 @@ if (isset($_POST['actualizar'])) {
     }//if si esta seteado el campo
 } else if (isset($_POST['insertar'])) {
 
-    if (isset($_POST['productoVeterinarioNombre']) && isset($_POST['productoVeterinarioNombreComun']) && isset($_POST['productoVeterinarioPrincipioActivo']) && isset($_POST['productoVeterinarioContenido']) && isset($_POST['productoVeterinarioCantidad']) && isset($_POST['productoVeterinarioPrecio']) && isset($_POST['productoVeterinarioFechaVencimiento']) && isset($_POST['productoVeterinarioEstado']) && isset($_POST['productoVeterinarioFunciones'])) {
+    if (isset($_POST['productoVeterinarioNombre']) && isset($_POST['productoVeterinarioNombreComun']) && isset($_POST['productoVeterinarioPrincipioActivo']) && isset($_POST['productoVeterinarioContenido']) && isset($_POST['productoVeterinarioCantidad']) && isset($_POST['productoVeterinarioPrecio']) && isset($_POST['productoVeterinarioFechaVencimiento']) && isset($_POST['productoVeterinarioEstado'])) {
             
         $productoVeterinarioId = $_POST['productoVeterinarioId'];
         $productoVeterinarioNombre = $_POST['productoVeterinarioNombre'];
@@ -69,14 +68,13 @@ if (isset($_POST['actualizar'])) {
         $productoVeterinarioPrecio = $_POST['productoVeterinarioPrecio'];
         $productoVeterinarioFechaVencimiento = $_POST['productoVeterinarioFechaVencimiento'];
         $productoVeterinarioEstado = $_POST['productoVeterinarioEstado'];
-        $productoVeterinarioFunciones = $_POST['productoVeterinarioFunciones'];
         
         if (strlen($productoVeterinarioNombreComun) > 0 && strlen($productoVeterinarioPrincipioActivo) > 0 && strlen($productoVeterinarioCantidad) > 0 && strlen($productoVeterinarioContenido) > 0 && strlen($productoVeterinarioPrecio) > 0
-            && strlen($productoVeterinarioFechaVencimiento) > 0 && strlen($productoVeterinarioFunciones) > 0) {
-            if (!is_numeric($productoVeterinarioNombre) && !is_numeric($productoVeterinarioNombreComun) && !is_numeric($productoVeterinarioFunciones)) {
+            && strlen($productoVeterinarioFechaVencimiento) > 0) {
+            if (!is_numeric($productoVeterinarioNombre) && !is_numeric($productoVeterinarioNombreComun)) {
 
                 $contenido = $productoVeterinarioCantidad . " " . $productoVeterinarioContenido;
-                $productoVeterinario = new productoveterinario(0, $productoVeterinarioNombre, $productoVeterinarioNombreComun, $productoVeterinarioPrincipioActivo, $contenido, $productoVeterinarioPrecio, $productoVeterinarioEstado, $productoVeterinarioFechaVencimiento, $productoVeterinarioFunciones);
+                $productoVeterinario = new productoveterinario(0, $productoVeterinarioNombre, $productoVeterinarioNombreComun, $productoVeterinarioPrincipioActivo, $contenido, $productoVeterinarioPrecio, $productoVeterinarioEstado, $productoVeterinarioFechaVencimiento);
 
                 $productoVeterinarioBusiness = new ProductoVeterinarioBusiness();
 
@@ -96,44 +94,5 @@ if (isset($_POST['actualizar'])) {
     } else {
         header("location: ../view/productoVeterinarioView.php?error=error");
     }//if si esta seteado el campo
-}else if (isset($_POST['agregarFuncion'])) {
-
-    if ( isset($_POST['productoVeterinarioId']) && isset($_POST['productoVeterinarioNombre']) && isset($_POST['productoVeterinarioNombreComun']) && isset($_POST['productoVeterinarioPrincipioActivo']) && isset($_POST['productoVeterinarioContenido']) && isset($_POST['productoVeterinarioPrecio']) && isset($_POST['productoVeterinarioFechaVencimiento']) && isset($_POST['productoVeterinarioEstado'])) {
-            
-        $productoVeterinarioId = $_POST['productoVeterinarioId'];
-        $productoVeterinarioNombre = $_POST['productoVeterinarioNombre'];
-        $productoVeterinarioNombreComun = $_POST['productoVeterinarioNombreComun'];
-        $productoVeterinarioPrincipioActivo = $_POST['productoVeterinarioPrincipioActivo'];
-        $productoVeterinarioContenido = $_POST['productoVeterinarioContenido'];
-        $productoVeterinarioPrecio = $_POST['productoVeterinarioPrecio'];
-        $productoVeterinarioFechaVencimiento = $_POST['productoVeterinarioFechaVencimiento'];
-        $productoVeterinarioEstado = $_POST['productoVeterinarioEstado'];
-        $productoVeterinarioFunciones = $_POST['productoVeterinarioFunciones'];
-
-        $funcionAgregar = $_POST['funciones'];
-
-        if (strlen($productoVeterinarioNombreComun) > 0 && strlen($productoVeterinarioPrincipioActivo) > 0 && strlen($productoVeterinarioContenido) > 0 && strlen($productoVeterinarioFechaVencimiento) > 0 && strlen($productoVeterinarioPrecio) > 0) {
-            if (!is_numeric($productoVeterinarioNombre) && !is_numeric($productoVeterinarioNombreComun)) {
-
-                $productoVeterinario = new productoveterinario($productoVeterinarioId, $productoVeterinarioNombre, $productoVeterinarioNombreComun, $productoVeterinarioPrincipioActivo, $productoVeterinarioContenido, $productoVeterinarioPrecio, $productoVeterinarioEstado, $productoVeterinarioFechaVencimiento, $productoVeterinarioFunciones);
-
-                $productoVeterinarioBusiness = new ProductoVeterinarioBusiness();
-
-                $resultado = $productoVeterinarioBusiness->actualizarTBProductoVeterinario($productoVeterinario, $funcionAgregar);
-                if ($resultado == 1) {
-                    header("location: ../../view/productoVeterinarioView.php?success=updated");
-                } else {
-                    //echo $idSickness." - ".$bullName;
-                    header("location: ../../view/productoVeterinarioView.php?error=dbError");
-                }//if error a nivel de base
-            } else {
-                header("location: ../../view/productoVeterinarioView.php?error=numberFormat");
-            }//if si se igreso un numero
-        } else {
-            header("location: ../../view/productoVeterinarioView.php?error=emptyField");
-        }//if si se dejo en blanco
-    } else {
-        header("location:../../view/productoVeterinarioView.php?error=error");
-    }//if si esta seteado el campo
-}
+}//if accion
 ?>

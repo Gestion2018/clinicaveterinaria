@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-02-2018 a las 16:28:29
+-- Tiempo de generación: 31-01-2018 a las 15:33:06
 -- Versión del servidor: 5.7.11
 -- Versión de PHP: 5.6.19
 
@@ -30,8 +30,9 @@ CREATE TABLE `tbanimal` (
   `animalid` int(3) NOT NULL,
   `animalnombre` varchar(50) NOT NULL,
   `animalespecierazaid` int(3) NOT NULL,
-  `animalidcliente` int(11) NOT NULL,
-  `animalfechanacimiento` date NOT NULL,
+  `animalsennas` varchar(200) NOT NULL,
+  `animalpeso` double NOT NULL,
+  `animalmedidapeso` varchar(50) NOT NULL,
   `animalestado` varchar(3) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -39,29 +40,12 @@ CREATE TABLE `tbanimal` (
 -- Volcado de datos para la tabla `tbanimal`
 --
 
-INSERT INTO `tbanimal` (`animalid`, `animalnombre`, `animalespecierazaid`, `animalidcliente`, `animalfechanacimiento`, `animalestado`) VALUES
-(1, 'Tais', 1, 1, '2017-12-01', 'A');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbdiagnostico`
---
-
-CREATE TABLE `tbdiagnostico` (
-  `diagnosticoid` int(11) NOT NULL,
-  `diagnosticoanimalid` int(11) NOT NULL,
-  `diagnosticofecha` date NOT NULL,
-  `diagnosticodescripcion` varchar(300) NOT NULL,
-  `diagnosticoestado` varchar(3) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `tbdiagnostico`
---
-
-INSERT INTO `tbdiagnostico` (`diagnosticoid`, `diagnosticoanimalid`, `diagnosticofecha`, `diagnosticodescripcion`, `diagnosticoestado`) VALUES
-(1, 1, '2018-02-05', 'Presentaba menos picazon necesita otra nextCard', 'A');
+INSERT INTO `tbanimal` (`animalid`, `animalnombre`, `animalespecierazaid`, `animalsennas`, `animalpeso`, `animalmedidapeso`, `animalestado`) VALUES
+(1, 'Animal1', 4, 'Ninguna', 10, 'Kilogramos', 'B'),
+(2, 'Animal2', 5, 'Ninguna', 5, 'Kilogramos', 'B'),
+(3, 'Rocket', 4, 'Color Negro', 12, 'Kilogramos', 'A'),
+(4, 'Gatito', 5, 'Ninguna', 5, 'Kilogramos', 'B'),
+(5, 'Aldo', 10, 'Color gris', 10, 'Kilogramos', 'A');
 
 -- --------------------------------------------------------
 
@@ -83,8 +67,9 @@ CREATE TABLE `tbencargado` (
 --
 
 INSERT INTO `tbencargado` (`encargadoid`, `encargadonombrecompleto`, `encargadocorreo`, `encargadopueblo`, `encargadodireccion`, `encargadoestado`) VALUES
-(2, 'algo', 'LGO@GMAIL.COM', 'Turrialba', 'Turrialba', 'A'),
-(1, 'Johan', 'johan@gmail.com', 'San Rafael', 'Juan Viñas', 'A');
+(3, 'persona1', '', '', 'persona1', 'A'),
+(2, 'Maureen Calderon Fernandez', '', '', 'Turrialba', 'A'),
+(1, 'Silvia Calderon Fernandez', '', '', 'Turrialba', 'A');
 
 -- --------------------------------------------------------
 
@@ -96,16 +81,18 @@ CREATE TABLE `tbenfermedadescomunes` (
   `enfermedadescomunesid` int(11) NOT NULL,
   `enfermedadescomunesnombre` varchar(100) NOT NULL,
   `enfermedadescomunesdescripcion` varchar(300) NOT NULL,
-  `enfermedadescomunesestado` varchar(2) NOT NULL,
-  `enfermedadescomunesproductosusados` varchar(300) DEFAULT NULL
+  `enfermedadescomunessintomas` varchar(300) NOT NULL,
+  `enfermedadescomunesestado` varchar(2) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tbenfermedadescomunes`
 --
 
-INSERT INTO `tbenfermedadescomunes` (`enfermedadescomunesid`, `enfermedadescomunesnombre`, `enfermedadescomunesdescripcion`, `enfermedadescomunesestado`, `enfermedadescomunesproductosusados`) VALUES
-(1, 'Rasquiña', 'Mucha comezón y dolor', 'A', 'NextCard');
+INSERT INTO `tbenfermedadescomunes` (`enfermedadescomunesid`, `enfermedadescomunesnombre`, `enfermedadescomunesdescripcion`, `enfermedadescomunessintomas`, `enfermedadescomunesestado`) VALUES
+(1, 'enfermedad 1', 'primer registro', 'sin sintomas evidentes', 'A'),
+(2, 'enfermedad 2', 'segundo registro', 'sin sinomas visibles', 'B'),
+(3, 'Enfermedad 3', 'tercer registro', 'ninguno', 'A');
 
 -- --------------------------------------------------------
 
@@ -124,27 +111,16 @@ CREATE TABLE `tbespecie` (
 --
 
 INSERT INTO `tbespecie` (`especieid`, `especienombre`, `especieestado`) VALUES
-(1, 'Canino', 'A');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbfuncion`
---
-
-CREATE TABLE `tbfuncion` (
-  `funcionnombre` varchar(200) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `tbfuncion`
---
-
-INSERT INTO `tbfuncion` (`funcionnombre`) VALUES
-('desinflamatorio'),
-('antiinflamatorio'),
-('desparacitante'),
-('anticoagulante');
+(1, 'Perro', '1'),
+(2, 'Gato', '1'),
+(3, 'Vaca', 'B'),
+(4, 'Conejo', '1'),
+(5, 'Vaca', '1'),
+(6, 'Oveja', 'B'),
+(7, 'Caballo', '1'),
+(8, 'Tortuga', 'A'),
+(9, 'Loro', 'B'),
+(10, 'Loro', 'A');
 
 -- --------------------------------------------------------
 
@@ -169,27 +145,12 @@ CREATE TABLE `tbmedico` (
 --
 
 INSERT INTO `tbmedico` (`medicoid`, `mediconumeroidentificacion`, `mediconombrecompleto`, `medicocorreo`, `medicoespecialidad`, `medicolicencia`, `medicofechavigencialicencia`, `medicoestado`, `medicoinclusionlaboral`) VALUES
-(2, '21', 'iji', 'ij@gmail.com', 'ihio', 'b5', '2019-04-04', 'B', '2018-01-04'),
-(1, '3503808', 'Alfonso', 'alfonsobrenes08@gmail.com', 'cirujano', 'B2', '2019-01-11', '1', '2018-02-05');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbpesoanimal`
---
-
-CREATE TABLE `tbpesoanimal` (
-  `diagnosticoid` int(11) NOT NULL,
-  `animalid` int(11) NOT NULL,
-  `animalpeso` varchar(100) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `tbpesoanimal`
---
-
-INSERT INTO `tbpesoanimal` (`diagnosticoid`, `animalid`, `animalpeso`) VALUES
-(1, 1, '7 kilos');
+(1, '304980175', 'Silvia Calderon ', 'silvia23cf@gmail.com', 'algo', '12gr', '2018-01-19', '1', NULL),
+(2, '309870354', 'Maureen Calderon', 'maureen@gmail.com', 'algo2', '1234567', '2018-01-27', 'B', NULL),
+(3, '101110222', 'prueba', 'prueba@gmail.com', 'prueba', '34hbfd', '2018-01-18', 'B', NULL),
+(4, '304440555', 'Karen Calderon', 'karen@gmail.com', 'cirugia', 'YZE46', '2018-03-15', '1', '2017-11-06'),
+(5, '304440777', 'Alejandra Rojas', 'ale@gmail.com', 'especialidadades', '123abc', '2020-04-23', 'B', '2018-01-01'),
+(6, '305550999', 'Prueba 1', 'prueba@gmail.com', 'mjdgbf', 'shefki', '2018-01-19', 'B', '2017-12-05');
 
 -- --------------------------------------------------------
 
@@ -205,16 +166,16 @@ CREATE TABLE `tbproductoveterinario` (
   `productoveterinariocontenido` varchar(50) NOT NULL,
   `productoveterinarioprecio` int(10) NOT NULL,
   `productoveterinarioestado` varchar(2) NOT NULL,
-  `productoveterinariofechavencimiento` date DEFAULT NULL,
-  `productoveterinariofunciones` varchar(300) DEFAULT NULL
+  `productoveterinariofechavencimiento` date DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tbproductoveterinario`
 --
 
-INSERT INTO `tbproductoveterinario` (`productoveterinarioid`, `productoveterinarionombre`, `productoveterinarionombrecomun`, `productoveterinarioprincipioactivo`, `productoveterinariocontenido`, `productoveterinarioprecio`, `productoveterinarioestado`, `productoveterinariofechavencimiento`, `productoveterinariofunciones`) VALUES
-(1, 'NextCard', 'NextCard', '  Vitamina A', '  1 Unidades', 9000, 'A', '2019-09-20', 'desparacitante,desinflamatorio');
+INSERT INTO `tbproductoveterinario` (`productoveterinarioid`, `productoveterinarionombre`, `productoveterinarionombrecomun`, `productoveterinarioprincipioactivo`, `productoveterinariocontenido`, `productoveterinarioprecio`, `productoveterinarioestado`, `productoveterinariofechavencimiento`) VALUES
+(1, 'Producto 1', '', 'principio activo 1', '', 0, 'A', NULL),
+(2, 'Producto 2', '', 'principio 2', '', 0, 'B', NULL);
 
 -- --------------------------------------------------------
 
@@ -229,6 +190,15 @@ CREATE TABLE `tbpropietario` (
   `propietariodireccion` varchar(100) NOT NULL,
   `propietarioestado` varchar(2) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tbpropietario`
+--
+
+INSERT INTO `tbpropietario` (`propietarioid`, `propietarionombrecompleto`, `propietariotelefono`, `propietariodireccion`, `propietarioestado`) VALUES
+(1, 'Adolfo Calderon', '77777777', 'Turrialba', 'A'),
+(2, 'Emily Fernandez', '23416785', 'San Pedro, San Jose', 'A'),
+(3, 'prueba', '123', 'prueba2', 'B');
 
 -- --------------------------------------------------------
 
@@ -248,45 +218,14 @@ CREATE TABLE `tbraza` (
 --
 
 INSERT INTO `tbraza` (`razaid`, `razanombre`, `razaestado`, `razaespecieid`) VALUES
-(1, 'Snouser', '1', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbsintoma`
---
-
-CREATE TABLE `tbsintoma` (
-  `sintomaid` int(11) NOT NULL,
-  `sintomanombre` varchar(100) NOT NULL,
-  `sintomadescripcion` varchar(200) NOT NULL,
-  `sintomaestado` varchar(3) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `tbsintoma`
---
-
-INSERT INTO `tbsintoma` (`sintomaid`, `sintomanombre`, `sintomadescripcion`, `sintomaestado`) VALUES
-(1, 'Comezón', 'Se le despeyeja la piel y coge mal olor', 'A');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbsintomaenfermedad`
---
-
-CREATE TABLE `tbsintomaenfermedad` (
-  `enfermedadcomunid` int(11) NOT NULL,
-  `sintomaid` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `tbsintomaenfermedad`
---
-
-INSERT INTO `tbsintomaenfermedad` (`enfermedadcomunid`, `sintomaid`) VALUES
-(1, 1);
+(3, 'Doberman', '1', NULL),
+(4, 'Huskey', '1', 1),
+(6, 'Hosten', 'B', 5),
+(5, 'Angora', '1', 2),
+(7, 'Jersey', '1', 5),
+(8, 'Baula', 'B', 8),
+(9, 'Carey', 'A', 8),
+(10, 'Pastor Aleman', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -304,49 +243,11 @@ CREATE TABLE `tbtelefonoencargado` (
 --
 
 INSERT INTO `tbtelefonoencargado` (`encargadoid`, `numerotelefono`) VALUES
-(2, '6578'),
-(1, '25560090');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbtratamiento`
---
-
-CREATE TABLE `tbtratamiento` (
-  `tratamientoid` int(11) NOT NULL,
-  `tratamientoproductoveterinarioid` int(11) NOT NULL,
-  `tratamientoenfermedadcomunid` int(11) NOT NULL,
-  `tratamientodosis` varchar(50) NOT NULL,
-  `tratamientoperiodicidad` varchar(100) NOT NULL,
-  `tratamientofecha` date NOT NULL,
-  `tratamientoestado` varchar(2) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `tbtratamiento`
---
-
-INSERT INTO `tbtratamiento` (`tratamientoid`, `tratamientoproductoveterinarioid`, `tratamientoenfermedadcomunid`, `tratamientodosis`, `tratamientoperiodicidad`, `tratamientofecha`, `tratamientoestado`) VALUES
-(1, 1, 1, 'una tableta', '5pm cada mes dias', '2018-02-05', 'A');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbtratamientocliente`
---
-
-CREATE TABLE `tbtratamientocliente` (
-  `tratamientoid` int(11) NOT NULL,
-  `animalid` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `tbtratamientocliente`
---
-
-INSERT INTO `tbtratamientocliente` (`tratamientoid`, `animalid`) VALUES
-(1, 1);
+(1, '89661137'),
+(2, '88888888'),
+(2, '98765432'),
+(3, '78'),
+(3, '23');
 
 -- --------------------------------------------------------
 
@@ -364,19 +265,18 @@ CREATE TABLE `tbunidades` (
 --
 
 INSERT INTO `tbunidades` (`unidadid`, `unidadnombre`) VALUES
-(1, 'Unidades por tableta'),
-(2, 'Miligramos'),
-(3, 'Mililitros');
+(1, 'tableta'),
+(2, 'miligramos');
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `tbdiagnostico`
+-- Indices de la tabla `tbanimal`
 --
-ALTER TABLE `tbdiagnostico`
-  ADD PRIMARY KEY (`diagnosticoid`);
+ALTER TABLE `tbanimal`
+  ADD PRIMARY KEY (`animalid`);
 
 --
 -- Indices de la tabla `tbencargado`
@@ -404,12 +304,6 @@ ALTER TABLE `tbmedico`
   ADD UNIQUE KEY `mediconumeroidentificacion` (`mediconumeroidentificacion`);
 
 --
--- Indices de la tabla `tbpesoanimal`
---
-ALTER TABLE `tbpesoanimal`
-  ADD PRIMARY KEY (`diagnosticoid`);
-
---
 -- Indices de la tabla `tbpropietario`
 --
 ALTER TABLE `tbpropietario`
@@ -420,30 +314,6 @@ ALTER TABLE `tbpropietario`
 --
 ALTER TABLE `tbraza`
   ADD PRIMARY KEY (`razaid`);
-
---
--- Indices de la tabla `tbsintoma`
---
-ALTER TABLE `tbsintoma`
-  ADD PRIMARY KEY (`sintomaid`);
-
---
--- Indices de la tabla `tbsintomaenfermedad`
---
-ALTER TABLE `tbsintomaenfermedad`
-  ADD PRIMARY KEY (`enfermedadcomunid`,`sintomaid`);
-
---
--- Indices de la tabla `tbtratamiento`
---
-ALTER TABLE `tbtratamiento`
-  ADD PRIMARY KEY (`tratamientoid`);
-
---
--- Indices de la tabla `tbtratamientocliente`
---
-ALTER TABLE `tbtratamientocliente`
-  ADD PRIMARY KEY (`tratamientoid`,`animalid`);
 
 --
 -- Indices de la tabla `tbunidades`

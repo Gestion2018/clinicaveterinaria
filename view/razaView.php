@@ -8,16 +8,19 @@
     <link rel="stylesheet" href="../resources/css/css.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
     <?php
     include '../business/especiebusiness/especieBusiness.php';
 	include '../business/razabusiness/razaBusiness.php';
 	?>
-	
+
 </head>
 
 <body>
 
-    <header> 
+    <header>
         <h1>Razas</h1>
     </header>
 
@@ -26,7 +29,7 @@
              <li><a href="../index.php">Inicio</a></li>
         </ul>
     </nav>
-    
+
     <section id="form">
         <?php
             $especieBusiness = new EspecieBusiness();
@@ -82,10 +85,10 @@
 
                 <?php
             }
-            
+
             ?>
             <tr>
-                <td></td> 
+                <td></td>
             </tr>
         </table>
         <h3>
@@ -102,7 +105,7 @@
                     echo '<p style="color: green">Transacción realizada</p>';
                 }
             ?>
-                        
+
         </h3>
     </section>
 

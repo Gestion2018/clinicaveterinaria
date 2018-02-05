@@ -5,7 +5,7 @@ Entra en el if se realiza las siguientes operaciones, por que se toma
 la ruta desde el business, y entra en el else si no se realiza el crud por
 que se toma la ruta desde el view
 */
-if (isset($_POST['eliminar']) || isset($_POST['insertar']) || isset($_POST['actualizar']) || isset($_POST['agregarFuncion'])) {
+if (isset($_POST['eliminar']) || isset($_POST['insertar']) || isset($_POST['actualizar'])) {
     include '../../data/productoveterinariodata/productoveterinariodata.php';
 }else {
     include '../data/productoveterinariodata/productoveterinariodata.php';
@@ -22,8 +22,8 @@ class ProductoVeterinarioBusiness {
         return $this->productoVeterinarioData->insertarProductoVeterinario($productoVeterinario);
     }//InsertarProductoVeterinario
 
-    public function actualizarTBProductoVeterinario($productoVeterinario, $funcionAgregar) {
-        return $this->productoVeterinarioData->actualizarProductoVeterinario($productoVeterinario, $funcionAgregar);
+    public function actualizarTBProductoVeterinario($productoVeterinario) {
+        return $this->productoVeterinarioData->actualizarProductoVeterinario($productoVeterinario);
     }//ActualizarProductoVeterinario
 
     public function eliminarTBProductoVeterinario($productoVeterinarioId) {
@@ -41,11 +41,6 @@ class ProductoVeterinarioBusiness {
     public function obtenerActualizar($encargadoId) {
         return $this->productoVeterinarioData->obtenerActualizar($productoVeterinarioId);
     }//ObtenerActualizar
-
-    public function obtenerFunciones() {
-        return $this->productoVeterinarioData->obtenerFunciones();
-    }//ObtenerActualizar
-
 
 }//class
 
