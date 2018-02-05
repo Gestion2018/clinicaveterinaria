@@ -13,7 +13,7 @@ if (isset($_POST['eliminar']) || isset($_POST['actualizar']) || isset($_POST['in
 
 }else {
 
-	include '../data/data.php';
+	include_once '../data/data.php';
 	include '../domain/pesoanimal/pesoanimal.php';
 
 }
@@ -48,15 +48,11 @@ class PesoAnimalData extends Data {
     }//insertar especie
 
 
-     public function actualizarPesoAnimal($pesoanimal) {
+     public function actualizarPesoAnimal($diagnosticoId, $animalId, $peso) {
 
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $queryUpdate = "UPDATE tbpesonanimal SET " .
-        "pesonanimalanimalid = " . "'" .$pesoanimal->getPesoAnimalAnimalID() . "'". ", ".
-        "pesoanimalpeso = " .$pesoanimal->getPesoAnimalAnimalID() . "'". "," .
-        "pesoanimaldiagnosticoid = " .$pesoanimal->getPesoAnimalDiagnosticoId() . "'". "," .
-        "WHERE pesoanimalid =". $pesoanimal->getPesoAnimalId() .";";
+        $queryUpdate = "UPDATE tbpesoanimal SET animalpeso = ". "'" .$peso."'". ", WHERE animalid =". $animalId ." AND diagnosticoid=". $diagnosticoId .";";
 
         $result = mysqli_query($conn, $queryUpdate);
         mysqli_close($conn);
@@ -66,13 +62,12 @@ class PesoAnimalData extends Data {
     }//actualizar especie
 
 
-    public function eliminarPesoAnimal($pesoanimalid) {
+    public function eliminarPesoAnimal($animalId, $diagnosticoId) {
 
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
 
-        $queryUpdate = "UPDATE tbpesonanimal SET pesoanimalestado = 'B' WHERE" .
-        " pesoanimalid = " . $pesoanimalid . ";";
+        $queryUpdate = "DELETE tbpesoanimal WHERE animalid = " . $animalid . " AND diagnosticoid = ". $diagnosticoId .";";
         $result = mysqli_query($conn, $queryUpdate);
         mysqli_close($conn);
 
@@ -80,25 +75,20 @@ class PesoAnimalData extends Data {
 
     }//eliminarEspecie
 
+/*SELECT tbdiagnostico.diagnosticofecha, tbpesoanimal.diagnosticoid, tbpesoanimal.animalpeso, tbpesoanimal.animalid,tbanimal.animalnombre FROM tbpesoanimal, tbanimal, tbdiagnostico WHERE tbanimal.animalid = 2 AND (tbpesoanimal.animalid=2 AND tbpesoanimal.diagnosticoid = tbdiagnostico.diagnosticoid);*/
 
 
-       public function obtenerPesoAnimal() {
+       public function obtenerPesoAnimal($animalId) {
 
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
 
-        $querySelect = "SELECT * FROM tbpesonanimal;";
+        $querySelect = "SELECT tbdiagnostico.diagnosticofecha, tbpesoanimal.diagnosticoid,  tbdiagnostico.animalpeso, tbpesoanimal.animalid,tbanimal.animalnombre FROM tbpesoanimal, tbanimal, tbdiagnostico WHERE tbanimal.animalid = ".$animalId." AND (tbpesoanimal.animalid=".$animalId." AND tbpesoanimal.diagnosticoid = tbdiagnostico.diagnosticoid);";
         $result = mysqli_query($conn, $querySelect);
         mysqli_close($conn);
         $pesosanimal = [];
         while ($row = mysqli_fetch_array($result)) {
-
-            if($row['pesoanimalestado']!='B'){
-                $pesoanimal = new pesoanimal($row['pesoanimalid'], $row['pesonanimalanimalid'],
-                $row['pesoanimalpeso'],$row['pesoanimaldiagnosticoid'],$row['pesoanimaldiagnosticoestado']);
-                array_push($pesosanimal, $pesoanimal);
-
-            }//end if
+            $pesosanimal [] = $row;
         }//end while
 
         return $pesosanimal;

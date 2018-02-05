@@ -6,9 +6,11 @@
         private $AnimalEstado;
         private $AnimalIdCliente;
         private $AnimalFechaNacimiento;
+        private $AnimalEdad;
 
-        function animal($AnimalNombre, $AnimalId, $EspecieRazaId, $AnimalIdCliente, $AnimalFechaNacimiento ,
-        $AnimalEstado)
+        function animal($AnimalNombre, $AnimalId, 
+                            $EspecieRazaId, $AnimalIdCliente, 
+                            $AnimalFechaNacimiento,$AnimalEstado,$AnimalEdad)
         {
             $this->AnimalNombre = $AnimalNombre;
             $this->AnimalId = $AnimalId;
@@ -16,6 +18,7 @@
             $this->AnimalEstado = $AnimalEstado;
             $this->AnimalIdCliente = $AnimalIdCliente;
             $this->AnimalFechaNacimiento = $AnimalFechaNacimiento;
+            $this->AnimalEdad = $AnimalEdad;
         }
 
         /***********************************************************************
@@ -53,6 +56,11 @@
             return $this->AnimalFechaNacimiento;
         }
 
+        public function getAnimalEdad()
+        {
+            return $this->AnimalEdad;
+        }
+
         /*SET*/
         public function setAnimalNombre($AnimalNombre)
         {
@@ -82,6 +90,11 @@
         public function setAnimalFechaNacimiento($AnimalFechaNacimiento)
         {
             return $this->AnimalFechaNacimiento = $AnimalFechaNacimiento;
+        }
+
+        public function setAnimalEdad($AnimalEdad)
+        {
+            return $this->AnimalEdad = $AnimalEdad;
         }
     }
 ?>

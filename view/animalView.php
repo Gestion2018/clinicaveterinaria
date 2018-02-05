@@ -41,15 +41,23 @@
 
         <table>
             <tr>
-                <th>Nombre</th>
+                <th>Cliente</th>
+                <th>Nombre Animal</th>
                 <th>Especie</th>
                 <th>Raza</th>
                 <th>Fecha Nacimiento</th>
-                <th>Cliente</th>
                 <th></th>
             </tr>
             <tr>
             <form method="post" action="../business/animalbusiness/animalAction.php">
+                <td><select id="clienteId" name="clienteId">
+                <option value="-1">Seleccione un cliente</option>
+                <?php
+                    foreach ($clientes as $cliente) {
+                        echo '<option value='.$cliente->getEncargadoId().'>'.$cliente->getEncargadoNombreCompleto().'</option>';
+                    }//foreach
+                ?>
+                </select></td>
                 <td><input required type="text" id="animalNombre" name="animalNombre"></td>
                 <td><select id="especieId" name="especieId">
                 <option value="-1">Seleccione la especie</option>
@@ -62,14 +70,6 @@
                 <td><select id="especieRazaId" name="especieRazaId">
                 </select></td>
                 <td><input  type="date" id="animalFechaNacimiento" name="animalFechaNacimiento"></td>
-                <td><select id="clienteId" name="clienteId">
-                <option value="-1">Seleccione un cliente</option>
-                <?php
-                    foreach ($clientes as $cliente) {
-                        echo '<option value='.$cliente->getEncargadoId().'>'.$cliente->getEncargadoNombreCompleto().'</option>';
-                    }//foreach
-                ?>
-                </select></td>
                 <td><input type="hidden" value="A" name="animalEstado" id="animalEstado"/></td>
                 <td><input type="submit" value="Insertar" name="insertar" id="insertar"/></td>
             </form>
@@ -88,6 +88,17 @@
             ?>
                 <form method="post" action="../business/animalbusiness/animalAction.php">
                 <input type="hidden" id="animalId" name="animalId" value="<?php echo $animal["animalid"];?>"></td>
+                <td><select id="clienteId" name="clienteId">
+                    <?php 
+                        foreach ($clientes as $cliente) {
+                            if($cliente->getEncargadoId() == $animal["animalidcliente"]){
+                                echo '<option selected value='.$cliente->getEncargadoId().'>'.$cliente->getEncargadoNombreCompleto().'</option>';
+                            }else{
+                                echo '<option value='.$cliente->getEncargadoId().'>'.$cliente->getEncargadoNombreCompleto().'</option>';
+                            }//if-else
+                        }//foreach
+                    ?>
+                </select></td>
                 <td><input type="text" id="animalNombre" name="animalNombre" value="<?php echo $animal["animalnombre"];?>"></td>
                 <td><input readonly type="text" id="animalEspecie" name="animalEspecie" value="<?php echo $animal["especienombre"];?>"></td>
                 <td><select id="especieRazaId" name="especieRazaId">
@@ -105,17 +116,6 @@
                 ?>
                 </select></td>
                 <td><input  type="date" id="animalFechaNacimiento" name="animalFechaNacimiento" value="<?php echo $animal["animalfechanacimiento"];?>"></td>
-                <td><select id="clienteId" name="clienteId">
-                    <?php 
-                        foreach ($clientes as $cliente) {
-                            if($cliente->getEncargadoId() == $animal["animalidcliente"]){
-                                echo '<option selected value='.$cliente->getEncargadoId().'>'.$cliente->getEncargadoNombreCompleto().'</option>';
-                            }else{
-                                echo '<option value='.$cliente->getEncargadoId().'>'.$cliente->getEncargadoNombreCompleto().'</option>';
-                            }//if-else
-                        }//foreach
-                    ?>
-                </select></td>
                 <td><input type="hidden" value="A" name="animalEstado" id="animalEstado"/></td>
                 <td><input type="submit" value="Actualizar" name="actualizar" id="actualizar"/></td>
                 <td><input type="submit" value="Eliminar" name="eliminar" id="eliminar"/></td>
@@ -170,7 +170,7 @@ $("#especieId").change(function () {
                 var prod = JSON.parse(data);
                 document.getElementById("especieRazaId").options.length = 0;
                 
-                $('#especieRazaId').append($("<option></option>").attr("value", "-1").text("Seleccione una Raza"));
+                /*$('#especieRazaId').append($("<option></option>").attr("value", "-1").text("Seleccione una Raza"));*/
 
                 for (var i = 0; i < prod["Data"].length; i++) {
                     $('#especieRazaId').append($("<option></option>").attr("value", prod.Data[i].razaid).text(prod.Data[i].razanombre));
@@ -179,7 +179,7 @@ $("#especieId").change(function () {
             });
         }else{
             document.getElementById("especieRazaId").options.length = 0;
-            $('#especieRazaId').append($("<option></option>").attr("value", "-1").text("Seleccione una Raza"));
+            /*$('#especieRazaId').append($("<option></option>").attr("value", "-1").text("Seleccione una Raza"));*/
             $("#especieRazaId").selectpicker("refresh");
         }
     });

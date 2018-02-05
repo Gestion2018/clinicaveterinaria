@@ -9,8 +9,9 @@
       private $ProductoVeterinarioNombreComun;
       private $ProductoVeterinarioEstado;
       private $ProductoVeterinarioFechaVencimiento;
+      private $ProductoVeterinarioFunciones;
 
-      function productoveterinario($ProductoVeterinarioId, $ProductoVeterinarioNombre, $ProductoVeterinarioNombreComun, $ProductoVeterinarioPrincipioActivo, $ProductoVeterinarioContenido, $ProductoVeterinarioPrecio, $ProductoVeterinarioEstado, $ProductoVeterinarioFechaVencimiento)
+      function productoveterinario($ProductoVeterinarioId, $ProductoVeterinarioNombre, $ProductoVeterinarioNombreComun, $ProductoVeterinarioPrincipioActivo, $ProductoVeterinarioContenido, $ProductoVeterinarioPrecio, $ProductoVeterinarioEstado, $ProductoVeterinarioFechaVencimiento, $ProductoVeterinarioFunciones)
       {
           $this->ProductoVeterinarioId = $ProductoVeterinarioId;
           $this->ProductoVeterinarioNombre = $ProductoVeterinarioNombre;
@@ -20,6 +21,7 @@
           $this->ProductoVeterinarioNombreComun = $ProductoVeterinarioNombreComun;
           $this->ProductoVeterinarioEstado = $ProductoVeterinarioEstado;
           $this->ProductoVeterinarioFechaVencimiento = $ProductoVeterinarioFechaVencimiento;
+           $this->ProductoVeterinarioFunciones = $ProductoVeterinarioFunciones;
       }
 
       /***********************************************************************
@@ -65,6 +67,11 @@
           return $this->ProductoVeterinarioFechaVencimiento;
       }
 
+      public function getProductoVeterinarioFunciones()
+      {
+          return $this->ProductoVeterinarioFunciones;
+      }
+
       /*SET*/
       public function setProductoVeterinarioId($ProductoVeterinarioId)
       {
@@ -102,6 +109,11 @@
       public function setProductoVeterinarioFechaVencimiento($ProductoVeterinarioFechaVencimiento)
       {
           $this->ProductoVeterinarioFechaVencimiento = $ProductoVeterinarioFechaVencimiento;
+      }
+
+      public function setProductoVeterinarioFunciones($ProductoVeterinarioFunciones)
+      {
+          $this->ProductoVeterinarioFunciones = $ProductoVeterinarioFunciones;
       }
   }
 ?>

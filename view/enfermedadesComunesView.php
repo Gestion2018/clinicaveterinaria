@@ -231,7 +231,7 @@
 
 
         $.post("../business/enfermedadescomunesbusiness/enfermedadesComunesAction.php",parameters, function(data){
-            alert(data);
+            //alert(data);
             if(data === "true"){
                 setTimeout("location.href = '../view/enfermedadesComunesView.php?success=success';", 0);
             }//if

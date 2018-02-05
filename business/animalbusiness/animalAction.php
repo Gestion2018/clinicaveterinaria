@@ -16,7 +16,7 @@ if (isset($_POST['actualizar'])) {
         if($especieRazaId != -1){
             if (strlen($animalNombre) > 0 && strlen($animalId) > 0 && strlen($especieRazaId) > 0 && strlen($clienteId) > 0 && strlen($animalFechaNacimiento) > 0) {
                 if (!is_numeric($animalNombre)) {
-                    $animal = new animal($animalNombre, $animalId, $especieRazaId, $clienteId, $animalFechaNacimiento, $animalEstado);
+                    $animal = new animal($animalNombre, $animalId, $especieRazaId, $clienteId, $animalFechaNacimiento, $animalEstado, 0);
 
                     $animalBusiness = new AnimalBusiness();
 
@@ -70,7 +70,7 @@ if (isset($_POST['actualizar'])) {
         if($especieRazaId != -1){
             if (strlen($animalNombre) > 0 && strlen($especieRazaId) > 0 && strlen($clienteId) > 0 && strlen($animalFechaNacimiento) > 0) {
                 if (!is_numeric($animalNombre)) {
-                    $animal = new animal($animalNombre, 0, $especieRazaId, $clienteId, $animalFechaNacimiento, $animalEstado);
+                    $animal = new animal($animalNombre, 0, $especieRazaId, $clienteId, $animalFechaNacimiento, $animalEstado, 0);
 
                     $animalBusiness = new AnimalBusiness();
 
@@ -93,5 +93,10 @@ if (isset($_POST['actualizar'])) {
     } else {
         header("location: ../../view/animalView.php?error=error");
     }//if si esta seteado el campo
-}//if accion
+}else if(isset($_POST["obtenerEdad"])){
+    if(isset($_POST["animalId"])){
+        $animalBusiness = new AnimalBusiness();
+        $animalBusiness->obtenerEdadAnimalUnico($_POST["animalId"]);
+    }//if
+}//if
 ?>

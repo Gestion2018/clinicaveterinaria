@@ -48,7 +48,7 @@
                 <th>Producto Veterinario</th>
                 <th>Dosis</th>
                 <th>Periodicidad</th>
-                <th>Fecha</th>
+                <th>Fecha Tratamiento</th>
                 <th></th>
             </tr>
             <tr>
