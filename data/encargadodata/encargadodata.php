@@ -48,19 +48,15 @@ class EncargadoData extends Data {
         $telefonos = explode(",", $encargado->getEncargadoTelefono());
 
         for ($i=0; $i < count($telefonos) ; $i++) {
-<<<<<<< HEAD
             if($telefonos[$i] !== " "){
                 $queryInsertT = "INSERT INTO tbtelefonoencargado VALUES (".$encargado->getEncargadoId().",'".
                 $telefonos[$i] . "');" ;
                 mysqli_query($conn, $queryInsertT);
             }//if
-=======
 
           $queryInsertT = "INSERT INTO tbtelefonoencargado VALUES (".$encargado->getEncargadoId().",'".
           $telefonos[$i] . "');" ;
           mysqli_query($conn, $queryInsertT);
-
->>>>>>> 0177944420610ff3f47772686bfa2988ce1d4770
         }//end for*/
 
         mysqli_close($conn);
