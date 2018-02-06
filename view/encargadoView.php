@@ -8,9 +8,6 @@
     <script src="./jquery-3.2.1.js"></script>
     <!--<script type="text/javascript" src="script.js"></script>-->
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-
     <?php
     include '../business/encargadobusiness/encargadoBusiness.php';
     ?>
@@ -19,18 +16,16 @@
 
 <body>
 
-    <header>
+    <header> 
         <h1>Cliente</h1>
     </header>
 
     <nav>
         <ul>
              <li><a href="../index.php">Inicio</a></li>
-             <br>
-             <li><a href="./busquedaView.php">Busqueda</a></li>
         </ul>
     </nav>
-
+    
 
     <section id="form">
         <table>
@@ -94,11 +89,11 @@
                     <td><input type="submit" value="Agregar Teléfono" name="agregarTelefono" id="agregarTelefono"/></td>
                     <td><select id="numeroTelefono" name="numeroTelefono">
                     <?php
-                        foreach ($telefonos as $telefonoTemp) {
+                        foreach ($telefonos as $telefonoTemp) { 
                             if($telefonoTemp["encargadoid"] == $current->getEncargadoId()){
                                 echo '<option value='.$telefonoTemp["numerotelefono"].'>'.$telefonoTemp["numerotelefono"].'</option>';
                             }//if
-                        }//foreach
+                        }//foreach  
                     ?>
                     </select></td>
                     <td><input type="submit" value="Eliminar Teléfono" name="eliminarTelefono" id="eliminarTelefono" /></td>
@@ -106,7 +101,7 @@
                     <td><input type="hidden" name="encargadoEstado" id="encargadoEstado" value="A" /></td>
                     </tr>
                 </form>
-                <?php
+                <?php 
             }
             ?>
             <tr>
@@ -126,7 +121,7 @@
                 } else if (isset($_GET['success'])) {
                     echo '<p style="color: green">Transacción realizada</p>';
                 }
-            ?>
+            ?>            
         </h3>
     </section>
 
@@ -158,7 +153,7 @@
                 arrayTelefonos += telefonos[i].value;
             }else{
                 arrayTelefonos += telefonos[i].value + ",";
-            }
+            }     
         }//for
 
         var parameters = {
@@ -186,8 +181,8 @@
                 var seleccion = $("#encargadoTelefonosInsert").val();
                 $("#encargadoTelefonosInsert option[value="+seleccion+"]").remove();
                 $("#encargadoTelefonosInsert").selectpicker("refresh");
-            }//if
+            }//if   
         }//for
     }//eliminarTel
-
+    
 </script>

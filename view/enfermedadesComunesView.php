@@ -7,9 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <script src="./jquery-3.2.1.js"></script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-
     <?php
     include '../business/enfermedadescomunesbusiness/enfermedadesComunesBusiness.php';
     include '../business/sintomabusiness/sintomaBusiness.php';
@@ -20,7 +17,7 @@
 
 <body>
 
-    <header>
+    <header> 
         <h1>Enfermedades Comunes</h1>
     </header>
 
@@ -29,7 +26,7 @@
              <li><a href="../index.php">Inicio</a></li>
         </ul>
     </nav>
-
+    
     <?php
         $sintomaBusiness = new SintomaBusiness();
         $sintomas = $sintomaBusiness->obtenerTBSintoma();
@@ -120,9 +117,9 @@
                             echo '<option value='.$producto->getProductoVeterinarioId().'>'.$producto->getProductoVeterinarioNombre().'</option>';
                         }//foreach
                         ?>
-                    </select></td>
+                    </select></td>  
                     <td><input type="submit" value="Agregar Producto" name="agregarProducto" id="agregarProducto"/></td>
-                    <td><input type="text" name="enfermedadesComunesProductosUsados" id="enfermedadesComunesProductosUsados" value="<?php echo $current->getenfermedadescomunesProductosUsados() ?>" /></td>
+                    <td><input type="text" name="enfermedadesComunesProductosUsados" id="enfermedadesComunesProductosUsados" value="<?php echo $current->getenfermedadescomunesProductosUsados() ?>" /></td>  
                     <td><input type="submit" value="Actualizar" name="actualizar" id="actualizar"/></td>
                     <td><select id="sintomas" name="sintomas">
                         <option value="-1">Seleccione el S&iacute;ntoma</option>
@@ -142,9 +139,9 @@
                         }//foreach
                         ?>
                     </select></td>
-                    <td><input type="submit" value="Eliminar Síntoma" name="eliminarSintoma" id="eliminarSintoma" /></td>
+                    <td><input type="submit" value="Eliminar Síntoma" name="eliminarSintoma" id="eliminarSintoma" /></td>          
                     <input type="hidden" id="enfermedadesComunesEstado" name="enfermedadesComunesEstado" value="A"></td>
-
+                    
                     <td><input type="submit" value="Eliminar" name="eliminar" id="eliminar"/></td>
                     </tr>
                 </form>
@@ -169,7 +166,7 @@
                     echo '<p style="color: green">Transacción realizada</p>';
                 }
             ?>
-
+                        
         </h3>
     </section>
 
@@ -207,7 +204,7 @@
                 var seleccion = $("#enfermedadesComunesSintomasInsert").val();
                 $("#enfermedadesComunesSintomasInsert option[value="+seleccion+"]").remove();
                 $("#enfermedadesComunesSintomasInsert").selectpicker("refresh");
-            }//if
+            }//if   
         }//for
     }//eliminarSintoma
 
@@ -220,7 +217,7 @@
                 arraySintomas += sintomas[i].value;
             }else{
                 arraySintomas += sintomas[i].value + ",";
-            }
+            }     
         }//for
 
         var parameters = {
@@ -234,7 +231,7 @@
 
 
         $.post("../business/enfermedadescomunesbusiness/enfermedadesComunesAction.php",parameters, function(data){
-            alert(data);
+            //alert(data);
             if(data === "true"){
                 setTimeout("location.href = '../view/enfermedadesComunesView.php?success=success';", 0);
             }//if

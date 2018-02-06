@@ -85,5 +85,34 @@ if (isset($_POST['actualizar'])) {
     } else {
         header("location: ../../view/diagnosticoView.php?error=error");
     }//if si esta seteado el campo
-}//if accion
+}else if(isset($_POST["historial"])){
+    $idAnimal = $_POST["animalId"];
+    header("location: ../../view/historialPesoAnimalView.php?id=".$idAnimal);
+
+}else if(isset($_POST["actualizarPeso"])){
+
+    if (isset($_POST['animalId']) && isset($_POST['diagnosticoId']) && isset($_POST['animalPeso'])) {
+            
+        $animalId = $_POST['animalId'];
+        $animalPeso = $_POST['animalPeso'];
+        $diagnosticoId = $_POST['diagnosticoId'];
+
+        if (strlen($animalId) > 0 && strlen($animalPeso) > 0 && strlen($diagnosticoId) > 0) {
+                
+                $diagnosticoBusiness = new DiagnosticoBusiness();
+                $resultado = $diagnosticoBusiness->actualizarPesoAnimal($diagnosticoId, $animalId, $animalPeso);
+
+                if ($resultado == 1) {
+                    header("location: ../../view/historialPesoAnimalView.php?id=".$animalId."&success=inserted");
+                } else {
+                    header("location: ../../view/historialPesoAnimalView.php?id=".$animalId."&error=dbError");
+                }//if error a nivel de base
+        } else {
+            header("location: ../../view/historialPesoAnimalView.php?id=".$animalId."&error=emptyField");
+        }//if si se dejo en blanco
+    } else {
+        header("location: ../../view/historialPesoAnimalView.php?id=".$animalId."&error=error");
+    }//if si esta seteado el campo
+
+}//if-else
 ?>
